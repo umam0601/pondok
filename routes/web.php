@@ -12,5 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('frontend.landing');
+  return view('frontend.landing');
 });
+Route::prefix('admin')->group(function () {
+	Route::get('/', 'AdminController@index')->name('admin.dashboard');
+	Route::get('/login', 'AdminController@login')->name('admin.login');
+});
+

@@ -184,7 +184,7 @@
                   </ul>
                 </li>
                 <li>
-                  <a href="contact.html">Contact </a>
+                  <a href="{{route('admin.dashboard')}}">Contact </a>
                 </li>
               </ul>
             </nav>
