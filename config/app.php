@@ -201,6 +201,7 @@ return [
         'Cache'        => Illuminate\Support\Facades\Cache::class,
         'Config'       => Illuminate\Support\Facades\Config::class,
         'Cookie'       => Illuminate\Support\Facades\Cookie::class,
+        'CodeGenerator'=> App\Http\Controllers\CodeGenerator::class,
         'Crypt'        => Illuminate\Support\Facades\Crypt::class,
         'DataTables'   => Yajra\DataTables\Facades\DataTables::class,
         'DB'           => Illuminate\Support\Facades\DB::class,

@@ -6,7 +6,21 @@
 <!-- Custom scripts for all pages-->
 <script src="{{asset('assets/backend/js/sb-admin-2.min.js')}}"></script>
 <!-- Page level plugins -->
-<script src="{{asset('assets/backend/vendor/chart.js/Chart.min.js')}}"></script>
+<script src="{{asset('assets/backend/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/backend/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/select2/select2.js')}}"></script>
 <!-- Page level custom scripts -->
+<script src="{{asset('assets/backend/vendor/chart.js/Chart.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/demo/chart-area-demo.js')}}"></script>
 <script src="{{asset('assets/backend/js/demo/chart-pie-demo.js')}}"></script>
+  <!-- Page level plugins -->
+<script type="text/JavaScript">
+	$(document).ready(function(){
+		$('.select2').select2({
+      theme: "bootstrap",
+      dropdownAutoWidth: true,
+      width: '100%'
+		});
+		$('.data-table').dataTable().fnDestroy();
+	});
+</script>

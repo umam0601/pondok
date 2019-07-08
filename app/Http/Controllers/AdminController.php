@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class AdminController extends Controller
 {
@@ -11,14 +12,19 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         return view('admin.dashboard');
     }
 
-    public function login()
+    public function pondok()
     {
-        return view('admin.login');
+        return view('admin.master_pondok.index');
     }
 
     /**

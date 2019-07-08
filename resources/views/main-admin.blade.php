@@ -6,7 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SB Admin 2 - Dashboard</title>
+    <title>M-PONPES - Admin Dashboard</title>
+    <style type="text/css">
+      .table-sm > thead{
+        background-color: #385ece;
+        color: white;
+        font-size: small;
+      }
+      .table > thead {
+        text-align: center;
+      }
+      .table-sm > tbody > tr > td{
+        font-size: small;
+      }
+    </style>
+    @yield('extra_style')
     @include('admin.layouts._head')
   </head>
   <body id="page-top">
@@ -180,7 +194,7 @@
                     Activity Log
                   </a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout
                   </a>
@@ -193,8 +207,8 @@
           <div class="container-fluid">
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+              <h1 class="h3 mb-0 text-gray-800">@yield('name-heading')</h1>
+              @yield('extra-button')
             </div>
             @yield('content')
           </div>
@@ -223,7 +237,13 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="{{ route('logout') }}"
+              onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              Logout
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
           </div>
         </div>
       </div>

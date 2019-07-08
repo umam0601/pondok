@@ -15,3 +15,12 @@
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{asset('assets/frontend/ico/apple-touch-icon-72-precomposed.png')}}" />
 <link rel="apple-touch-icon-precomposed" href="{{asset('assets/frontend/ico/apple-touch-icon-57-precomposed.png')}}" />
 <link rel="shortcut icon" href="{{asset('assets/frontend/ico/favicon.png')}}" />
+<style type="text/css">
+  header .logo{
+    margin-top: 20px !important;
+  }
+
+  .navbar-static-top{
+    margin-top: 30px !important;
+  }
+</style>
