@@ -75,7 +75,7 @@ Tambah Data Pondok
         <div class="col-12 col-md-12">
           <div class="form-group">
             <label for="p_description">Keterangan Pondok Pesantren</label>
-            <textarea name="p_description" id="description" cols="30" rows="4" class="form-control form-control-sm" placeholder="Tuliskan keterangan seputar Pondok Pesantren"></textarea>
+            <textarea name="p_description" id="description" placeholder="Tuliskan keterangan seputar Pondok Pesantren"></textarea>
           </div>
         </div>
       </div>
@@ -86,7 +86,7 @@ Tambah Data Pondok
       <div class="col-6"><span><span class="text-danger">*</span> Wajib diisi.</span></div>
       <div class="col-6">
         <div class="text-right">
-          <button type="button" class="btn btn-primary">Simpan</button>
+          <button type="button" class="btn btn-primary" onclick="save()">Simpan</button>
         </div>
       </div>
     </div>
@@ -96,8 +96,16 @@ Tambah Data Pondok
 @section('extra_script')
 <script type="text/Javascript">
 	var tb_pondok;
-	$(document).ready(function(){
+	$(document).ready(function(){    
+    $('#phone').inputmask("9999 9999 9999 9",{
+      autoUnmask: true
+    });
+    CKEDITOR.replace('description');
 	});
+
+  function save() {
+    alert($('#phone').val());
+  }
 
   $('#provId').on('change', function() {
     var provId = $('#provId').val();

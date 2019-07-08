@@ -19,6 +19,9 @@
       .table-sm > tbody > tr > td{
         font-size: small;
       }
+      label {
+        color: #000 !important;
+      }
     </style>
     @yield('extra_style')
     @include('admin.layouts._head')

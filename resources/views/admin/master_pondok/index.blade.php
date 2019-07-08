@@ -1,6 +1,6 @@
 @extends('main-admin')
 @section('name-heading')
-Tabel Pondok Pesantren
+  Tabel Pondok Pesantren
 @endsection
 @section('extra-button')
 <a href="{{route('admin.pondok.add')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah</a>
