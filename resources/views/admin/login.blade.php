@@ -48,9 +48,9 @@
                   <form class="user" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                      <input type="text" class="form-control form-control-user @error('name') is-invalid @enderror" id="exampleInputName" aria-describedby="nameHelp" placeholder="Enter name..." name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                        @error('email')
+                        @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
