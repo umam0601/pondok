@@ -2,6 +2,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="{{asset('assets/frontend/js/jquery.js')}}"></script>
 <script src="{{asset('assets/frontend/js/jquery.easing.1.3.js')}}"></script>
+{{-- <script src="{{asset('assets/bootstrap-4/js/bootstrap.min.js')}}"></script> --}}
 <script src="{{asset('assets/frontend/js/bootstrap.js')}}"></script>
 <script src="{{asset('assets/frontend/js/jcarousel/jquery.jcarousel.min.js')}}"></script>
 <script src="{{asset('assets/frontend/js/jquery.fancybox.pack.js')}}"></script>

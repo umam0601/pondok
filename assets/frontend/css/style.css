@@ -19,7 +19,19 @@
 @import url('overwrite.css');
 @import url('animate.css');
 /* Table of content */
-
+/* Fonts */
+@font-face {
+  font-family: Roboto;
+  src:url('../../fonts/Roboto-Regular.ttf');
+}
+/*@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Cormorant+SC:700');
+@import url('https://fonts.googleapis.com/css?family=Quicksand:700');*/
+/* END */
+body {
+    font-family: 'Roboto', sans-serif !important;
+}
 /*===================================
 1. General
 2. layout

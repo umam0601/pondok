@@ -5,8 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
-    <title>M-PONPES - Admin Dashboard</title>
+    <title>PPM - Admin Dashboard</title>
+    <link rel="icon" type="image/png" href="{{asset('assets/images/logo.png')}}">
     <style type="text/css">
       .table-sm > thead{
         background-color: #385ece;
@@ -21,6 +23,8 @@
       }
       label {
         color: #000 !important;
+        font-size: 14px !important;
+        font-weight: bold;
       }
     </style>
     @yield('extra_style')
@@ -210,7 +214,7 @@
           <div class="container-fluid">
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 class="h3 mb-0 text-gray-800">@yield('name-heading')</h1>
+              <h1 class="h3 mb-0 text-gray-800"><b>@yield('name-heading')</b></h1>
               @yield('extra-button')
             </div>
             @yield('content')

@@ -21,6 +21,7 @@ Route::prefix('admin')->group(function () {
 	Route::get('/pondok/get-data', 'AdminPondokController@get_pondok')->name('admin.pondok.get');
 	Route::get('/pondok/get-detail/{id}', 'AdminPondokController@get_detail_pondok')->name('admin.pondok.getDetail');
 	Route::get('/pondok/add-data', 'AdminPondokController@add_pondok')->name('admin.pondok.add');
+	Route::get('/pondok/add-data-galeri/{id}', 'AdminPondokController@add_galeriPondok')->name('admin.pondok.addGaleri');
 	Route::post('/pondok/save-data', 'AdminPondokController@save_pondok')->name('admin.pondok.save');
 	Route::get('/pondok/edit-data/{id}', 'AdminPondokController@edit_pondok')->name('admin.pondok.edit');
 	Route::post('/pondok/update-data/{id}', 'AdminPondokController@update_pondok')->name('admin.pondok.update');

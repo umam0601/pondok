@@ -3,9 +3,10 @@
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin')}}">
     <div class="sidebar-brand-icon rotate-n-15">
-      <i class="fas fa-home"></i>
+      <img src="{{asset('assets/images/logo-light.png')}}" alt="" class="img-fluid" style="width: 50px;">
+      {{-- <i class="fas fa-home"></i> --}}
     </div>
-    <div class="sidebar-brand-text mx-3">PonPes Maps</div>
+    <div class="sidebar-brand-text mx-1" style="font-size: 20px; line-height: 20px;">PONPES MAPS</div>
   </a>
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
