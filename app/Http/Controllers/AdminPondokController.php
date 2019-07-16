@@ -88,6 +88,23 @@ class AdminPondokController extends Controller
                 'p_map'         => ''
             ]);
 
+            // upload image
+            $dataPondok = DB::table('d_pondok')->where('p_id', $id)->first();
+            $images = $request->file('p_image');
+
+            if(!$dataPondok){
+                return json_encode([
+                    'status'  => 'error',
+                    'text'    => 'Terjadi Kesalahan, Coba Muat Ulang Halaman'
+                ]);
+            }
+
+            if(!is_null($images)){
+                if($images != null){
+                    $this->upload($images, $dataPondok->p_code);
+                }
+            }
+
 
             DB::commit();
             return response()->json([
@@ -100,6 +117,19 @@ class AdminPondokController extends Controller
                 'status' => 'Gagal',
                 'message' => $e
             ]);
+        }
+    }
+
+    public function upload($image, $code){
+        $path = public_path()."/profile/upload/".$code;
+        $name = $code;
+
+        $destinationPath = $path;
+        $extension       = $image->getClientOriginalExtension();
+        $fileName        = $name.'.'.$extension;
+
+        if($image->move($destinationPath, $fileName)){
+            return $fileName;
         }
     }
 
@@ -152,7 +182,7 @@ class AdminPondokController extends Controller
             $detailId = DB::table('d_pondokdt')->where('pd_pondok', $pd_pondok)->max('pd_detailid') + 1;
 
             $images  = $request->file('pd_image');
-            $imgName = self::upload($images, $request->p_code, $detailId);
+            $imgName = self::uploadGaleri($images, $request->p_code, $detailId);
 
             DB::table('d_pondokdt')->insert([
                 'pd_pondok'   => $pd_pondok,
@@ -174,7 +204,7 @@ class AdminPondokController extends Controller
         }
     }
 
-    public function upload($image, $code, $dt){
+    public function uploadGaleri($image, $code, $dt){
         $path = public_path()."/galeri/upload/".$code;
         $name = "".$code."-".$dt."";
 

@@ -79,10 +79,30 @@ Tambah Data Pondok
         </div>
       </div>
       <div class="row">
-        <div class="col-12 col-md-12">
+        <div class="col-8 col-md-8">
           <div class="form-group">
             <label for="p_description">Keterangan Pondok Pesantren</label>
             <textarea name="p_description" id="p_description" class="form-control form-control-sm ckeditor">Tuliskan keterangan seputar Pondok Pesantren</textarea>
+          </div>
+        </div>
+        <div class="col-4 col-md-4">
+          <div class="w-100">
+            <div class="row">
+              <div class="col-12 col-md-12">
+                <div class="form-group">
+                  <label for="p_image">Upload Foto</label>
+                  <img src="{{asset('public/images/thumbnail.png')}}" alt="" id="img-priview" class="img-fluid img-thumbnail">
+                  <span id="imgError" class="text-danger d-none" style="font-size: 12px;">Gambar harus berupa file 'gif', 'jpg', 'png', 'jpeg'</span>
+                </div>
+              </div>
+              <div class="col-10 col-md-10">
+                <input type="file" class="custom-file-input" name="p_image" id="imageupload">
+                <label class="custom-file-label" style="left: 10px; right: 0px;overflow: hidden;">Pilih Foto</label>
+              </div>
+              <div class="col-2 col-md-2 align-items-center" style="display: flex;">
+                <button type="button" class="btn btn-sm btn-block btn-reset btn-warning hint--top hint--warning" aria-label="Reset Gambar"><i class="fa fa-sync-alt"></i></button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -93,7 +113,7 @@ Tambah Data Pondok
       <div class="col-6"><span><span class="text-danger">*</span> Wajib diisi.</span></div>
       <div class="col-6">
         <div class="text-right">
-          <button type="button" class="btn btn-primary btn-simpan"">Simpan</button>
+          <button type="button" class="btn btn-primary btn-simpan">Simpan</button>
         </div>
       </div>
     </div>
@@ -232,6 +252,60 @@ Tambah Data Pondok
         }        
       }
     })
+  }
+
+  $('#imageupload').on('change',function(){
+    var img = $('#imageupload').val();
+    if (img == '' || img == null) {
+      $('#img-priview').attr('src', '{{asset('public/images/thumbnail.png')}}');
+      $('#imgError').addClass('d-none');
+      $('.btn-simpan').removeAttr('disabled');
+      $('#imageupload').val('');
+      $('.custom-file-label').html('');
+    }else{
+      var imgPath = $(this)[0].value;
+      var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+
+      if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+
+        var fileName = $(this).val().replace('C:\\fakepath\\', " ");;
+        $(this).next('.custom-file-label').html(fileName);
+
+        $('#imgError').addClass('d-none');
+        $('#img-priview').addClass('animated zoomIn');
+        $('.btn-simpan').removeAttr('disabled');
+        readImg(this);
+
+        setTimeout(function(){
+          $('#img-priview').removeClass('animated zoomIn');
+        }, 1000);
+      }else{
+        $('.btn-simpan').attr('disabled', '');
+        $('#img-priview').attr('src', '{{asset('public/images/thumbnail.png')}}');
+        $('#imgError').removeClass('d-none');
+        $('#imageupload').val('');
+        $('.custom-file-label').html('');
+      }
+    }
+  });
+
+  $('.btn-reset').on('click', function(){
+    $('#img-priview').attr('src', '{{asset('public/images/thumbnail.png')}}');
+    $('#imgError').addClass('d-none');
+    $('.btn-simpan').removeAttr('disabled');
+    $('#imageupload').val('');
+    $('.custom-file-label').html('');
+  });
+
+  // Get data image
+  function readImg(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $('#img-priview').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
   }
 </script>
 @endsection

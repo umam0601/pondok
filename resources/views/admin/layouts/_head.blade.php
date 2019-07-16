@@ -10,4 +10,5 @@
 <link rel="stylesheet" href="{{asset('assets/select2/select2-bootstrap.css')}}">
 <link rel="stylesheet" href="{{asset('assets/alert/css/jquery.notify.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/animate.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/hint/hint.min.css')}}">
 {{-- <link rel="stylesheet" href="{{asset('assets/backend/js/ckeditor/skins/moono-lisa/editor.css')}}"/> --}}
