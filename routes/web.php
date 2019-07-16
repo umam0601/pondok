@@ -25,6 +25,7 @@ Route::prefix('admin')->group(function () {
 	Route::post('/pondok/save-data', 'AdminPondokController@save_pondok')->name('admin.pondok.save');
 	Route::get('/pondok/edit-data/{id}', 'AdminPondokController@edit_pondok')->name('admin.pondok.edit');
 	Route::post('/pondok/update-data/{id}', 'AdminPondokController@update_pondok')->name('admin.pondok.update');
+	Route::post('/pondok/upload-image', 'AdminPondokController@save_image')->name('admin.pondok.upload_image');
 });
 
 Route::get('/get-city/{id}', 'WilayahController@get_city')->name('get.city');

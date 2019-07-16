@@ -127,16 +127,64 @@ class AdminPondokController extends Controller
     public function add_galeriPondok($id)
     {
         try {
-            $id = Crypt::decrypt($id);
+            $idP = Crypt::decrypt($id);
         } catch (\Exception $e) {
             return view('admin.errors.404');
         }
 
-        $pondok = DB::table('d_pondok')->where('p_id', $id)->first();
+        $pondok = DB::table('d_pondok')->where('p_id', $idP)->first();
+        $id = Crypt::encrypt($pondok->p_id);
+        $code = $pondok->p_code;
 
-        $galeri = DB::table('d_pondokdt')->where('pd_pondok', $id)->get();
-        // dd($pondok);
-        return view('admin.master_pondok.galeri', compact('pondok', 'galeri'));
+        $galeri = DB::table('d_pondokdt')
+            ->join('d_pondok', 'p_id', 'pd_pondok')
+            ->where('pd_pondok', $idP)->get();
+
+        return view('admin.master_pondok.galeri', compact('pondok', 'id', 'code', 'galeri'));
+    }
+
+    public function save_image(Request $request)
+    {
+        // dd($request);
+        DB::beginTransaction();
+        try {
+            $pd_pondok = Crypt::decrypt($request->pd_pondok);
+            $detailId = DB::table('d_pondokdt')->where('pd_pondok', $pd_pondok)->max('pd_detailid') + 1;
+
+            $images  = $request->file('pd_image');
+            $imgName = self::upload($images, $request->p_code, $detailId);
+
+            DB::table('d_pondokdt')->insert([
+                'pd_pondok'   => $pd_pondok,
+                'pd_detailid' => $detailId,
+                'pd_image'    => $imgName,
+                'pd_imgdesc'  => $request->pd_imgdesc
+            ]);
+
+            DB::commit();
+            return response()->json([
+                'status' => 'success'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'status' => 'Gagal',
+                'message' => $e
+            ]);
+        }
+    }
+
+    public function upload($image, $code, $dt){
+        $path = public_path()."/galeri/upload/".$code;
+        $name = "".$code."-".$dt."";
+
+        $destinationPath = $path;
+        $extension  = $image->getClientOriginalExtension();
+        $fileName = $name.'.'.$extension;
+
+        if($image->move($destinationPath, $fileName)){
+            return $fileName;
+        }
     }
 
     /**

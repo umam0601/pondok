@@ -29,6 +29,7 @@ Galeri Foto {{$pondok->p_name}}
       @else
         @foreach($galeri as $key => $g)
           <div class="col-3 col-md-3 col-sm-3">
+            <img src="{{asset('public/galeri/upload/'.$g->p_code.'/'.$g->pd_image.'')}}" alt="" class="img-fluid img-thumbnail">
           </div>
         @endforeach
       @endif
@@ -46,8 +47,11 @@ Galeri Foto {{$pondok->p_name}}
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form action="{{url('admin/pondok/upload-image')}}" method="post" id="form_saveImage" enctype="multipart/form-data">
+      @csrf
       <div class="modal-body">
-        <input type="hidden" id="idPondok" value="{{$pondok->p_id}}">
+        <input type="hidden" name="pd_pondok" id="idPondok" value="{{$id}}">
+        <input type="hidden" name="p_code" value="{{$code}}">
         <div class="row">
           <div class="col-6">
             <div class="form-group">
@@ -56,7 +60,7 @@ Galeri Foto {{$pondok->p_name}}
                   <label for="imageupload">File Foto</label>
                 </div>
                 <div class="col-12">
-                  <input type="file" class="custom-file-input" name="filephoto" id="imageupload">
+                  <input type="file" class="custom-file-input" name="pd_image" id="imageupload">
                   <label class="custom-file-label" style="left: 10px; right: 10px;overflow: hidden;">Pilih Foto</label>
                   <span id="imgError" class="text-danger d-none" style="font-size: 12px;">Gambar harus berupa file 'gif', 'jpg', 'png', 'jpeg'</span>
                 </div>
@@ -73,15 +77,18 @@ Galeri Foto {{$pondok->p_name}}
           <div class="col-6">
             <div class="form-group">
               <label for="">Keterangan</label>
-              <textarea name="pd_imgdesc" id="" cols="30" rows="10" class="form-control form-control-sm"></textarea>
+              <textarea name="pd_imgdesc" id="" cols="30" rows="5" class="form-control form-control-sm"></textarea>
+            </div>
+            <div class="text-right">
+              <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
             </div>
           </div>
         </div>
       </div>
+      </form>
     </div>
   </div>
 </div>
-
 @endsection
 @section('extra_script')
 <script type="text/javascript">
@@ -126,10 +133,30 @@ Galeri Foto {{$pondok->p_name}}
         reader.readAsDataURL(input.files[0]);
       }
     }
-
-    function saveImage() {
-      
-    }
   }
+
+  $(document).ready(function() {
+    $('#form_saveImage').on('submit',(function(e) {
+      var id = $('#idPondok').val();
+      e.preventDefault();
+      $.ajax({
+        url: "{{url('admin/pondok/upload-image')}}",
+        type: "POST",
+        data:  new FormData(this),
+        contentType: false,
+        cache: false,
+        processData:false,
+        success:function(resp) {
+          if (resp.status == 'success') {
+            $('#modalAddGalery').modal('hide');
+            setTimeout(function(){
+              messageSuccess('Sukses', 'Berhasil diupload');
+            }, 1000);
+            window.location.href = "{{url('admin/pondok/add-data-galeri')}}"+"/"+id;
+          }
+        }
+      });
+    }));
+  })
 </script>
 @endsection
