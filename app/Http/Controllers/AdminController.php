@@ -27,6 +27,11 @@ class AdminController extends Controller
         return view('admin.master_pondok.index');
     }
 
+    public function kitab()
+    {
+        return view('admin.master_kitab.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

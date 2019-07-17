@@ -149,10 +149,12 @@ Galeri Foto {{$pondok->p_name}}
         success:function(resp) {
           if (resp.status == 'success') {
             $('#modalAddGalery').modal('hide');
+            messageSuccess('Gambar berhasil diunggah!');
             setTimeout(function(){
-              messageSuccess('Sukses', 'Berhasil diupload');
-            }, 1000);
-            window.location.href = "{{url('admin/pondok/add-data-galeri')}}"+"/"+id;
+              window.location.href = "{{url('admin/pondok/add-data-galeri')}}"+"/"+id;
+            }, 3000);
+          }else{
+            messageError('Gagal unggah gambar!')
           }
         }
       });

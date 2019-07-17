@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
-    <title>PPM - Admin Dashboard</title>
+    <title>PPM - Admin</title>
     <link rel="icon" type="image/png" href="{{asset('assets/images/logo.png')}}">
     <style type="text/css">
       .table-sm > thead{

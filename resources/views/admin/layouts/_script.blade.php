@@ -1,6 +1,6 @@
 <!-- Bootstrap core JavaScript-->
 <script src="{{asset('assets/backend/vendor/jquery/jquery.min.js')}}"></script>
-{{-- <script src="{{asset('assets/alert/js/jquery-1.8.2.min.js')}}"></script> --}}
+<script src="{{asset('assets/backend/js/toast/dist/jquery.toast.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/jquery.inputmask.min.js')}}"></script>
 <script src="{{asset('assets/backend/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- Core plugin JavaScript-->
@@ -13,10 +13,6 @@
 <script src="{{asset('assets/backend/vendor/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/backend/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('assets/select2/select2.js')}}"></script>
-<!-- Page level custom scripts -->
-{{-- <script src="{{asset('assets/backend/vendor/chart.js/Chart.min.js')}}"></script> --}}
-{{-- <script src="{{asset('assets/backend/js/demo/chart-area-demo.js')}}"></script> --}}
-{{-- <script src="{{asset('assets/backend/js/demo/chart-pie-demo.js')}}"></script> --}}
 {{-- Input Mask --}}
 <script src="{{asset('assets/backend/js/inputmask.min.js')}}"></script>
 {{-- Text Editor Js --}}
@@ -33,6 +29,11 @@
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
   });
+	var newNotif = new Audio('{{ asset('assets/backend/sound/newNotif.mp3') }}');
+	var notifAlert = new Audio('{{ asset('assets/backend/sound/newNotif.mp3') }}');
+	var notifSuccess = new Audio('{{ asset('assets/backend/sound/notifSuccess.mp3') }}');
+	var notifUnsuccess = new Audio('{{ asset('assets/backend/sound/notifUnsuccess.mp3') }}');
+
 	$(document).ready(function(){
 		$('.select2').select2({
       theme: "bootstrap",
@@ -49,123 +50,55 @@
     $('[data-toggle="tooltip"]').tooltip();
 	});
 
-	function messageSuccess(a, b) {
-		notify({
-			//alert | success | error | warning | info
-			type: "success", 
-			title: a,
-			//custom message
-			message: b,
-			position: {
-			  //right | left | center
-			  x: "right",
-			  //top | bottom | center
-			  y: "top" 
-			},
-			// notify icon
-			icon: '<img src="{{asset('assets/alert/images/check.png')}}" />',
-			//normal | full | small
-			size: "normal",
-			overlay: false, 
-			closeBtn: true, 
-			overflowHide: false, 
-			spacing: 20,
-			//default | dark-theme
-			theme: "default",
-			//auto-hide after a timeout
-			autoHide: true,
-			// timeout
-			delay: 2500
-		});
+	function messageSuccess(text) {
+        $.toast({
+            text: text,
+            showHideTransition: 'slide',
+            position: 'top-right',
+            icon: 'success',
+            hideAfter: 5000,
+            beforeShow: function(){
+                notifSuccess.play();
+            }
+        });
 	}
 
-	function messageWarning(a, b) {
-		notify({
-			//alert | success | error | warning | info
-			type: "warning", 
-			title: a,
-			//custom message
-			message: b,
-			position: {
-			  //right | left | center
-			  x: "right",
-			  //top | bottom | center
-			  y: "top" 
-			},
-			// notify icon
-			icon: '<img src="{{asset('assets/alert/images/warning.png')}}" />',
-			//normal | full | small
-			size: "normal",
-			overlay: false, 
-			closeBtn: true, 
-			overflowHide: false, 
-			spacing: 20,
-			//default | dark-theme
-			theme: "default",
-			//auto-hide after a timeout
-			autoHide: true,
-			// timeout
-			delay: 2500
-		});
+	function messageWarning(text) {
+        $.toast({
+            text: text,
+            showHideTransition: 'slide',
+            position: 'top-right',
+            icon: 'warning',
+            hideAfter: 5000,
+            beforeShow: function(){
+                notifUnsuccess.play();
+            }
+        });
 	}
 
-	function messageError(a, b) {
-		notify({
-			//alert | success | error | warning | info
-			type: "error", 
-			title: a,
-			//custom message
-			message: b,
-			position: {
-			  //right | left | center
-			  x: "right",
-			  //top | bottom | center
-			  y: "top" 
-			},
-			// notify icon
-			icon: '<img src="{{asset('assets/alert/images/error.png')}}" />',
-			//normal | full | small
-			size: "normal",
-			overlay: false, 
-			closeBtn: true, 
-			overflowHide: false, 
-			spacing: 20,
-			//default | dark-theme
-			theme: "default",
-			//auto-hide after a timeout
-			autoHide: true,
-			// timeout
-			delay: 2500
-		});
+	function messageError(text) {
+        $.toast({
+            text: 'Contoh Notifikasi Saat Error',
+            showHideTransition: 'slide',
+            position: 'top-right',
+            icon: 'error',
+            hideAfter: 5000,
+            beforeShow: function(){
+                notifUnsuccess.play();
+            }
+        });
 	}
 
-	function messageInfo(a, b) {
-		notify({
-			//alert | success | error | warning | info
-			type: "Info", 
-			title: a,
-			//custom message
-			message: b,
-			position: {
-			  //right | left | center
-			  x: "right",
-			  //top | bottom | center
-			  y: "top" 
-			},
-			// notify icon
-			icon: '<img src="{{asset('assets/alert/images/info.svg')}}" />',
-			//normal | full | small
-			size: "normal",
-			overlay: false, 
-			closeBtn: true, 
-			overflowHide: false, 
-			spacing: 20,
-			//default | dark-theme
-			theme: "default",
-			//auto-hide after a timeout
-			autoHide: true,
-			// timeout
-			delay: 2500
-		});
+	function messageInfo(text) {
+        $.toast({
+            text: text,
+            showHideTransition: 'slide',
+            position: 'top-right',
+            icon: 'info',
+            hideAfter: 5000,
+            beforeShow: function(){
+                notifAlert.play();
+            }
+        });
 	}
 </script>

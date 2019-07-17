@@ -17,16 +17,22 @@
     <span>Dashboard</span></a>
   </li>
     <!-- Divider -->
-  <hr class="sidebar-divider">
+  <hr class="sidebar-divider mb-0">
   <!-- Heading -->
-  <div class="sidebar-heading">
+  {{-- <div class="sidebar-heading">
     Interface
-  </div>
+  </div> --}}
   <!-- Nav Item - Pondok-->
-  <li class="nav-item {{Request::is('admin/pondok') ? 'active' : '' || Request::is('admin/pondok/*') ? 'active' : ''}}">
+  <li class="nav-item {{Request::is('admin/pondok') ? 'active' : '' || Request::is('admin/pondok/*') ? 'active' : ''}} mb-0">
     <a class="nav-link" href="{{route('admin.pondok')}}">
-    <i class="fas fa-fw fa-tachometer-alt"></i>
+    <i class="fas fa-fw fa-mosque"></i>
     <span>Pondok Pesantren</span></a>
+  </li>
+  <!-- Nav Item - Kitab-->
+  <li class="nav-item {{Request::is('admin/kitab') ? 'active' : '' || Request::is('admin/kitab/*') ? 'active' : ''}}">
+    <a class="nav-link pt-0" href="{{route('admin.kitab')}}">
+    <i class="fas fa-fw fa-quran"></i>
+    <span>Kitab</span></a>
   </li>
 </ul>
 <!-- End of Sidebar

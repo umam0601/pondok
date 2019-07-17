@@ -246,9 +246,9 @@ Tambah Data Pondok
       dataType: 'json',
       success:function(resp) {
         if (resp.status == 'sukses') {
-          messageSuccess('Berhasil!', 'Data '+resp.data+' berhasil disimpan!');
+          messageSuccess('Data '+resp.data+' berhasil disimpan!');
         } else {
-          messageError('Gagal!', 'Data gagal disimpan!');
+          messageError('Data gagal disimpan!');
         }        
       }
     })

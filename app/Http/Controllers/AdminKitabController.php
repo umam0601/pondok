@@ -17,7 +17,7 @@ use App\m_prov;
 use App\m_kota;
 use App\m_camat;
 
-class AdminPondokController extends Controller
+class AdminKitabController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,33 +29,21 @@ class AdminPondokController extends Controller
         $this->middleware('auth');
     }
 
-    public function get_pondok()
+    public function get_kitab()
     {
-        $datas = DB::table('d_pondok')->get();
+        $datas = DB::table('d_kitab')->get();
 
         return DataTables::of($datas)
             ->addIndexColumn()
             ->addColumn('action', function ($datas) {
                 return '<div class="btn-group">
-                            <button class="btn btn-sm btn-primary hint--top" aria-label="Detail" onclick="detail(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-folder"></i></button>
-                            <button class="btn btn-sm btn-info hint--top" aria-label="Galeri" onclick="galeri(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-image"></i></button>
-                            <button class="btn btn-sm btn-warning hint--top" aria-label="Edit" title="Edit" onclick="edit(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-edit"></i></button>
-                            <button class="btn btn-sm btn-danger hint--top" aria-label="Hapus" onclick="hapus(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-sm btn-info hint--top" aria-label="Detail" onclick="detail(\''.Crypt::encrypt($datas->k_id).'\')"><i class="fa fa-fw fa-folder-open"></i></button>
+                            <button class="btn btn-sm btn-warning hint--top" aria-label="Edit" title="Edit" onclick="edit(\''.Crypt::encrypt($datas->k_id).'\')"><i class="fa fa-fw fa-edit"></i></button>
+                            <button class="btn btn-sm btn-danger hint--top" aria-label="Hapus" onclick="hapus(\''.Crypt::encrypt($datas->k_id).'\')"><i class="fa fa-fw fa-trash"></i></button>
                         </div>';
             })
             ->rawColumns(['action'])
             ->make(true);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function add_pondok()
-    {
-        $prov = m_prov::all();
-        return view('admin.master_pondok.tambah_data', compact('prov'));
     }
 
     /**
@@ -64,35 +52,26 @@ class AdminPondokController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function save_pondok(Request $request)
+    public function save_kitab(Request $request)
     {
         // dd($request);
         DB::beginTransaction();
         try {
-            $codePondok = CodeGenerator::code('d_pondok', 'p_code', 5, 'PDK');
-            $id = DB::table('d_pondok')->max('p_id') + 1;
-            DB::table('d_pondok')->insert([
-                'p_id'          => $id,
-                'p_code'        => $codePondok,
-                'p_name'        => $request->p_name,
-                'p_phone'       => $request->p_phone,
-                'p_pengasuh'    => $request->p_pengasuh,
-                'p_address'     => $request->p_address,
-                'p_kec'         => $request->p_kec,
-                'p_kab'         => $request->p_kab,
-                'p_prov'        => $request->p_prov,
-                'p_email'       => $request->p_email,
-                'p_web'         => $request->p_web,
-                'p_image'       => '',
-                'p_description' => $request->p_description,
-                'p_map'         => ''
+            $codeKitab = CodeGenerator::code('d_kitab', 'k_code', 5, 'KT');
+            $id = DB::table('d_kitab')->max('k_id') + 1;
+            DB::table('d_kitab')->insert([
+                'k_id'          => $id,
+                'k_code'        => $codeKitab,
+                'k_name'        => $request->k_name,
+                'k_penulis'     => $request->k_penulis,
+                'k_description' => $request->k_description
             ]);
 
             // upload image
-            $dataPondok = DB::table('d_pondok')->where('p_id', $id)->first();
-            $images = $request->file('p_image');
+            $dataKitab = DB::table('d_kitab')->where('k_id', $id)->first();
+            $images = $request->file('k_image');
 
-            if(!$dataPondok){
+            if(!$dataKitab){
                 return json_encode([
                     'status'  => 'error',
                     'text'    => 'Terjadi Kesalahan, Coba Muat Ulang Halaman'
@@ -101,10 +80,9 @@ class AdminPondokController extends Controller
 
             if(!is_null($images)){
                 if($images != null){
-                    $this->upload($images, $dataPondok->p_code);
+                    $this->upload($images, $dataKitab->k_code);
                 }
             }
-
 
             DB::commit();
             return response()->json([
@@ -121,7 +99,7 @@ class AdminPondokController extends Controller
     }
 
     public function upload($image, $code){
-        $path = public_path()."/profile/upload/".$code;
+        $path = public_path()."/kitab/upload/".$code;
         $name = $code;
 
         $destinationPath = $path;
