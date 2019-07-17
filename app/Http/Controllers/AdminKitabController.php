@@ -57,36 +57,29 @@ class AdminKitabController extends Controller
         // dd($request);
         DB::beginTransaction();
         try {
+            
             $codeKitab = CodeGenerator::code('d_kitab', 'k_code', 5, 'KT');
             $id = DB::table('d_kitab')->max('k_id') + 1;
+
+            $images = $request->file('k_image');
+            if ($images != null) {
+                $k_image = $this->upload($images, $codeKitab);
+            }else{
+                $k_image = '';
+            }
+
             DB::table('d_kitab')->insert([
                 'k_id'          => $id,
                 'k_code'        => $codeKitab,
                 'k_name'        => $request->k_name,
                 'k_penulis'     => $request->k_penulis,
+                'k_image'       => $k_image,
                 'k_description' => $request->k_description
             ]);
 
-            // upload image
-            $dataKitab = DB::table('d_kitab')->where('k_id', $id)->first();
-            $images = $request->file('k_image');
-
-            if(!$dataKitab){
-                return json_encode([
-                    'status'  => 'error',
-                    'text'    => 'Terjadi Kesalahan, Coba Muat Ulang Halaman'
-                ]);
-            }
-
-            if(!is_null($images)){
-                if($images != null){
-                    $this->upload($images, $dataKitab->k_code);
-                }
-            }
-
             DB::commit();
             return response()->json([
-                'status' => 'sukses',
+                'status' => 'success',
                 'data'   => $request->p_name
             ]);
         } catch (\Exception $e) {

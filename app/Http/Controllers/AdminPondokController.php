@@ -66,11 +66,17 @@ class AdminPondokController extends Controller
      */
     public function save_pondok(Request $request)
     {
-        // dd($request);
         DB::beginTransaction();
         try {
             $codePondok = CodeGenerator::code('d_pondok', 'p_code', 5, 'PDK');
             $id = DB::table('d_pondok')->max('p_id') + 1;
+
+            $images = $request->file('p_image');
+            if ($images != null) {
+                $p_image = self::upload($images, $codePondok);
+            }else{
+                $p_image = '';
+            }
             DB::table('d_pondok')->insert([
                 'p_id'          => $id,
                 'p_code'        => $codePondok,
@@ -83,32 +89,14 @@ class AdminPondokController extends Controller
                 'p_prov'        => $request->p_prov,
                 'p_email'       => $request->p_email,
                 'p_web'         => $request->p_web,
-                'p_image'       => '',
+                'p_image'       => $p_image,
                 'p_description' => $request->p_description,
                 'p_map'         => ''
             ]);
 
-            // upload image
-            $dataPondok = DB::table('d_pondok')->where('p_id', $id)->first();
-            $images = $request->file('p_image');
-
-            if(!$dataPondok){
-                return json_encode([
-                    'status'  => 'error',
-                    'text'    => 'Terjadi Kesalahan, Coba Muat Ulang Halaman'
-                ]);
-            }
-
-            if(!is_null($images)){
-                if($images != null){
-                    $this->upload($images, $dataPondok->p_code);
-                }
-            }
-
-
             DB::commit();
             return response()->json([
-                'status' => 'sukses',
+                'status' => 'success',
                 'data'   => $request->p_name
             ]);
         } catch (\Exception $e) {

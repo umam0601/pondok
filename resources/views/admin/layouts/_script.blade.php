@@ -24,33 +24,30 @@
 
  <!-- Page level plugins -->
 <script type="text/JavaScript">
-  $.ajaxSetup({
-      headers: {
+    $.ajaxSetup({
+        headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-  });
-	var newNotif = new Audio('{{ asset('assets/backend/sound/newNotif.mp3') }}');
-	var notifAlert = new Audio('{{ asset('assets/backend/sound/newNotif.mp3') }}');
-	var notifSuccess = new Audio('{{ asset('assets/backend/sound/notifSuccess.mp3') }}');
-	var notifUnsuccess = new Audio('{{ asset('assets/backend/sound/notifUnsuccess.mp3') }}');
+        }
+    });
+    var notifAlert = new Audio('{{ asset('assets/backend/sound/newNotif.mp3') }}');
+    var notifSuccess = new Audio('{{ asset('assets/backend/sound/notifSuccess.mp3') }}');
+    var notifUnsuccess = new Audio('{{ asset('assets/backend/sound/notifUnsuccess.mp3') }}');
 
 	$(document).ready(function(){
 		$('.select2').select2({
-      theme: "bootstrap",
-      dropdownAutoWidth: true,
-      width: '100%'
+          theme: "bootstrap",
+          dropdownAutoWidth: true,
+          width: '100%'
 		});
 
-		$('.data-table').dataTable().fnDestroy();
-		
-    $('.phone').inputmask("9999 - 9999 - 9999 - 9",{
-      autoUnmask: true
+    	$('.data-table').dataTable().fnDestroy();
+    		
+        $('.phone').inputmask("9999 9999 9999 9",{
+          autoUnmask: true
+        });
     });
 
-    $('[data-toggle="tooltip"]').tooltip();
-	});
-
-	function messageSuccess(text) {
+    function messageSuccess(text) {
         $.toast({
             text: text,
             showHideTransition: 'slide',
@@ -61,9 +58,9 @@
                 notifSuccess.play();
             }
         });
-	}
+    }
 
-	function messageWarning(text) {
+    function messageWarning(text) {
         $.toast({
             text: text,
             showHideTransition: 'slide',
@@ -74,9 +71,9 @@
                 notifUnsuccess.play();
             }
         });
-	}
+    }
 
-	function messageError(text) {
+    function messageError(text) {
         $.toast({
             text: 'Contoh Notifikasi Saat Error',
             showHideTransition: 'slide',
@@ -87,9 +84,9 @@
                 notifUnsuccess.play();
             }
         });
-	}
+    }
 
-	function messageInfo(text) {
+    function messageInfo(text) {
         $.toast({
             text: text,
             showHideTransition: 'slide',
@@ -100,5 +97,5 @@
                 notifAlert.play();
             }
         });
-	}
+    }
 </script>

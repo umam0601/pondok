@@ -37,7 +37,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="" id="formAddKitab">
+      <form action="" id="formAddKitab" enctype="multipart/form-data">
         @csrf
       <div class="modal-body">
         <div class="row">
@@ -63,7 +63,7 @@
                     <label for="imageupload">File Foto</label>
                   </div>
                   <div class="col-12">
-                    <input type="file" class="custom-file-input" name="pd_image" id="imageupload">
+                    <input type="file" class="custom-file-input" name="k_image" id="imageupload">
                     <label class="custom-file-label" style="left: 10px; right: 10px;overflow: hidden;">Pilih Foto</label>
                     <span id="imgError" class="text-danger d-none" style="font-size: 12px;">Gambar harus berupa file 'gif', 'jpg', 'png', 'jpeg'</span>
                   </div>
@@ -76,12 +76,12 @@
           </div>
         </div>
       </div>
-      </form>
       <div class="modal-footer">
         <div class="text-right">
-          <button type="button" class="btn btn-sm btn-primary" onclick="saveKitab()">Simpan</button>
+          <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
         </div>
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -165,28 +165,32 @@
     }
   }
 
-  function saveKitab() {
-    // event.preventDefault();
-    for (instance in CKEDITOR.instances) {
-      CKEDITOR.instances[instance].updateElement();
-    }
-    var formData = $('#formAddKitab').serialize();
-    $.ajax({
-      url: "{{url('admin/kitab/save-data')}}",
-      type: "post",
-      data: formData,
-      success:function(resp) {
-        if (resp.status == 'sukses') {
-          messageSuccess('Data berhasil disimpan!')
-          $('#addKitab').modal('show');
-          setTimeout(function() {
-            window.location.href = "{{url('admin/kitab')}}";
-          }, 2000)
-        }else{
-          messageError('Data gagal disimpan!')
-        }
+  $(document).ready(function() {
+    $('#formAddKitab').on('submit',(function(e) {
+      e.preventDefault();
+      for (instance in CKEDITOR.instances) {
+        CKEDITOR.instances[instance].updateElement();
       }
-    });
-  }
+      $.ajax({
+        url: "{{url('admin/kitab/save-data')}}",
+        type: "POST",
+        data:  new FormData(this),
+        contentType: false,
+        cache: false,
+        processData:false,
+        success:function(resp) {
+          if (resp.status == 'success') {
+            $('#addKitab').modal('hide');
+            messageSuccess('Data berhasil disimpan!');
+            setTimeout(function(){
+              window.location.href = "{{url('admin/kitab')}}";
+            }, 3000);
+          }else{
+            messageError('Data gagal disimpan!')
+          }
+        }
+      });
+    }));
+  })
 </script>
 @endsection

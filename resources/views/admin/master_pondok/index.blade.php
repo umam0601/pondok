@@ -65,7 +65,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="p_address">Alamat</label>
-                  <input type="text" id="p_address" disabled="" readonly="" class="form-control form-control-sm bg-light">
+                  <textarea type="text" id="p_address" disabled="" readonly="" class="form-control form-control-sm bg-light"></textarea>
                 </div>
               </div>
             </div>
@@ -89,7 +89,20 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="p_description">Keterangan Pondok Pesantren</label>
-                  <div id="description" class="w-100 border border-secondary p-1 rounded text-dark bg-light"></div>
+                  <div class="w-100 border border-secondary p-1 rounded">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="row">
+                          <div class="col-4">
+                            <img src="" class="img-fluid img-thumbnail" alt="" id="p_image">
+                          </div>
+                          <div class="col-8">
+                            <div id="description" style="font-size: 12px;"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -143,7 +156,7 @@
         $('#p_email').val(resp.data.p_email);
         $('#p_web').val(resp.data.p_web);
         $('#description').html(resp.data.p_description);
-
+        $('#p_image').attr("src", "{{asset('public/profile/upload')}}"+'/'+resp.data.p_code+'/'+resp.data.p_image+"");
         $('#detailPondok').modal('show');
       }
     })
