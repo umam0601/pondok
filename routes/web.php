@@ -31,13 +31,14 @@ Route::prefix('admin')->group(function () {
 	Route::get('/kitab', 'AdminController@kitab')->name('admin.kitab');
 	Route::get('/kitab/get-data', 'AdminKitabController@get_kitab')->name('admin.kitab.get');
 	Route::post('/kitab/save-data', 'AdminKitabController@save_kitab')->name('admin.kitab.save');
+	Route::get('/kitab/get-detail', 'AdminKitabController@get_detail')->name('admin.kitab.get_detail');
 });
 
 Route::get('/get-city/{id}', 'WilayahController@get_city')->name('get.city');
 Route::get('/get-kecamatan/{id}', 'WilayahController@get_kecamatan')->name('get.kecamatan');
 Route::get('/get-desa/{id}', 'WilayahController@get_desa')->name('get.desa');
 
-
+Route::get('/admin2', 'AdminController@admin2');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -24,12 +24,12 @@ class AdminController extends Controller
 
     public function pondok()
     {
-        return view('admin.master_pondok.index');
+        return view('admin.pondok.index');
     }
 
     public function kitab()
     {
-        return view('admin.master_kitab.index');
+        return view('admin.kitab.index');
     }
 
     /**

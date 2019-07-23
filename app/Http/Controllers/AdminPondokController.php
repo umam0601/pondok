@@ -55,7 +55,7 @@ class AdminPondokController extends Controller
     public function add_pondok()
     {
         $prov = m_prov::all();
-        return view('admin.master_pondok.tambah_data', compact('prov'));
+        return view('admin.pondok.tambah_data', compact('prov'));
     }
 
     /**
@@ -158,7 +158,7 @@ class AdminPondokController extends Controller
             ->join('d_pondok', 'p_id', 'pd_pondok')
             ->where('pd_pondok', $idP)->get();
 
-        return view('admin.master_pondok.galeri', compact('pondok', 'id', 'code', 'galeri'));
+        return view('admin.pondok.galeri', compact('pondok', 'id', 'code', 'galeri'));
     }
 
     public function save_image(Request $request)

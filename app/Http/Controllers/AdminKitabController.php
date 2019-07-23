@@ -104,44 +104,20 @@ class AdminKitabController extends Controller
         }
     }
 
-    public function get_detail_pondok($id)
-    {
+    public function get_detail(Request $request)
+    {   
+        $id = $request->id;
         try {
             $id = Crypt::decrypt($id);
         } catch (\Exception $e) {
             return view('admin.errors.404');
         }
 
-        $data = DB::table('d_pondok')->where('p_id', $id)->first();
+        $data = DB::table('d_kitab')->where('k_id', $id)->first();
 
         return response()->json([
             'data' => $data
         ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function add_galeriPondok($id)
-    {
-        try {
-            $idP = Crypt::decrypt($id);
-        } catch (\Exception $e) {
-            return view('admin.errors.404');
-        }
-
-        $pondok = DB::table('d_pondok')->where('p_id', $idP)->first();
-        $id = Crypt::encrypt($pondok->p_id);
-        $code = $pondok->p_code;
-
-        $galeri = DB::table('d_pondokdt')
-            ->join('d_pondok', 'p_id', 'pd_pondok')
-            ->where('pd_pondok', $idP)->get();
-
-        return view('admin.master_pondok.galeri', compact('pondok', 'id', 'code', 'galeri'));
     }
 
     public function save_image(Request $request)
