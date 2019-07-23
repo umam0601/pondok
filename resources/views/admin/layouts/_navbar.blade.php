@@ -8,9 +8,9 @@
         </form>
     </div>
     <ul class="nav navbar-top-links navbar-right">
-        <li style="padding: 20px">
+        {{-- <li style="padding: 20px">
             <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
-        </li>
+        </li> --}}
         <li class="dropdown">
             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                 <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
@@ -108,7 +108,7 @@
         </li>
         <li>
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="fa fa-sign-out"></i> Log out
+                <i class="fa fa-sign-out-alt"></i> Log out
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf

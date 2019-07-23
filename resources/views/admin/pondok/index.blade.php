@@ -117,7 +117,8 @@
     window.location.href = "{{url('admin/pondok/add-data-galeri')}}" + "/" + id;
   }
 
-  function edit() {
+  function edit(id) {
+    window.location.href = "{{url('admin/pondok/edit-data')}}" + "/" + id;
   }
 
   function hapus() {

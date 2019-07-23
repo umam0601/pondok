@@ -29,7 +29,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="p_phone">No Telepon</label>
-                  <div id="p_phone" class="w-100 border-bottom" style="height: auto;"></div>
+                  <div id="p_phone" class="w-100 border-bottom phone" style="height: auto;"></div>
                   {{-- <input type="text" id="p_phone" disabled="" readonly="" class="form-control form-control-sm bg-light phone"> --}}
                 </div>
               </div>

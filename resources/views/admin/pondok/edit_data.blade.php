@@ -11,7 +11,7 @@
                 <a href="{{route('admin.pondok')}}">Master Pondok</a>
             </li>
             <li class="breadcrumb-item active">
-                <strong>Tambah Data Pondok Pesantren</strong>
+                <strong>Edit Data Pondok Pesantren</strong>
             </li>
         </ol>
     </div>
@@ -24,47 +24,48 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                  <h5>Tambah Data</h5>
+                  <h5>Edit Data {{$data->p_name}}</h5>
                   <div class="ibox-tools" style="margin-top: -5px;">
                     <a href="{{route('admin.pondok')}}" class="btn btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
                   </div>
                 </div>
-                <form action="" id="formAdd" enctype="multipart/form-data">
+                <form action="" id="formEdit" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="p_id" value="{{$data->p_id}}">
                 <div class="ibox-content">
                   <div class="row">
                     <div class="col-6 col-md-6">
                       <div class="form-group">
                         <label for="p_name"><span class="text-danger">*</span>Nama Pondok</label>
-                        <input type="text" name="p_name" class="form-control form-control-sm" id="p_name">
+                        <input type="text" name="p_name" class="form-control form-control-sm" id="p_name" value="{{$data->p_name}}">
                         <span class="text-danger error-name d-none">Nama tidak boleh kosong!</span>
                       </div>
                       <div class="form-group">
                         <label for="p_pengasuh"><span class="text-danger">*</span>Nama Pengasuh</label>
-                        <input type="text" name="p_pengasuh" class="form-control form-control-sm" id="p_pengasuh">
+                        <input type="text" name="p_pengasuh" class="form-control form-control-sm" id="p_pengasuh" value="{{$data->p_pengasuh}}">
                         <span class="text-danger error-pengasuh d-none">Nama Pengasuh tidak boleh kosong!</span>
                       </div>
                       <div class="form-group">
                         <label for="p_phone"><span class="text-danger">*</span>No Telepon</label>
-                        <input type="text" name="p_phone" class="form-control form-control-sm phone" id="p_phone" placeholder="Contoh: 0812 3456 7890 1">
+                        <input type="text" name="p_phone" class="form-control form-control-sm phone" id="p_phone" placeholder="Contoh: 0812 3456 7890 1" value="{{$data->p_phone}}">
                         <span class="text-danger error-phone d-none">Telepon tidak boleh kosong!</span>
                       </div>
                       <div class="form-group">
                         <label for="p_email">Alamat Email</label>
-                        <input type="email" name="p_email" class="form-control form-control-sm">
+                        <input type="email" name="p_email" class="form-control form-control-sm" value="{{$data->p_email}}">
                       </div>
                       <div class="form-group">
                         <label for="p_web">Situs Web</label>
-                        <input type="text" name="p_web" class="form-control form-control-sm">
+                        <input type="text" name="p_web" class="form-control form-control-sm" value="{{$data->p_web}}">
                       </div>
                     </div>
                     <div class="col-6 col-md-6">
                       <div class="form-group">
                         <label for="p_prov"><span class="text-danger">*</span>Provinsi</label>
                         <select name="p_prov" id="provId" class="form-control select2">
-                          <option value="" selected="" disabled="">Pilih Provinsi</option>
+                          <option value="" disabled="">Pilih Provinsi</option>
                           @foreach($prov as $key => $p)
-                            <option value="{{$p->wp_id}}">{{$p->wp_name}}</option>
+                            <option value="{{$p->wp_id}}" @if($p->wp_id == $data->p_prov) selected="" @endif>{{$p->wp_name}}</option>
                           @endforeach
                         </select>
                         <span class="text-danger error-prov d-none">Harap memilih provinsi!</span>
@@ -73,6 +74,9 @@
                         <label for="p_kab"><span class="text-danger">*</span>Kabupaten/Kota</label>
                         <select name="p_kab" id="kabId" class="select2">
                           <option value="" selected="" disabled="">Pilih Kabupaten / Kota</option>
+                          @foreach($kota as $key => $k)
+                            <option value="{{$k->wc_id}}" @if($k->wc_id == $data->p_kab) selected="" @endif>{{$k->wc_name}}</option>
+                          @endforeach
                         </select>
                         <span class="text-danger error-kab d-none">Harap memilih kabupaten!</span>
                       </div>
@@ -80,13 +84,16 @@
                         <label for="p_kec"><span class="text-danger">*</span>Kecamatan</label>
                         <select name="p_kec" id="kecId" class="select2">
                           <option value="" selected="" disabled="">Pilih Kecamatan</option>
+                          @foreach($camat as $key => $c)
+                            <option value="{{$c->wk_id}}" @if($c->wk_id == $data->p_kec) selected="" @endif>{{$c->wk_name}}</option>
+                          @endforeach
                         </select>
                         <span class="text-danger error-kec d-none">Harap memilih kecamatan!</span>
                       </div>
                       <div class="form-group">
                         <label for="p_address"><span class="text-danger">*</span>Alamat Lengkap</label>
-                        <textarea name="p_address" id="address" cols="30" rows="5" class="form-control form-control-sm" style="height: 110px;" placeholder="Tuliskan alamat lengkap, ex: nama jalan, RT/RW dll."></textarea>
-                        <span class="text-danger error-address d-none">Harap mengisi alamat lengkapa!</span>
+                        <textarea name="p_address" id="address" cols="30" rows="5" class="form-control form-control-sm" style="height: 110px;" placeholder="Tuliskan alamat lengkap, ex: nama jalan, RT/RW dll.">{{$data->p_address}}</textarea>
+                        <span class="text-danger error-address d-none">Alamat tidak boleh kosong!</span>
                       </div>
                     </div>
                   </div>
@@ -94,7 +101,7 @@
                     <div class="col-8 col-md-8">
                       <div class="form-group">
                         <label for="p_description">Keterangan Pondok Pesantren</label>
-                        <textarea name="p_description" id="p_description" class="form-control form-control-sm ckeditor">Tuliskan keterangan seputar Pondok Pesantren</textarea>
+                        <textarea name="p_description" id="p_description" class="form-control form-control-sm ckeditor">{!! $data->p_description !!}</textarea>
                       </div>
                     </div>
                     <div class="col-4 col-md-4">
@@ -103,7 +110,7 @@
                           <div class="col-12 col-md-12">
                             <div class="form-group">
                               <label for="p_image">Upload Foto</label>
-                              <img src="{{asset('public/images/thumbnail.png')}}" alt="" id="img-priview" class="img-fluid img-thumbnail">
+                              <img src="{{asset('public/profile/upload/'.$data->p_code.'/'.$data->p_image.'')}}" alt="" id="img-priview" class="img-fluid img-thumbnail">
                               <span id="imgError" class="text-danger d-none" style="font-size: 12px;">Gambar harus berupa file 'gif', 'jpg', 'png', 'jpeg'</span>
                             </div>
                           </div>
@@ -235,30 +242,58 @@
     }
 
     if (result == 1) {
-      $('.phone').unmask()
-      for (instance in CKEDITOR.instances) {
-        CKEDITOR.instances[instance].updateElement();
-      }
-      $.ajax({
-        url: "{{url('admin/pondok/save-data')}}",
-        type: "post",
-        data: new FormData(document.getElementById("formAdd")),
-        contentType: false,
-        cache: false,
-        processData:false,
-        success:function(resp) {
-          if (resp.status == 'success') {
-            messageSuccess('Data '+resp.data+' berhasil disimpan!', 'Berhasil!');
-            setTimeout(function(){
-              window.location.href = "{{route('admin.pondok')}}"
-            }, 2000)
-          } else {
-            messageError('Gagal menyimpan data!', 'Gagal!');
-          }        
+      $.confirm({
+        icon: 'fa fa-question',
+        theme: 'material',
+        closeIcon: true,
+        animation: 'scale',
+        type: 'green',
+        title: 'Peringatan!',
+        content: 'Apakah anda yakin dengan keputusan ini?',
+        buttons: {
+          confirm: {
+              text: 'Ya',
+              btnClass: 'btn-green',
+              action: function(){
+                update_data()
+              }
+          },
+          cancel: {
+              text: 'Tidak',
+              btnClass: 'btn-orange',
+              action: function(){
+                
+              }
+          },
         }
       });
     }
   });
+
+  function update_data() {
+    $('.phone').unmask()
+    for (instance in CKEDITOR.instances) {
+      CKEDITOR.instances[instance].updateElement();
+    }
+    $.ajax({
+      url: "{{url('admin/pondok/update-data')}}",
+      type: "post",
+      data: new FormData(document.getElementById("formEdit")),
+      contentType: false,
+      cache: false,
+      processData:false,
+      success:function(resp) {
+        if (resp.status == 'success') {
+          messageSuccess('Data '+resp.data+' berhasil diperbarui!', 'Berhasil!');
+          setTimeout(function(){
+            window.location.href = "{{route('admin.pondok')}}"
+          }, 2000)
+        } else {
+          messageError('Gagal menyimpan data!', 'Gagal!');
+        }        
+      }
+    });
+  }
 
   $('#imageupload').on('change',function(){
     var img = $('#imageupload').val();

@@ -211,9 +211,21 @@ class AdminPondokController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit_pondok($id)
     {
-        //
+        try{
+            $id = Crypt::decrypt($id);
+        } catch (\Exception $e) {
+            return view('admin.errors.404');
+        }
+
+        $prov = m_prov::all();
+        $kota = m_kota::all();
+        $camat = m_camat::all();
+
+        $data = DB::table('d_pondok')->where('p_id', $id)->first();
+
+        return view('admin.pondok.edit_data', compact('prov', 'kota', 'camat', 'data'));
     }
 
     /**
@@ -223,9 +235,47 @@ class AdminPondokController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update_pondok(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+        
+            $id  = $request->p_id;
+            $img = DB::table('d_pondok')->where('p_id', $id)->first();
+
+            $images = $request->file('p_image');
+            if ($images != null) {
+                $p_image = self::upload($images, $codePondok);
+            }else{
+                $p_image = $img->p_image;
+            }
+
+            DB::table('d_pondok')->where('p_id', $id)->update([
+                'p_name'        => $request->p_name,
+                'p_pengasuh'    => $request->p_pengasuh,
+                'p_phone'       => $request->p_phone,
+                'p_address'     => $request->p_address,
+                'p_kec'         => $request->p_kec,
+                'p_kab'         => $request->p_kab,
+                'p_prov'        => $request->p_prov,
+                'p_email'       => $request->p_email,
+                'p_web'         => $request->p_web,
+                'p_image'       => $p_image,
+                'p_description' => $request->p_description
+            ]);
+        
+            DB::commit();
+            return response()->json([
+                'status' => 'success',
+                'data'   => $img->p_name
+            ]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'status'  => 'Gagal',
+                'message' => $e
+            ]);
+        }
     }
 
     /**

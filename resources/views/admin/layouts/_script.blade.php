@@ -58,10 +58,15 @@
 
 <script src="{{asset('assets/select2/select2.full.min.js')}}"></script>
 
+{{-- Jquery Confirm --}}
+<script src="{{asset('assets/js/jquery-confirm/dist/jquery-confirm.min.js')}}"></script>
 {{-- Leaflet Map --}}
 <script src="{{asset('assets/js/leaflet/leaflet.js')}}"></script>
 
 <script type="text/javascript">
+var notifInfo = new Audio('{{ asset('assets/sound/newNotif.mp3') }}');
+var notifSuccess = new Audio('{{ asset('assets/sound/notifSuccess.mp3') }}');
+var notifError = new Audio('{{ asset('assets/sound/notifUnsuccess.mp3') }}');
 $(document).ready(function() {
     var data1 = [
         [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,30],[11,10],[12,13],[13,4],[14,3],[15,3],[16,6]
@@ -165,6 +170,7 @@ function messageSuccess(desc, title) {
         "hideMethod": "hide"
     };
     toastr.success(desc, title);
+    notifSuccess.play();
 }
 
 function messageWarning(desc, title) {
@@ -185,6 +191,7 @@ function messageWarning(desc, title) {
         "hideMethod": "hide"
     };
     toastr.warning(desc, title);
+    notifError.play()
 }
 
 function messageInfo(desc, title) {
@@ -205,6 +212,7 @@ function messageInfo(desc, title) {
         "hideMethod": "hide"
     };
     toastr.info(desc, title);
+    notifInfo.play()
 }
 
 function messageError(desc, title) {
@@ -225,6 +233,7 @@ function messageError(desc, title) {
         "hideMethod": "hide"
     };
     toastr.error(desc, title);
+    notifError.play()
 }
 
 function loadingShow() {
