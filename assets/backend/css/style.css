@@ -9607,6 +9607,7 @@ body.md-skin {
 
 .btn {
   border-radius: 0px;
+  /*box-shadow: 2px 2px 8px #888;*/
 }
 
 .img-thumbnail {
@@ -9615,4 +9616,8 @@ body.md-skin {
 
 .custom-file-label {
   border-radius: 0px;
+}
+
+.modal-content {
+  border-top: 3px solid #1ab394;
 }

@@ -37,8 +37,8 @@ class AdminPondokController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($datas) {
                 return '<div class="btn-group">
-                            <button class="btn btn-sm btn-primary hint--top" aria-label="Detail" onclick="detail(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-folder"></i></button>
-                            <button class="btn btn-sm btn-info hint--top" aria-label="Galeri" onclick="galeri(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-image"></i></button>
+                            <button class="btn btn-sm btn-info hint--top" aria-label="Detail" onclick="detail(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-folder-open"></i></button>
+                            <button class="btn btn-sm btn-success hint--top" aria-label="Galeri" onclick="galeri(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-image"></i></button>
                             <button class="btn btn-sm btn-warning hint--top" aria-label="Edit" title="Edit" onclick="edit(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-edit"></i></button>
                             <button class="btn btn-sm btn-danger hint--top" aria-label="Hapus" onclick="hapus(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-trash"></i></button>
                         </div>';

@@ -1,10 +1,10 @@
-<div class="modal inmodal fade" id="modalAddGalery" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal fade" id="modalAddGalery" tabindex="-1" role="dialog"  aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <div class="modal-header" style="height: 40px; display: flex;align-items: center;">
         <h4 class="modal-title"><b>Tambah Foto</h4>
         {{-- <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small> --}}
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       </div>
       <form action="{{url('admin/pondok/upload-image')}}" method="post" id="form_saveImage" enctype="multipart/form-data">
       @csrf
@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-12">
                   <input type="file" class="custom-file-input" name="pd_image" id="imageupload">
-                  <label class="custom-file-label" style="left: 10px; right: 10px;overflow: hidden;">Pilih Foto</label>
+                  <label class="custom-file-label" style="left: 15px; right: 15px;overflow: hidden; height: 31px;">Pilih Foto</label>
                   <span id="imgError" class="text-danger d-none" style="font-size: 12px;">Gambar harus berupa file 'gif', 'jpg', 'png', 'jpeg'</span>
                 </div>
               </div>

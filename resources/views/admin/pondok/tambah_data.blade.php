@@ -111,7 +111,7 @@
                             <input type="file" class="custom-file-input" name="p_image" id="imageupload" style="height: 31px;">
                             <label class="custom-file-label" style="left: 15px; right: 0px;overflow: hidden; height: 31px;">Pilih Foto</label>
                           </div>
-                          <div class="col-2 col-md-2 align-items-center" style="display: flex;">
+                          <div class="col-2 col-md-2 align-items-center pl-1" style="display: flex;">
                             <button type="button" class="btn btn-sm btn-block btn-reset btn-warning hint--top" aria-label="Reset Gambar"><i class="fa fa-sync-alt"></i></button>
                           </div>
                         </div>

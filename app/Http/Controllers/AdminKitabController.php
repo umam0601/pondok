@@ -92,8 +92,14 @@ class AdminKitabController extends Controller
     }
 
     public function upload($image, $code){
+        $temp = DB::table('d_kitab')->where('k_code', $code)->first();
+
+        if ($temp->k_image != null) {
+            file::delete(public_path()."/kitab/upload/".$code."/".$temp->k_image);
+        }        
+
         $path = public_path()."/kitab/upload/".$code;
-        $name = $code;
+        $name = $code;        
 
         $destinationPath = $path;
         $extension       = $image->getClientOriginalExtension();
@@ -120,59 +126,26 @@ class AdminKitabController extends Controller
         ]);
     }
 
-    public function save_image(Request $request)
-    {
-        // dd($request);
-        DB::beginTransaction();
-        try {
-            $pd_pondok = Crypt::decrypt($request->pd_pondok);
-            $detailId = DB::table('d_pondokdt')->where('pd_pondok', $pd_pondok)->max('pd_detailid') + 1;
-
-            $images  = $request->file('pd_image');
-            $imgName = self::uploadGaleri($images, $request->p_code, $detailId);
-
-            DB::table('d_pondokdt')->insert([
-                'pd_pondok'   => $pd_pondok,
-                'pd_detailid' => $detailId,
-                'pd_image'    => $imgName,
-                'pd_imgdesc'  => $request->pd_imgdesc
-            ]);
-
-            DB::commit();
-            return response()->json([
-                'status' => 'success'
-            ]);
-        } catch (\Exception $e) {
-            DB::rollback();
-            return response()->json([
-                'status' => 'Gagal',
-                'message' => $e
-            ]);
-        }
-    }
-
-    public function uploadGaleri($image, $code, $dt){
-        $path = public_path()."/galeri/upload/".$code;
-        $name = "".$code."-".$dt."";
-
-        $destinationPath = $path;
-        $extension  = $image->getClientOriginalExtension();
-        $fileName = $name.'.'.$extension;
-
-        if($image->move($destinationPath, $fileName)){
-            return $fileName;
-        }
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit_kitab(Request $request)
+    {   
+        $id = $request->id;
+        try {
+            $id = Crypt::decrypt($id);
+        } catch (\Exception $e) {
+            return view('admin.errors.404');
+        }
+
+        $data = DB::table('d_kitab')->where('k_id', $id)->first();
+
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     /**
@@ -182,9 +155,40 @@ class AdminKitabController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update_kitab(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+
+            $id  = $request->k_id;
+            $img = DB::table('d_kitab')->where('k_id', $id)->first();
+
+            $images = $request->file('k_image');
+            if ($images != null) {
+                $k_image = $this->upload($images, $img->k_code);
+            }else{
+                $k_image = $img->k_image;
+            }
+
+            DB::table('d_kitab')->where('k_id', $id)->update([
+                'k_name'        => $request->k_name,
+                'k_penulis'     => $request->k_penulis,
+                'k_image'       => $k_image,
+                'k_description' => $request->k_description
+            ]);
+
+            DB::commit();
+            return response()->json([
+                'status' => 'success',
+                'data'   => $img->k_name
+            ]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'status' => 'Gagal',
+                'message' => $e
+            ]);
+        }
     }
 
     /**

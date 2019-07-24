@@ -32,6 +32,8 @@ Route::prefix('admin')->group(function () {
 	Route::get('/kitab/get-data', 'AdminKitabController@get_kitab')->name('admin.kitab.get');
 	Route::post('/kitab/save-data', 'AdminKitabController@save_kitab')->name('admin.kitab.save');
 	Route::get('/kitab/get-detail', 'AdminKitabController@get_detail')->name('admin.kitab.get_detail');
+	Route::get('/kitab/edit-data', 'AdminKitabController@edit_kitab')->name('admin.kitab.edit');
+	Route::post('/kitab/update-data', 'AdminKitabController@update_kitab')->name('admin.kitab.update');
 });
 
 Route::get('/get-city/{id}', 'WilayahController@get_city')->name('get.city');

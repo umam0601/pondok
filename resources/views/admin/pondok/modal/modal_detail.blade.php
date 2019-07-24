@@ -63,13 +63,13 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="p_description">Keterangan Pondok Pesantren</label>
-                  <div class="w-100 border border-secondary p-1 rounded">
+                  <div class="w-100 border p-1" style="height: auto;">
                     <div class="row">
                       <div class="col-4">
                         <img src="" class="img-fluid img-thumbnail" alt="" id="p_image">
                       </div>
                       <div class="col-8">
-                        <div id="description" style="font-size: 12px;"></div>
+                        <div id="description"></div>
                       </div>
                     </div>
                   </div>

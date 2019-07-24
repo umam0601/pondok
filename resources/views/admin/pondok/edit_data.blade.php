@@ -24,10 +24,10 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                  <h5>Edit Data {{$data->p_name}}</h5>
-                  <div class="ibox-tools" style="margin-top: -5px;">
-                    <a href="{{route('admin.pondok')}}" class="btn btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
-                  </div>
+                    <h5>Tabel Pondok Pesantren</h5>
+                    <div class="ibox-tools" style="margin-top: -5px;">
+                        <a href="{{route('admin.pondok')}}" class="btn btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
+                    </div>
                 </div>
                 <form action="" id="formEdit" enctype="multipart/form-data">
                 @csrf

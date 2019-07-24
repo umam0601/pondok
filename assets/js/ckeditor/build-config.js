@@ -13,10 +13,10 @@
  * (1) https://ckeditor.com/cke4/builder
  *     Visit online builder to build CKEditor from scratch.
  *
- * (2) https://ckeditor.com/cke4/builder/30bb5ff2b8cd0807faca587d94baf92d
+ * (2) https://ckeditor.com/cke4/builder/4eec53e08e22782a3f27bb288989e28e
  *     Visit online builder to build CKEditor, starting with the same setup as before.
  *
- * (3) https://ckeditor.com/cke4/builder/download/30bb5ff2b8cd0807faca587d94baf92d
+ * (3) https://ckeditor.com/cke4/builder/download/4eec53e08e22782a3f27bb288989e28e
  *     Straight download link to the latest version of CKEditor (Optimized) with the same setup as before.
  *
  * NOTE:
@@ -25,7 +25,7 @@
  */
 
 var CKBUILDER_CONFIG = {
-	skin: 'moonocolor',
+	skin: 'moono',
 	preset: 'standard',
 	ignore: [
 		'.DS_Store',
@@ -58,6 +58,7 @@ var CKBUILDER_CONFIG = {
 		'blockquote' : 1,
 		'clipboard' : 1,
 		'contextmenu' : 1,
+		'easyimage' : 1,
 		'elementspath' : 1,
 		'enterkey' : 1,
 		'entities' : 1,
@@ -67,7 +68,7 @@ var CKBUILDER_CONFIG = {
 		'format' : 1,
 		'horizontalrule' : 1,
 		'htmlwriter' : 1,
-		'image' : 1,
+		'imageresize' : 1,
 		'indentlist' : 1,
 		'justify' : 1,
 		'link' : 1,
@@ -79,7 +80,6 @@ var CKBUILDER_CONFIG = {
 		'removeformat' : 1,
 		'resize' : 1,
 		'scayt' : 1,
-		'selectall' : 1,
 		'showborders' : 1,
 		'sourcearea' : 1,
 		'specialchar' : 1,
@@ -90,7 +90,6 @@ var CKBUILDER_CONFIG = {
 		'tabletools' : 1,
 		'toolbar' : 1,
 		'undo' : 1,
-		'uploadfile' : 1,
 		'uploadimage' : 1,
 		'wsc' : 1,
 		'wysiwygarea' : 1

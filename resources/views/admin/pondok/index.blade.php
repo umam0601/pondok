@@ -62,9 +62,7 @@
     $('#tb_pondok').DataTable({
       responsive: true,
       serverSide: true,
-      processing: true,
       ordering: true,
-      info: false,
       ajax: {
           url: "{{ route('admin.pondok.get') }}",
           type: "get",
@@ -73,10 +71,10 @@
           }
       },
       columns: [
-        {data: 'DT_RowIndex', className: 'text-center'},
-        {data: 'p_name'},
-        {data: 'p_pengasuh'},
-        {data: 'p_address'},
+        {data: 'DT_RowIndex', className: 'text-center align-middle'},
+        {data: 'p_name', className: 'align-middle'},
+        {data: 'p_pengasuh', className: 'align-middle'},
+        {data: 'p_address', className: 'align-middle'},
         {data: 'action', className: 'text-center'}
       ],
       pageLength: 10,

@@ -3,7 +3,7 @@
         <div class="dropdown profile-element">
             <img alt="image" class="rounded-circle" src="{{asset('assets/backend/img/profile_small.jpg')}}"/>
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <span class="block m-t-xs font-bold">{{Auth::user()->name}}</span>
+                {{-- <span class="block m-t-xs font-bold">{{Auth::user()->name}}</span> --}}
                 <span class="text-muted text-xs block text-capitalize">{{Auth::user()->name}} <b class="caret"></b></span>
             </a>
             <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -20,7 +20,7 @@
             </ul>
         </div>
         <div class="logo-element">
-            IN+
+            <img src="{{asset('assets/images/logo.png')}}" alt="" class="img-fluid">
         </div>
     </li>
     {{-- <li class="active">

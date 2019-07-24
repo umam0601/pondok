@@ -1,11 +1,10 @@
 <div class="modal fade" id="addKitab" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header bg-primary text-light">
-        <h6 class="modal-title" id="myModalLabel"><b>Tambah Data Kitab <span id="title"></span></b></h6>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <div class="modal-header" style="height: 40px; display: flex;align-items: center;">
+        <h4 class="modal-title"><b>Tambah Data</h4>
+        {{-- <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small> --}}
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       </div>
       <form action="" id="formAddKitab" enctype="multipart/form-data">
         @csrf
