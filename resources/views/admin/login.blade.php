@@ -1,90 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>M-PONPES - Admin Login</title>
+    <title>INSPINIA | Login 2</title>
 
-  <!-- Custom fonts for this template-->
-  <link href="{{asset('assets/backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('assets/backend/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/backend/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
-  <link href="{{asset('assets/backend/css/sb-admin-2.min.css')}}" rel="stylesheet">
-  <style type="text/css">
-    body{
-      height: 100vh;
-      display: flex;
-      align-items: center;
-    }
-  </style>
+    <link href="{{asset('assets/backend/css/animate.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/backend/css/style.css')}}" rel="stylesheet">
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="gray-bg">
 
-  <div class="container">
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
 
-    <!-- Outer Row -->
-    <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="font-bold">Welcome to IN+</h2>
 
-      <div class="col-xl-10 col-lg-12 col-md-9">
+                <p>
+                    Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
+                </p>
 
-        <div class="card o-hidden border-0 shadow-lg my-5">
-          <div class="card-body p-0">
-            <!-- Nested Row within Card Body -->
-            <div class="row">
-              <div class="col-lg-6 d-none d-lg-block"></div>
-              <div class="col-lg-6">
-                <div class="p-5">
-                  <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                  </div>
-                  <form class="user" method="POST" action="{{ route('login') }}">
-                    @csrf
-                    <div class="form-group">
-                      <input type="text" class="form-control form-control-user @error('name') is-invalid @enderror" id="exampleInputName" aria-describedby="nameHelp" placeholder="Enter name..." name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                </p>
 
-                        @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror" id="exampleInputPassword" placeholder="Password" name="password" required autocomplete="current-password">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">
-                        {{ __('Login') }}
-                    </button>
-                  </form>
-                  {{-- <hr>
-                  <div class="text-center">
-                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                  </div> --}}
-                </div>
-              </div>
+                <p>
+                    When an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                </p>
+
+                <p>
+                    <small>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</small>
+                </p>
+
             </div>
-          </div>
+            <div class="col-md-6">
+                <div class="ibox-content">
+                    <form class="m-t" role="form" method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="form-group">
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="exampleInputName" aria-describedby="nameHelp" placeholder="Enter name..." name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" @error('password') is-invalid @enderror" id="exampleInputPassword" placeholder="Password" name="password" required autocomplete="current-password">
+                        </div>
+                        <button type="submit" class="btn btn-primary block full-width m-b">{{ __('Login') }}</button>
+                    </form>
+                    <p class="m-t">
+                        {{-- <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> --}}
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                {{-- Copyright Example Company --}}
+            </div>
+            <div class="col-md-6 text-right">
+               <small>© 2014-2015</small>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="{{asset('assets/backend/vendor/jquery/jquery.min.js')}}"></script>
-  <script src="{{asset('assets/backend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="{{asset('assets/backend/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="{{asset('assets/backend/js/sb-admin-2.min.js')}}"></script>
 
 </body>
 

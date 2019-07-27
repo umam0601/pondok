@@ -15,6 +15,7 @@
 <script src="{{asset('assets/frontend/js/modernizr.custom.js')}}"></script>
 <script src="{{asset('assets/frontend/js/jquery.ba-cond.min.js')}}"></script>
 <script src="{{asset('assets/frontend/js/jquery.slitslider.js')}}"></script>
+<script src="{{asset('assets/frontend/js/jquery.cslider.js')}}"></script>
 <script src="{{asset('assets/frontend/js/animate.js')}}"></script>
 
 <!-- Template Custom JavaScript File -->

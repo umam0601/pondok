@@ -1,9 +1,8 @@
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-  <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-      <span>Copyright &copy; Your Website 2019</span>
-    </div>
+<div class="footer">
+  <div class="float-right">
+      10GB of <strong>250GB</strong> Free.
   </div>
-</footer>
-<!-- End of Footer -->
+  <div>
+      <strong>Copyright</strong> Example Company &copy; 2014-2018
+  </div>
+</div>
