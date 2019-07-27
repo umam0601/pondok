@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 
@@ -31,7 +32,7 @@ class AdminKitabController extends Controller
 
     public function get_kitab()
     {
-        $datas = DB::table('d_kitab')->get();
+        $datas = DB::table('m_kitab')->get();
 
         return DataTables::of($datas)
             ->addIndexColumn()
@@ -58,8 +59,8 @@ class AdminKitabController extends Controller
         DB::beginTransaction();
         try {
             
-            $codeKitab = CodeGenerator::code('d_kitab', 'k_code', 5, 'KT');
-            $id = DB::table('d_kitab')->max('k_id') + 1;
+            $codeKitab = CodeGenerator::code('m_kitab', 'k_code', 5, 'KT');
+            $id = DB::table('m_kitab')->max('k_id') + 1;
 
             $images = $request->file('k_image');
             if ($images != null) {
@@ -68,7 +69,7 @@ class AdminKitabController extends Controller
                 $k_image = '';
             }
 
-            DB::table('d_kitab')->insert([
+            DB::table('m_kitab')->insert([
                 'k_id'          => $id,
                 'k_code'        => $codeKitab,
                 'k_name'        => $request->k_name,
@@ -80,7 +81,7 @@ class AdminKitabController extends Controller
             DB::commit();
             return response()->json([
                 'status' => 'success',
-                'data'   => $request->p_name
+                'data'   => $request->k_name
             ]);
         } catch (\Exception $e) {
             DB::rollback();
@@ -92,21 +93,25 @@ class AdminKitabController extends Controller
     }
 
     public function upload($image, $code){
-        $temp = DB::table('d_kitab')->where('k_code', $code)->first();
-
-        if ($temp->k_image != null) {
-            file::delete(public_path()."/kitab/upload/".$code."/".$temp->k_image);
-        }        
-
         $path = public_path()."/kitab/upload/".$code;
-        $name = $code;        
 
-        $destinationPath = $path;
-        $extension       = $image->getClientOriginalExtension();
-        $fileName        = $name.'.'.$extension;
+        if (File::exists($path)) {
+            File::deleteDirectory($path);
+        }
+        $numRandom = rand(1000, 1999);
+        $nama = $code.'-'.$numRandom;
+        if(File::makeDirectory($path,0777,true)){
+            // $name = ''+$code+'-'rand(100, 900)'';        
 
-        if($image->move($destinationPath, $fileName)){
-            return $fileName;
+            $destinationPath = $path;
+            $extension       = $image->getClientOriginalExtension();
+            $fileName        = $nama.'.'.$extension;
+
+            if($image->move($destinationPath, $fileName)){
+                return $fileName;
+            }
+        }else{
+            return false;
         }
     }
 
@@ -119,7 +124,7 @@ class AdminKitabController extends Controller
             return view('admin.errors.404');
         }
 
-        $data = DB::table('d_kitab')->where('k_id', $id)->first();
+        $data = DB::table('m_kitab')->where('k_id', $id)->first();
 
         return response()->json([
             'data' => $data
@@ -141,7 +146,7 @@ class AdminKitabController extends Controller
             return view('admin.errors.404');
         }
 
-        $data = DB::table('d_kitab')->where('k_id', $id)->first();
+        $data = DB::table('m_kitab')->where('k_id', $id)->first();
 
         return response()->json([
             'data' => $data
@@ -161,7 +166,7 @@ class AdminKitabController extends Controller
         try {
 
             $id  = $request->k_id;
-            $img = DB::table('d_kitab')->where('k_id', $id)->first();
+            $img = DB::table('m_kitab')->where('k_id', $id)->first();
 
             $images = $request->file('k_image');
             if ($images != null) {
@@ -170,7 +175,7 @@ class AdminKitabController extends Controller
                 $k_image = $img->k_image;
             }
 
-            DB::table('d_kitab')->where('k_id', $id)->update([
+            DB::table('m_kitab')->where('k_id', $id)->update([
                 'k_name'        => $request->k_name,
                 'k_penulis'     => $request->k_penulis,
                 'k_image'       => $k_image,
@@ -197,8 +202,40 @@ class AdminKitabController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function hapus_kitab(Request $request)
     {
-        //
+        try {
+            $id = Crypt::decrypt($request->id);
+        } catch (\Exception $e) {
+            return view('admin.errors.404');
+        }
+
+        DB::beginTransaction();
+        try {
+        
+            $data = DB::table('m_kitab')->where('k_id', $id);
+            $path = public_path()."/kitab/upload/".$data->first()->k_code;
+            $nama = $data->first()->k_name;
+
+            if ($data->first()) {
+                if (File::exists($path)) {
+                    File::deleteDirectory($path);
+                }
+
+                $data->delete();
+            }
+        
+            DB::commit();
+            return response()->json([
+                'status' => 'success',
+                'nama'   => $nama
+            ]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'status'  => 'Gagal',
+                'message' => $e
+            ]);
+        }
     }
 }

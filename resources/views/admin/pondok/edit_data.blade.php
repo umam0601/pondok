@@ -24,7 +24,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>Tabel Pondok Pesantren</h5>
+                    <h5>Edit Pondok Pesantren</h5>
                     <div class="ibox-tools" style="margin-top: -5px;">
                         <a href="{{route('admin.pondok')}}" class="btn btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
                     </div>
@@ -110,7 +110,11 @@
                           <div class="col-12 col-md-12">
                             <div class="form-group">
                               <label for="p_image">Upload Foto</label>
-                              <img src="{{asset('public/profile/upload/'.$data->p_code.'/'.$data->p_image.'')}}" alt="" id="img-priview" class="img-fluid img-thumbnail">
+                              @if($data->p_image == "" || $data->p_image == null)
+                                <img src="{{asset('public/images/thumbnail.png')}}" alt="" id="img-priview" class="img-fluid img-thumbnail">
+                              @else
+                                <img src="{{asset('public/profile/upload/'.$data->p_code.'/'.$data->p_image.'')}}" alt="" id="img-priview" class="img-fluid img-thumbnail">
+                              @endif
                               <span id="imgError" class="text-danger d-none" style="font-size: 12px;">Gambar harus berupa file 'gif', 'jpg', 'png', 'jpeg'</span>
                             </div>
                           </div>
@@ -146,6 +150,13 @@
 @endsection
 @section('extra_script')
 <script type="text/Javascript">
+  $(document).ready(function(){
+    loadingShow()
+
+    setTimeout(function(){
+      loadingHide()
+    }, 1000)
+  })
   $('#provId').on('change', function() {
     var provId = $('#provId').val();
     $.ajax({
@@ -247,20 +258,20 @@
         theme: 'material',
         closeIcon: true,
         animation: 'scale',
-        type: 'green',
+        type: 'orange',
         title: 'Peringatan!',
         content: 'Apakah anda yakin dengan keputusan ini?',
         buttons: {
           confirm: {
               text: 'Ya',
-              btnClass: 'btn-green',
+              btnClass: 'btn-orange',
               action: function(){
                 update_data()
               }
           },
           cancel: {
               text: 'Tidak',
-              btnClass: 'btn-orange',
+              btnClass: 'btn-default',
               action: function(){
                 
               }

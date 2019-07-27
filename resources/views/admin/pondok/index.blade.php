@@ -36,11 +36,11 @@
 			              <table class="table table-striped table-bordered table-hover w-100" id="tb_pondok">
 				              <thead>
 					              <tr>
-					                  <th>No.</th>
-					                  <th>Nama Pondok</th>
-					                  <th>Nama Pengasuh</th>
-					                  <th>Alamat</th>
-					                  <th>Aksi</th>
+					                  <th width="5%">No.</th>
+					                  <th width="25%">Nama Pondok</th>
+					                  <th width="20%">Nama Pengasuh</th>
+					                  <th width="35%">Alamat</th>
+					                  <th width="15%">Aksi</th>
 					              </tr>
 				              </thead>
 				              <tbody>
@@ -58,8 +58,10 @@
 @endsection
 @section('extra_script')
 <script type="text/javascript">
+  var tb_pondok;
   $(document).ready(function(){
-    $('#tb_pondok').DataTable({
+    $('#tb_pondok').dataTable().fnDestroy()
+    tb_pondok = $('#tb_pondok').DataTable({
       responsive: true,
       serverSide: true,
       ordering: true,
@@ -75,7 +77,7 @@
         {data: 'p_name', className: 'align-middle'},
         {data: 'p_pengasuh', className: 'align-middle'},
         {data: 'p_address', className: 'align-middle'},
-        {data: 'action', className: 'text-center'}
+        {data: 'action', className: 'text-center align-middle'}
       ],
       pageLength: 10,
       lengthMenu: [
@@ -119,7 +121,55 @@
     window.location.href = "{{url('admin/pondok/edit-data')}}" + "/" + id;
   }
 
-  function hapus() {
+  function hapus(id) {
+    $.confirm({
+        icon: 'fa fa-question',
+        theme: 'material',
+        closeIcon: true,
+        animation: 'scale',
+        type: 'red',
+        title: 'Peringatan!',
+        content: 'Apakah anda yakin dengan keputusan ini?',
+        buttons: {
+          confirm: {
+              text: 'Ya',
+              btnClass: 'btn-red',
+              action: function(){
+                delete_data(id)
+              }
+          },
+          cancel: {
+              text: 'Tidak',
+              btnClass: 'btn-default',
+              action: function(){
+                
+              }
+          },
+        }
+      });
+  }
+
+  function delete_data(id) {
+    // alert('hapus');
+    axios.post('{{url('admin/pondok/hapus-data')}}',
+      {
+        'id' : id,
+        "_token": "{{csrf_token()}}"
+      }
+    )
+    .then(function(resp){
+      if (resp.data.status == 'success'){
+        messageSuccess(resp.data.nama + ' Berhasil dihapus', 'Berhasil!')
+        tb_pondok.ajax.reload()
+      }
+      else{
+        messageError('Gagal menghapus data ' + resp.data.nama, 'Gagal!')
+      }
+      
+    })
+    .catch(function(error){
+      
+    })
   }
 </script>
 @endsection

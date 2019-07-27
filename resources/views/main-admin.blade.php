@@ -21,9 +21,6 @@
     @include('admin.layouts._head')
     @yield('extra_style')
     <style type="text/css">
-        body {
-            font-family: 'Roboto' !important;
-        }
         label {
             font-weight: bold;
         }

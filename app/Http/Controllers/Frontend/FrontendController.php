@@ -1,35 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 use DB;
 
-class AdminController extends Controller
+class FrontendController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     public function index()
     {
-        return view('admin.dashboard');
-    }
-
-    public function pondok()
-    {
-        return view('admin.pondok.index');
-    }
-
-    public function kitab()
-    {
-        return view('admin.kitab.index');
+        $pondok = DB::table('m_pondok')->get();
+        return view('frontend.landing', compact('pondok'));
     }
 
     /**

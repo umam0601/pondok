@@ -136,6 +136,7 @@ jQuery(document).ready(function($) {
 
   $('#mycarousel').jcarousel();
   $('#mycarousel1').jcarousel();
+  $('#mycarousel2').jcarousel();
 
   //flexslider
   $('.flexslider').flexslider();

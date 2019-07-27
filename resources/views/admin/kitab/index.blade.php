@@ -59,6 +59,7 @@
 <script type="text/Javascript">
   var tb_kitab;
   $(document).ready(function(){
+    $('#table_kitab').dataTable().fnDestroy()
     tb_kitab = $('#table_kitab').DataTable({
       responsive: true,
       serverSide: true,
@@ -100,12 +101,10 @@
         success:function(resp) {
           if (resp.status == 'success') {
             $('#addKitab').modal('hide');
-            messageSuccess('Data berhasil disimpan!');
-            setTimeout(function(){
-              window.location.href = "{{url('admin/kitab')}}";
-            }, 3000);
+            messageSuccess(resp.data + ' berhasil disimpan...', 'Berhasil!');
+            tb_kitab.ajax.reload()
           }else{
-            messageError('Data gagal disimpan!')
+            messageError('Data gagal disimpan...', 'Gagal!')
           }
         }
       });
@@ -122,13 +121,13 @@
         theme: 'material',
         closeIcon: true,
         animation: 'scale',
-        type: 'green',
+        type: 'orange',
         title: 'Peringatan!',
         content: 'Apakah anda yakin dengan keputusan ini?',
         buttons: {
           confirm: {
               text: 'Ya',
-              btnClass: 'btn-green',
+              btnClass: 'btn-orange',
               action: function(){
                 $.ajax({
                   url: "{{url('admin/kitab/update-data')}}",
@@ -140,8 +139,8 @@
                   success:function(resp) {
                     if (resp.status == 'success') {
                       $('#editKitab').modal('hide')
-                      tb_kitab.ajax.reload()
                       messageSuccess('Data '+resp.data+' berhasil diperbarui!', 'Berhasil!')
+                      tb_kitab.ajax.reload()                    
                     }else{
                       messageError('Data '+resp.data+' gagal diperbarui!', 'Gagal!')
                     }
@@ -151,7 +150,7 @@
           },
           cancel: {
               text: 'Tidak',
-              btnClass: 'btn-orange',
+              btnClass: 'btn-default',
               action: function(){
                 
               }
@@ -289,6 +288,55 @@
         reader.readAsDataURL(input.files[0]);
       }
     }
+  }
+
+  function hapus(id) 
+  {
+    $.confirm({
+      icon: 'fa fa-question',
+      theme: 'material',
+      closeIcon: true,
+      animation: 'scale',
+      type: 'red',
+      title: 'Peringatan!',
+      content: 'Apakah anda yakin dengan keputusan ini?',
+      buttons: {
+        confirm: {
+            text: 'Ya',
+            btnClass: 'btn-red',
+            action: function(){
+              hapus_data(id)
+            }
+        },
+        cancel: {
+            text: 'Tidak',
+            btnClass: 'btn-default',
+            action: function(){
+              
+            }
+        },
+      }
+    });
+  }
+
+  function hapus_data(id) {    
+    axios.post('{{url('admin/kitab/hapus-data')}}',
+      {
+        id: id,
+        "_token": "{{csrf_token()}}"
+      }
+    )
+    .then(function(resp){
+      if (resp.data.status == 'success') {
+        messageSuccess(resp.data.nama + " Berhasil dihapus...", "Berhasil!")
+        tb_kitab.ajax.reload()
+      }else{
+        messageError('Gagal hapus data ...', 'Gagal!')
+      }
+    })
+    .catch(function(error){
+      
+    })
   }
 </script>
 @endsection

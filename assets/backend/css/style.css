@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
+/*@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");*/
+/*@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");*/
 /*
  *
  *   INSPINIA - Responsive Admin Theme
@@ -13,10 +13,18 @@
 }
 
 @font-face {
-  font-family: : 'Roboto;
+  font-family: : 'Roboto';
   src: url('../../fonts/Roboto-Regular.ttf');
 }
 
+@font-face {
+  font-family: : 'Nunito';
+  src: url('../../fonts/Nunito-Regular.ttf');
+}
+
+body{
+  font-family: 'Roboto', sans-serif !important;
+}
 .glyphicon {
   position: relative;
   top: 1px;
@@ -4393,7 +4401,7 @@ samp {
   border-bottom: 1px solid #e7eaec;
 }
 body {
-  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: sans-serif;
   background-color: #2f4050;
   font-size: 13px;
   color: #676a6c;

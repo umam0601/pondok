@@ -126,12 +126,12 @@ $(document).ready(function() {
         success:function(resp) {
           if (resp.status == 'success') {
             $('#modalAddGalery').modal('hide');
-            messageSuccess('Gambar berhasil diunggah!');
+            messageSuccess('Gambar berhasil diunggah...', 'Berhasil!');
             setTimeout(function(){
               window.location.href = "{{url('admin/pondok/add-data-galeri')}}"+"/"+id;
-            }, 3000);
+            }, 1500);
           }else{
-            messageError('Gagal unggah gambar!')
+            messageError('Gagal unggah gambar...', 'Gagal!')
           }
         }
       });

@@ -1,128 +1,53 @@
 @extends('main')
+@section('extra_style')
+<style type="text/css">
+  .cover-slide{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    filter: blur(5px);
+    /*background: #0000002b;*/
+  }
+  .da-slide h2 {
+    text-shadow: 20px 20px 20px black;
+  }
+  .da-slide p{
+    top: 120px;    
+    text-shadow: 2px 2px 2px black;
+  }
+  .da-img img{
+    box-shadow: 0px 0px 20px 7px #505050;
+  }
+</style>
+@endsection
 @section('content')
 <section id="featured">
   <!-- start slider -->
-  <!-- Slider -->
-  <div id="nivo-slider">
-    <div class="nivo-slider">
-      <!-- Slide #1 image -->
-      <img src="{{asset('assets/frontend/img/slides/nivo/bg-1.jpg')}}" alt="" title="#caption-1" />
-      <!-- Slide #2 image -->
-      <img src="{{asset('assets/frontend/img/slides/nivo/bg-2.jpg')}}" alt="" title="#caption-2" />
-      <!-- Slide #3 image -->
-      <img src="{{asset('assets/frontend/img/slides/nivo/bg-3.jpg')}}" alt="" title="#caption-3" />
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="span12">
-          <!-- Slide #1 caption -->
-          <div class="nivo-caption" id="caption-1">
-            <div>
-              <h2>Awesome <strong>features</strong></h2>
-              <p>
-                Lorem ipsum dolor sit amet nsectetuer nec Vivamus. Curabitu laoreet amet eget. Viurab oremd ellentesque ameteget. Lorem ipsum dolor sit amet nsectetuer nec vivamus.
-              </p>
-              <a href="#" class="btn btn-theme">Read More</a>
-            </div>
-          </div>
-          <!-- Slide #2 caption -->
-          <div class="nivo-caption" id="caption-2">
-            <div>
-              <h2>Fully <strong>responsive</strong></h2>
-              <p>
-                Lorem ipsum dolor sit amet nsectetuer nec Vivamus. Curabitu laoreet amet eget. Viurab oremd ellentesque ameteget. Lorem ipsum dolor sit amet nsectetuer nec vivamus.
-              </p>
-              <a href="#" class="btn btn-theme">Read More</a>
-            </div>
-          </div>
-          <!-- Slide #3 caption -->
-          <div class="nivo-caption" id="caption-3">
-            <div>
-              <h2>Very <strong>customizable</strong></h2>
-              <p>
-                Lorem ipsum dolor sit amet nsectetuer nec Vivamus. Curabitu laoreet amet eget. Viurab oremd ellentesque ameteget. Lorem ipsum dolor sit amet nsectetuer nec vivamus.
-              </p>
-              <a href="#" class="btn btn-theme">Read More</a>
-            </div>
-          </div>
-        </div>
+  <div class="container">
+  <div id="da-slider" class="da-slider">
+    @foreach($pondok as $no => $p)
+    <div class="da-slide">
+      <div class="cover-slide" style="background: url('{{asset('public/profile/upload')}}/{{$p->p_code.'/'.$p->p_image}}') center center no-repeat;background-size: cover;"></div>
+      <h2>{{$p->p_name}}</h2>
+      <p>
+        {!!$p->p_description!!}
+      </p>
+      <a href="#" class="da-link">Read more</a>
+      <div class="da-img">
+        <img src="{{asset('public/profile/upload')}}/{{$p->p_code.'/'.$p->p_image}}" alt=""/>
       </div>
     </div>
+    @endforeach
+    <nav class="da-arrows">
+      <span class="da-arrows-prev"></span>
+      <span class="da-arrows-next"></span>
+    </nav>
+  </div>
   </div>
   <!-- end slider -->
 </section>
 <section id="content">
   <div class="container">
-    <div class="row">
-      <div class="span12">
-        <div class="row">
-          <div class="span3">
-            <div class="box aligncenter">
-              <div class="aligncenter icon">
-                <i class="icon-briefcase icon-circled icon-64 active"></i>
-              </div>
-              <div class="text">
-                <h6>Corporate business</h6>
-                <p>
-                  Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
-                </p>
-                <a href="#">Learn more</a>
-              </div>
-            </div>
-          </div>
-          <div class="span3">
-            <div class="box aligncenter">
-              <div class="aligncenter icon">
-                <i class="icon-desktop icon-circled icon-64 active"></i>
-              </div>
-              <div class="text">
-                <h6>Responsive theme</h6>
-                <p>
-                  Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
-                </p>
-                <a href="#">Learn more</a>
-              </div>
-            </div>
-          </div>
-          <div class="span3">
-            <div class="box aligncenter">
-              <div class="aligncenter icon">
-                <i class="icon-beaker icon-circled icon-64 active"></i>
-              </div>
-              <div class="text">
-                <h6>Coded carefully</h6>
-                <p>
-                  Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
-                </p>
-                <a href="#">Learn more</a>
-              </div>
-            </div>
-          </div>
-          <div class="span3">
-            <div class="box aligncenter">
-              <div class="aligncenter icon">
-                <i class="icon-coffee icon-circled icon-64 active"></i>
-              </div>
-              <div class="text">
-                <h6>Sit and enjoy</h6>
-                <p>
-                  Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
-                </p>
-                <a href="#">Learn more</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- divider -->
-    <div class="row">
-      <div class="span12">
-        <div class="solidline">
-        </div>
-      </div>
-    </div>
-    <!-- end divider -->
     <div class="row">
       <div class="span12">
         <h4>Very satisfied <strong>clients</strong></h4>
@@ -299,6 +224,31 @@
       </div>
     </div>
     <!-- End Portfolio Projects -->
+    <!-- divider -->
+    <div class="row">
+      <div class="span12">
+        <div class="solidline">
+        </div>
+      </div>
+    </div>
+    <!-- end divider -->
+    <div class="row">
+      <div class="span12">
+        <h4>Very satisfied <strong>clients</strong></h4>
+        <ul id="mycarousel2" class="jcarousel-skin-tango recent-jcarousel clients">
+          <li>
+            <a href="#">
+              <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" style="height: 250px;" alt="" />
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="span12">
+          <div class="aligncenter">
+            <button class="btn btn-theme">Lihat lebih banyak</button>
+          </div>
+      </div>
+    </div>
   </div>
 </section>
 <section id="bottom">

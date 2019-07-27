@@ -36,7 +36,7 @@
           <div class="col-6">
             <div class="form-group">
               <label for="">Keterangan</label>
-              <textarea name="pd_imgdesc" id="" cols="30" rows="10" class="form-control form-control-sm" style="height: 170px;"></textarea>
+              <textarea name="pd_img_description" id="" cols="30" rows="10" class="form-control form-control-sm" style="height: 170px;"></textarea>
             </div>
             <div class="text-right">
               <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
