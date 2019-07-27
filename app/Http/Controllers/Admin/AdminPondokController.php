@@ -37,13 +37,13 @@ class AdminPondokController extends Controller
         return DataTables::of($datas)
             ->addIndexColumn()
             ->addColumn('action', function ($datas) {
-                if ($datas->p_slide == 1) {
+                if ($datas->p_slide == '1') {
                     return '<div class="btn-group">
                                 <button class="btn btn-sm btn-info hint--top" aria-label="Detail" onclick="detail(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-folder-open"></i></button>
                                 <button class="btn btn-sm btn-success hint--top" aria-label="Galeri" onclick="galeri(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-image"></i></button>
                                 <button class="btn btn-sm btn-warning hint--top" aria-label="Edit" title="Edit" onclick="edit(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-edit"></i></button>
                                 <button class="btn btn-sm btn-danger hint--top" aria-label="Hapus" onclick="hapus(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-trash"></i></button>
-                                <button class="btn btn-sm btn-outline btn-danger hint--top" aria-label="Hilangkan dari slide" onclick="slideOff(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-desktop"></i></button>
+                                <button class="btn btn-sm btn-outline btn-danger hint--top" aria-label="Hilangkan dari slide" onclick="slider(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-desktop"></i></button>
                             </div>';
                 }else{
                     return '<div class="btn-group">
@@ -51,7 +51,7 @@ class AdminPondokController extends Controller
                                 <button class="btn btn-sm btn-success hint--top" aria-label="Galeri" onclick="galeri(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-image"></i></button>
                                 <button class="btn btn-sm btn-warning hint--top" aria-label="Edit" title="Edit" onclick="edit(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-edit"></i></button>
                                 <button class="btn btn-sm btn-danger hint--top" aria-label="Hapus" onclick="hapus(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-trash"></i></button>
-                                <button class="btn btn-sm btn-outline btn-primary hint--top" aria-label="Tampilkan ke slide" onclick="slideOn(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-desktop"></i></button>
+                                <button class="btn btn-sm btn-outline btn-primary hint--top" aria-label="Tampilkan ke slide" onclick="slider(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-desktop"></i></button>
                             </div>';
                 }
             })
@@ -337,6 +337,47 @@ class AdminPondokController extends Controller
             return response()->json([
                 'status' => 'success',
                 'nama'   => $nama
+            ]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'status'  => 'Gagal',
+                'message' => $e
+            ]);
+        }
+    }
+
+    public function slider($id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+        } catch (Exception $e) {
+            return view('admin.errors.404');
+        }
+
+        DB::beginTransaction();
+        try {
+        
+            $data = DB::table('m_pondok')->where('p_id', $id)->first();
+
+            if ($data) {
+                if ($data->p_slide == 1) {
+                    $slide = '0';
+                }else{
+                    $slide = '1';
+                }
+
+                DB::table('m_pondok')->where('p_id', $id)->update([
+                    'p_slide' => $slide
+                ]);
+            }
+            
+            $data = DB::table('m_pondok')->where('p_id', $id)->first();
+
+            DB::commit();
+            return response()->json([
+                'status' => 'success',
+                'data'   => $data
             ]);
         } catch (\Exception $e) {
             DB::rollback();

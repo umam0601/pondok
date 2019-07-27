@@ -28,6 +28,7 @@ Route::prefix('admin')->group(function () {
 	Route::post('/pondok/update-data', 'Admin\AdminPondokController@update_pondok')->name('admin.pondok.update');
 	Route::post('/pondok/upload-image', 'Admin\AdminPondokController@save_image')->name('admin.pondok.upload_image');
 	Route::post('/pondok/hapus-data', 'Admin\AdminPondokController@hapus_pondok')->name('admin.pondok.hapus');
+	Route::post('/pondok/slider/{id}', 'Admin\AdminPondokController@slider')->name('admin.pondok.slider');
 
 	// Master Kitab ----------------------------------------------------------------------------------
 	Route::get('/kitab', 'Admin\AdminController@kitab')->name('admin.kitab');

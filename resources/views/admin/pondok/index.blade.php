@@ -171,5 +171,31 @@
       
     })
   }
+
+  function slider(id) {
+    axios.post('{{url('admin/pondok/slider')}}/'+id+'', 
+      {
+        '_token': '{{csrf_token()}}'
+      }
+    )
+    .then(function(resp){
+      if (resp.data.status == 'success') {
+        if (resp.data.data.p_slide == '1') {
+          $status = 'Ditampilkan ke slider'
+        }else{
+          $status = 'Dihilangkan dari slider'
+        }
+
+        messageSuccess(resp.data.data.p_name+' '+$status, 'Berhasil!')
+        tb_pondok.ajax.reload()
+
+      }else{
+        messageError('Gagal mengubah data...', 'Gagal!')
+      }
+    })
+    .catch(function(error){
+
+    })
+  }
 </script>
 @endsection
