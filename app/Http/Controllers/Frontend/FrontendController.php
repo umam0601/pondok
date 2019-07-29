@@ -16,8 +16,9 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        $pondok = DB::table('m_pondok')->get();
-        return view('frontend.landing', compact('pondok'));
+        $pondok_slide = DB::table('m_pondok')->where('p_slide', '=', '1')->get();
+        $pondok_latest = DB::table('m_pondok')->latest()->get();
+        return view('frontend.landing', compact('pondok_slide', 'pondok_latest'));
     }
 
     /**

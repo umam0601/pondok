@@ -9,7 +9,7 @@
     /*background: #0000002b;*/
   }
   .da-slide h2 {
-    text-shadow: 20px 20px 20px black;
+    text-shadow: 0px 0px 5px black;
   }
   .da-slide p{
     top: 120px;    
@@ -18,31 +18,37 @@
   .da-img img{
     box-shadow: 0px 0px 20px 7px #505050;
   }
+  .link-button:hover {
+    color: white !important;
+  }
+  .btn-theme:hover {
+    border: none;
+  }
 </style>
 @endsection
 @section('content')
 <section id="featured">
   <!-- start slider -->
   <div class="container">
-  <div id="da-slider" class="da-slider">
-    @foreach($pondok as $no => $p)
-    <div class="da-slide">
-      <div class="cover-slide" style="background: url('{{asset('public/profile/upload')}}/{{$p->p_code.'/'.$p->p_image}}') center center no-repeat;background-size: cover;"></div>
-      <h2>{{$p->p_name}}</h2>
-      <p>
-        {!!$p->p_description!!}
-      </p>
-      <a href="#" class="da-link">Read more</a>
-      <div class="da-img">
-        <img src="{{asset('public/profile/upload')}}/{{$p->p_code.'/'.$p->p_image}}" alt=""/>
+    <div id="da-slider" class="da-slider">
+      @foreach($pondok_slide as $no => $ps)
+      <div class="da-slide">
+        <div class="cover-slide" style="background: url('{{asset('public/profile/upload')}}/{{$ps->p_code.'/'.$ps->p_image}}') center center no-repeat;background-size: cover;"></div>
+        <h2>{{$ps->p_name}}</h2>
+        <p>
+          {!!$ps->p_description!!}
+        </p>
+        <a href="#" class="da-link link-button">Read more</a>
+        <div class="da-img">
+          <img src="{{asset('public/profile/upload')}}/{{$ps->p_code.'/'.$ps->p_image}}" alt=""/>
+        </div>
       </div>
+      @endforeach
+      <nav class="da-arrows">
+        <span class="da-arrows-prev"></span>
+        <span class="da-arrows-next"></span>
+      </nav>
     </div>
-    @endforeach
-    <nav class="da-arrows">
-      <span class="da-arrows-prev"></span>
-      <span class="da-arrows-next"></span>
-    </nav>
-  </div>
   </div>
   <!-- end slider -->
 </section>
@@ -53,8 +59,9 @@
         <h4>Very satisfied <strong>clients</strong></h4>
         <ul id="mycarousel" class="jcarousel-skin-tango recent-jcarousel clients">
           <li>
-            <a href="#">
-              <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" />
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
+              <span style="width: 100%; text-align: center;">Silawesi</span>
+              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li>
@@ -130,94 +137,22 @@
         <div class="row">
           <section id="projects">
             <ul id="thumbs" class="portfolio">
+              @foreach($pondok_latest as $pl)
+              <li class="span3"style="background: url('{{asset('public/profile/upload')}}/{{$pl->p_code.'/'.$pl->p_image}}') center center no-repeat;background-size: cover;">
+                <img src="{{asset('assets/frontend/img/img-thumb.png')}}" alt="" class="img-fluid">
+              </li>
               <!-- Item Project and Filter Name -->
-              <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
+              {{-- <li class="item-thumbs span3 design rounded" data-id="id-0" data-type="web" style="background: url('{{asset('public/profile/upload')}}/{{$pl->p_code.'/'.$pl->p_image}}') center center no-repeat;background-size: cover;"> --}}
                 <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The City" href="{{asset('assets/frontend/img/works/full/image-01-full.jpg')}}">
+                {{-- <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The City" href="{{asset('public/profile/upload')}}/{{$pl->p_code.'/'.$pl->p_image}}">
                   <span class="overlay-img"></span>
                   <span class="overlay-img-thumb font-icon-plus"></span>
-                </a>
+                </a> --}}
                 <!-- Thumb Image and Description -->
-                <img class="rounded" src="{{asset('assets/frontend/img/works/thumbs/image-01.jpg')}}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-              </li>
+                {{-- <img class="rounded" src="{{asset('assets/frontend/img/img-thumb.png')}}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque <a href='{{url('/')}}'>Link</a>" style="max-width: 750px;">
+              </li> --}}
               <!-- End Item Project -->
-              <!-- Item Project and Filter Name -->
-              <li class="item-thumbs span3 design" data-id="id-1" data-type="icon">
-                <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Office" href="{{asset('assets/frontend/img/works/full/image-02-full.jpg')}}">
-                  <span class="overlay-img"></span>
-                  <span class="overlay-img-thumb font-icon-plus"></span>
-                </a>
-                <!-- Thumb Image and Description -->
-                <img class="rounded" src="{{asset('assets/frontend/img/works/thumbs/image-02.jpg')}}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-              </li>
-              <!-- End Item Project -->
-              <!-- Item Project and Filter Name -->
-              <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
-                <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="{{asset('assets/frontend/img/works/full/image-03-full.jpg')}}">
-                  <span class="overlay-img"></span>
-                  <span class="overlay-img-thumb font-icon-plus"></span>
-                </a>
-                <!-- Thumb Image and Description -->
-                <img class="rounded" src="{{asset('assets/frontend/img/works/thumbs/image-03.jpg')}}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-              </li>
-              <!-- End Item Project -->
-              <!-- Item Project and Filter Name -->
-              <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
-                <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="{{asset('assets/frontend/img/works/full/image-04-full.jpg')}}">
-                  <span class="overlay-img"></span>
-                  <span class="overlay-img-thumb font-icon-plus"></span>
-                </a>
-                <!-- Thumb Image and Description -->
-                <img class="rounded" src="{{asset('assets/frontend/img/works/thumbs/image-04.jpg')}}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-              </li>
-              <!-- End Item Project -->
-              <!-- Item Project and Filter Name -->
-              <li class="item-thumbs span3 photography" data-id="id-4" data-type="web">
-                <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Sea" href="{{asset('assets/frontend/img/works/full/image-05-full.jpg')}}">
-                  <span class="overlay-img"></span>
-                  <span class="overlay-img-thumb font-icon-plus"></span>
-                </a>
-                <!-- Thumb Image and Description -->
-                <img class="rounded" src="{{asset('assets/frontend/img/works/thumbs/image-05.jpg')}}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-              </li>
-              <!-- End Item Project -->
-              <!-- Item Project and Filter Name -->
-              <li class="item-thumbs span3 photography" data-id="id-5" data-type="icon">
-                <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Clouds" href="{{asset('assets/frontend/img/works/full/image-06-full.jpg')}}">
-                  <span class="overlay-img"></span>
-                  <span class="overlay-img-thumb font-icon-plus"></span>
-                </a>
-                <!-- Thumb Image and Description -->
-                <img class="rounded" src="{{asset('assets/frontend/img/works/thumbs/image-06.jpg')}}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-              </li>
-              <!-- End Item Project -->
-              <!-- Item Project and Filter Name -->
-              <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
-                <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="{{asset('assets/frontend/img/works/full/image-07-full.jpg')}}">
-                  <span class="overlay-img"></span>
-                  <span class="overlay-img-thumb font-icon-plus"></span>
-                </a>
-                <!-- Thumb Image and Description -->
-                <img class="rounded" src="{{asset('assets/frontend/img/works/thumbs/image-07.jpg')}}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-              </li>
-              <!-- End Item Project -->
-              <!-- Item Project and Filter Name -->
-              <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
-                <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Dark" href="{{asset('assets/frontend/img/works/full/image-08-full.jpg')}}">
-                  <span class="overlay-img"></span>
-                  <span class="overlay-img-thumb font-icon-plus"></span>
-                </a>
-                <!-- Thumb Image and Description -->
-                <img class="rounded" src="{{asset('assets/frontend/img/works/thumbs/image-08.jpg')}}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-              </li>
-              <!-- End Item Project -->
+              @endforeach
             </ul>
           </section>
         </div>
