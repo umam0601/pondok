@@ -43,6 +43,7 @@ class AdminPondokController extends Controller
                                 <button class="btn btn-sm btn-success hint--top" aria-label="Galeri" onclick="galeri(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-image"></i></button>
                                 <button class="btn btn-sm btn-warning hint--top" aria-label="Edit" title="Edit" onclick="edit(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-edit"></i></button>
                                 <button class="btn btn-sm btn-danger hint--top" aria-label="Hapus" onclick="hapus(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-trash"></i></button>
+                                <button class="btn btn-sm btn-success hint--top" aria-label="Map" onclick="map(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-map"></i></button>
                                 <button class="btn btn-sm btn-outline btn-danger hint--top" aria-label="Hilangkan dari slide" onclick="slider(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-desktop"></i></button>
                             </div>';
                 }else{
@@ -51,6 +52,7 @@ class AdminPondokController extends Controller
                                 <button class="btn btn-sm btn-success hint--top" aria-label="Galeri" onclick="galeri(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-image"></i></button>
                                 <button class="btn btn-sm btn-warning hint--top" aria-label="Edit" title="Edit" onclick="edit(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-edit"></i></button>
                                 <button class="btn btn-sm btn-danger hint--top" aria-label="Hapus" onclick="hapus(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-trash"></i></button>
+                                <button class="btn btn-sm btn-success hint--top" aria-label="Map" onclick="map(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-map"></i></button>
                                 <button class="btn btn-sm btn-outline btn-primary hint--top" aria-label="Tampilkan ke slide" onclick="slider(\''.Crypt::encrypt($datas->p_id).'\')"><i class="fa fa-fw fa-desktop"></i></button>
                             </div>';
                 }
@@ -102,8 +104,7 @@ class AdminPondokController extends Controller
                 'p_email'       => $request->p_email,
                 'p_web'         => $request->p_web,
                 'p_image'       => $p_image,
-                'p_description' => $request->p_description,
-                'p_map'         => ''
+                'p_description' => $request->p_description
             ]);
 
             DB::commit();
@@ -337,6 +338,80 @@ class AdminPondokController extends Controller
             return response()->json([
                 'status' => 'success',
                 'nama'   => $nama
+            ]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'status'  => 'Gagal',
+                'message' => $e
+            ]);
+        }
+    }
+
+    public function map($id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+        } catch (Exception $e) {
+            return view('admin.errors.404');
+        }
+
+        $pondok = DB::table('m_pondok')->where('p_id', $id)->first();
+        $pondok_map = DB::table('m_pondok_map')->where('pm_pondok', $id)->first();
+
+        return view('admin.pondok.map', compact('pondok', 'pondok_map'));
+    }
+
+    public function get_maps()
+    {
+        $data = DB::table('m_pondok_map')
+            ->leftJoin('m_pondok', 'p_id', 'pm_pondok')->get();
+
+        return $data;
+    }
+
+    public function get_lat_long(Request $request) {
+        $id = $request->id;
+        $data = DB::table('m_pondok_map')
+            ->leftJoin('m_pondok', 'p_id', 'pm_pondok')
+            ->where('pm_pondok', $id)->get();
+
+        return $data;
+    }
+
+    public function check_latlng(Request $request)
+    {
+        $id = $request->id;
+        $data = DB::table('m_pondok_map')->where('pm_pondok', $id)->get();
+
+        return $data;
+    }
+
+    public function save_map(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            
+            if ($request->pm_id != "" || $request->pm_id != null) {
+                DB::table('m_pondok_map')->where('pm_pondok', $request->pm_pondok)->update([
+                    'pm_latitude'  => $request->pm_latitude,
+                    'pm_longitude' => $request->pm_longitude
+                ]);
+            }else{
+                $id = DB::table('m_pondok_map')->max('pm_id') + 1;
+                DB::table('m_pondok_map')->insert([
+                    'pm_id'        => $id,
+                    'pm_pondok'    => $request->pm_pondok,
+                    'pm_latitude'  => $request->pm_latitude,
+                    'pm_longitude' => $request->pm_longitude
+                ]);
+            }
+            
+            $data = DB::table('m_pondok')->where('p_id', $request->pm_pondok)->first();
+            DB::commit();
+            return response()->json([
+                'status' => 'success',
+                'data'   => Crypt::encrypt($data->p_id)
             ]);
         } catch (\Exception $e) {
             DB::rollback();

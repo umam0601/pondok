@@ -172,6 +172,10 @@
     })
   }
 
+  function map(id) {
+    window.location.href = "{{url('admin/pondok/map')}}"+"/"+id;
+  }
+
   function slider(id) {
     axios.post('{{url('admin/pondok/slider')}}/'+id+'', 
       {
