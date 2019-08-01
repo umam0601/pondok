@@ -257,7 +257,7 @@ header {
 }
 
 header .logo {
-  margin: -10px 0 0 0;
+  margin: 0px 0 0 0;
   float: left;
 }
 
@@ -2724,6 +2724,10 @@ article img.pull-right, article .align-right {
   margin-left: 2px;
   text-align: center;
   outline: 0;
+}
+
+.text-center {
+  text-align: center !important;
 }
 
 /* Theme Styler :: End */

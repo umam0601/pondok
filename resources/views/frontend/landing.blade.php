@@ -24,6 +24,19 @@
   .btn-theme:hover {
     border: none;
   }
+  .d-none {
+    display: none;
+  }
+  .text-danger {
+    color: #980000 !important;
+  }
+  .da-slide .da-link{
+    background: white;
+    box-shadow: 0px 0px 10px 3px #505050;
+  }
+  #featured{
+    background: #fff;
+  }
 </style>
 @endsection
 @section('content')
@@ -200,4 +213,85 @@
     </div>
   </div>
 </section>
+@endsection
+@section('extra_script')
+<script type="text/javascript">
+  $('.btn-register').on('click', function(){
+    var nama = $('#inputName').val();
+    var email = $('#inputEmail').val();
+    var pass1 = $('#password').val();
+    var pass2 = $('#password-confirm').val();
+
+    var result = 1;
+    if (nama == "" || nama == null) {
+      $('.errorNama').removeClass('d-none')
+      $('#inputName').focus()
+      result = 0;
+    }else{
+      $('.errorNama').addClass('d-none')
+    }
+    if (email == "" || email == null) {
+      $('.errorEmail').removeClass('d-none')
+      $('#inputEmail').focus()
+      result = 0;
+    }else{
+      $('.errorEmail').addClass('d-none')
+    }
+    if (pass1 == "" || pass1 == null) {
+      $('.errorPassword').removeClass('d-none')
+      $('#password').focus()
+      result = 0;
+    }else{
+      $('.errorPassword').addClass('d-none')
+    }
+    if (pass2 == "" || pass2 == null) {
+      $('.errorPassword2null').removeClass('d-none')
+      $('.errorPassword2').addClass('d-none')
+      $('#password-confirm').focus()
+      result = 0;
+    }else{
+      $('.errorPassword2null').addClass('d-none')
+      if (pass2 != pass1) {
+        $('.errorPassword2').removeClass('d-none')
+        $('#password-confirm').focus()
+        result = 0;
+      }else{
+        $('.errorPassword2').addClass('d-none')
+      }
+    }
+    // console.log(result);
+    if (result == 1) {
+      cuss_register();
+    }
+  })
+
+  function cuss_register() {
+    // e.preventDefault()
+    console.log('register')
+    $.ajax({
+      url: "{{route('register')}}",
+      data: $('#form-register').serialize(),
+      type: "POST"
+    })
+  }
+
+  $('.btn-login').on('click', function(){
+    var data = $('#form-login').serialize();
+    $.ajax({
+      url: "{{route('login.auth_user')}}",
+      type: "POST",
+      data: data,
+      success:function(resp){
+        if (resp == 'gagal') {
+          $('.notif-error').css('display', 'block');
+        } else {
+          $('#mySignin').modal('hide');
+          setTimeout(function(){
+            window.location.href = "{{route('frontend.index')}}";
+          }, 1000);
+        }
+      }
+    })
+  })
+</script>
 @endsection

@@ -28,7 +28,7 @@
     border-radius: 0px;*/
   }
   ::-webkit-scrollbar-thumb {
-    background: #1fab8b;
+    background: #2acb20;
     border-radius: 10px;
   }
   .header-branded {

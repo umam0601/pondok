@@ -12,9 +12,9 @@
                 <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
                 <li class="dropdown-divider"></li> --}}
                 <li>
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <a class="dropdown-item" href="{{ route('login.signout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                 </li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                <form id="logout-form" action="{{ route('login.signout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
             </ul>

@@ -107,10 +107,10 @@
             </ul>
         </li>
         <li>
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <a href="{{ route('login.signout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa fa-sign-out-alt"></i> Log out
             </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            <form id="logout-form" action="{{ route('login.signout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
         </li>

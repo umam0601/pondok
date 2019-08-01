@@ -43,7 +43,7 @@
             </div>
             <div class="col-md-6">
                 <div class="ibox-content">
-                    <form class="m-t" role="form" method="POST" action="{{ route('login') }}">
+                    <form class="m-t" role="form" method="POST" action="{{ route('login.auth') }}">
                         @csrf
                         <div class="form-group">
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="exampleInputName" aria-describedby="nameHelp" placeholder="Enter name..." name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>

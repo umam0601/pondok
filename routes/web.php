@@ -12,10 +12,17 @@
 */
 
 // Route::get('/', function () {
+Route::group(['middleware' => ['guest', 'web']], function () {
+	Route::get('/admin/login', 'Admin\login_controller@showLoginForm')->name('admin.login');
+	Route::post('authenticate', ['uses' => 'Admin\login_controller@authenticate'])->name('login.auth');
+	Route::post('authuser', ['uses' => 'Admin\login_controller@authenticate_user'])->name('login.auth_user');
+});
+
 Route::prefix('/')->group(function(){
   Route::get('','Frontend\FrontendController@index')->name('frontend.index');
 });
-Route::prefix('admin')->group(function () {
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminonly']], function () {
 	Route::get('/', 'Admin\AdminController@index')->name('admin');
 	// Master Pondok ----------------------------------------------------------------------------------
 	Route::get('/pondok', 'Admin\AdminController@pondok')->name('admin.pondok');
@@ -43,6 +50,9 @@ Route::prefix('admin')->group(function () {
 	Route::get('/kitab/edit-data', 'Admin\AdminKitabController@edit_kitab')->name('admin.kitab.edit');
 	Route::post('/kitab/update-data', 'Admin\AdminKitabController@update_kitab')->name('admin.kitab.update');
 	Route::post('/kitab/hapus-data', 'Admin\AdminKitabController@hapus_kitab')->name('admin.kitab.hapus');
+
+
+	Route::post('signout', ['uses' => 'Admin\login_controller@logout'])->name('login.signout');
 });
 
 Route::get('/get-city/{id}', 'WilayahController@get_city')->name('get.city');
@@ -51,4 +61,4 @@ Route::get('/get-desa/{id}', 'WilayahController@get_desa')->name('get.desa');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
