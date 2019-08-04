@@ -1,15 +1,15 @@
 <div id="mySignup" class="modal styled hide fade" tabindex="-1" role="dialog" aria-labelledby="mySignupModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h4 id="mySignupModalLabel">Create an <strong>account</strong></h4>
+    <h4 id="mySignupModalLabel">Daftar <strong>Akun Baru</strong></h4>
   </div>
   <div class="modal-body">
     <form id="form-register" class="form-horizontal" method="POST" action="{{route('register')}}">
       @csrf
       <div class="control-group">
-        <label class="control-label" for="inputName">Nama</label>
+        <label class="control-label" for="inputName">Username</label>
         <div class="controls">
-          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="false" autofocus placeholder="contoh: sudre15, auliya88">
           @error('name')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -52,10 +52,10 @@
       </div>
       <div class="control-group">
         <div class="controls">
-          <button type="submit" class="btn btn-theme">Sign up</button>
+          <button type="submit" class="btn btn-theme">Daftar</button>
         </div>
         <p class="aligncenter margintop20">
-          Already have an account? <a href="#mySignin" data-dismiss="modal" aria-hidden="true" data-toggle="modal">Sign in</a>
+          Sudah mempunyai akun? <a href="#mySignin" data-dismiss="modal" aria-hidden="true" data-toggle="modal">Masuk</a>
         </p>
       </div>
     </form>

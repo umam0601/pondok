@@ -2,7 +2,6 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="{{asset('assets/frontend/js/jquery.js')}}"></script>
 <script src="{{asset('assets/frontend/js/jquery.easing.1.3.js')}}"></script>
-{{-- <script src="{{asset('assets/bootstrap-4/js/bootstrap.min.js')}}"></script> --}}
 <script src="{{asset('assets/frontend/js/bootstrap.js')}}"></script>
 <script src="{{asset('assets/frontend/js/jcarousel/jquery.jcarousel.min.js')}}"></script>
 <script src="{{asset('assets/frontend/js/jquery.fancybox.pack.js')}}"></script>
@@ -18,5 +17,19 @@
 <script src="{{asset('assets/frontend/js/jquery.cslider.js')}}"></script>
 <script src="{{asset('assets/frontend/js/animate.js')}}"></script>
 
+<script src="{{asset('assets/select2/select2.full.min.js')}}"></script>
+{{-- Axios--}}
+<script src="{{asset('assets/js/axios/dist/axios.min.js')}}"></script>
+{{-- Leaflet Map --}}
+<script src="{{asset('assets/js/leaflet/leaflet.js')}}"></script>
+
+{{-- Jquery Confirm --}}
+<script src="{{asset('assets/js/jquery-confirm/dist/jquery-confirm.min.js')}}"></script>
 <!-- Template Custom JavaScript File -->
 <script src="{{asset('assets/frontend/js/custom.js')}}"></script>
+{{-- Reg & Log --}}
+<script type="text/JavaScript">
+	$(document).ready(function(){
+		$('.select2').select2();
+	})
+</script>

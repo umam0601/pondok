@@ -1,7 +1,7 @@
 <div id="mySignin" class="modal styled hide fade" tabindex="-1" role="dialog" aria-labelledby="mySigninModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h4 id="mySigninModalLabel">Login to your <strong>account</strong></h4>
+    <h4 id="mySigninModalLabel">Masuk ke <strong>Akun</strong></h4>
   </div>
   <div class="modal-body">
     <div class="notif-error">
@@ -25,10 +25,10 @@
       </div>
       <div class="control-group">
         <div class="controls">
-          <button type="button" class="btn btn-theme btn-login">Sign in</button>
+          <button type="button" class="btn btn-theme btn-login">Masuk</button>
         </div>
         <p class="aligncenter margintop20">
-          Forgot password? <a href="#myReset" data-dismiss="modal" aria-hidden="true" data-toggle="modal">Reset</a>
+          Belum punya akun? <a href="#mySignup" data-dismiss="modal" aria-hidden="true" data-toggle="modal">Daftar</a>
         </p>
       </div>
     </form>

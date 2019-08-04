@@ -14,6 +14,27 @@
       text-decoration: none !important;
       color: darkgrey;
     }
+
+    .w-100 {
+      width: 100% !important;
+    }
+    .w-50 {
+      width: 50% !important;
+    }
+
+    .select2-container {
+      width: 100% !important;
+    }
+    .d-none {
+      display: none !important;
+    }
+
+    .btn-danger {
+      background: #D54848 !important;
+    }
+    .text-danger {
+      color: #D54848 !important;
+    }
     .rounded{
       border-radius: 5px;
     }
@@ -36,6 +57,16 @@
       background-color: #FCB8BE;
       margin-bottom: 10px;
       display: none;
+    }
+    .widget > h5 {
+        font-weight: 700;
+        color: #353535;
+    }
+    .btn {
+      border: none !important;
+    }
+    .btn:hover {
+      border: none !important;
     }
   </style>
   <!-- =======================================================

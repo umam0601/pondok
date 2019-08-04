@@ -61,16 +61,16 @@
                   <input type="text" class="search-query" placeholder="Pencarian pondok ...">
                 </li>
                 <li class="{{Request::is('/') ? 'active' : ''}}">
-                  <a href="">Home</a>
+                  <a href="{{route('frontend.index')}}">Home</a>
                 </li>
-                <li class="">
-                  <a href="index.html">Pondok</i></a>
+                <li class="{{Request::is('pondok-pesantren/*') || Request::is('pondok-pesantren') ? 'active' : ''}}">
+                  <a href="{{route('frontend.pondok')}}">Pondok</i></a>
                 </li>
                 <li class="">
                   <a href="index.html">Kitab</i></a>
                 </li>
-                <li class="">
-                  <a href="index.html">Riview</i></a>
+                <li class="{{Request::is('review/*') || Request::is('review') ? 'active' : ''}}">
+                  <a href="{{route('frontend.review')}}">Riview</i></a>
                 </li>
                 @if(Auth::user())
                 <li class="dropdown">

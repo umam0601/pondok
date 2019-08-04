@@ -37,6 +37,34 @@
   #featured{
     background: #fff;
   }
+  .modal{
+    z-index: 99999;
+  }
+  .modal-backdrop, .modal-backdrop.fade.in {
+    z-index: 9999;
+  }
+  .overlay > .text-center > a.da-link.link-button {
+    background: white;
+    border: 4px solid rgba(255,255,255,0.8);
+    border-radius: 30px;
+    padding: 2px 20px 0px;
+    font-size: 16px;
+    line-height: 30px;
+    width: 80px;
+    text-align: center;
+    box-shadow: 0px 0px 5px #505050;
+  }
+  .overlay > .text-center > a.da-link.link-button:hover {
+    color: white;
+    background: #2acb20;
+    border: 4px solid #2acb20;
+  }
+  .show-overlay{
+    border: 4px solid #e9e9e9;
+  }
+  #maps{
+    border: 4px solid #e9e9e9;
+  }
 </style>
 @endsection
 @section('content')
@@ -49,7 +77,7 @@
         <div class="cover-slide" style="background: url('{{asset('public/profile/upload')}}/{{$ps->p_code.'/'.$ps->p_image}}') center center no-repeat;background-size: cover;"></div>
         <h2>{{$ps->p_name}}</h2>
         <p>
-          {!!$ps->p_description!!}
+          {!! \Illuminate\Support\Str::words($ps->p_description, 30,'...')  !!}
         </p>
         <a href="#" class="da-link link-button">Read more</a>
         <div class="da-img">
@@ -78,58 +106,57 @@
             </a>
           </li>
           <li>
-            <a href="#">
-              <img src="{{asset('assets/frontend/img/dummies/clients/client2.png')}}" class="client-logo" alt="" />
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
+              <span style="width: 100%; text-align: center;">Silawesi</span>
+              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li>
-            <a href="#">
-              <img src="{{asset('assets/frontend/img/dummies/clients/client3.png')}}" class="client-logo" alt="" />
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
+              <span style="width: 100%; text-align: center;">Silawesi</span>
+              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li>
-            <a href="#">
-              <img src="{{asset('assets/frontend/img/dummies/clients/client4.png')}}" class="client-logo" alt="" />
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
+              <span style="width: 100%; text-align: center;">Silawesi</span>
+              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li>
-            <a href="#">
-              <img src="{{asset('assets/frontend/img/dummies/clients/client5.png')}}" class="client-logo" alt="" />
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
+              <span style="width: 100%; text-align: center;">Silawesi</span>
+              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li>
-            <a href="#">
-              <img src="{{asset('assets/frontend/img/dummies/clients/client6.png')}}" class="client-logo" alt="" />
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
+              <span style="width: 100%; text-align: center;">Silawesi</span>
+              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li>
-            <a href="#">
-              <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" />
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
+              <span style="width: 100%; text-align: center;">Silawesi</span>
+              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li>
-            <a href="#">
-              <img src="{{asset('assets/frontend/img/dummies/clients/client2.png')}}" class="client-logo" alt="" />
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
+              <span style="width: 100%; text-align: center;">Silawesi</span>
+              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li>
-            <a href="#">
-              <img src="{{asset('assets/frontend/img/dummies/clients/client3.png')}}" class="client-logo" alt="" />
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
+              <span style="width: 100%; text-align: center;">Silawesi</span>
+              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li>
-            <a href="#">
-              <img src="{{asset('assets/frontend/img/dummies/clients/client4.png')}}" class="client-logo" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="{{asset('assets/frontend/img/dummies/clients/client5.png')}}" class="client-logo" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="{{asset('assets/frontend/img/dummies/clients/client6.png')}}" class="client-logo" alt="" />
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
+              <span style="width: 100%; text-align: center;">Silawesi</span>
+              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
         </ul>
@@ -151,8 +178,14 @@
           <section id="projects">
             <ul id="thumbs" class="portfolio">
               @foreach($pondok_latest as $pl)
-              <li class="span3"style="background: url('{{asset('public/profile/upload')}}/{{$pl->p_code.'/'.$pl->p_image}}') center center no-repeat;background-size: cover;">
+              <li class="span3 show-overlay" style="background: url('{{asset('public/profile/upload')}}/{{$pl->p_code.'/'.$pl->p_image}}') center center no-repeat;background-size: cover; border-radius: 10px;">
                 <img src="{{asset('assets/frontend/img/img-thumb.png')}}" alt="" class="img-fluid">
+                <div class="overlay">
+                  <div class="text-center">
+                    <p>{{$pl->p_name}}</p>
+                    <a href="{{url('/pondok-pesantren/context-of')}}/{{Crypt::encrypt($pl->p_id)}}" class="da-link link-button">Read more</a>
+                  </div>
+                </div>
               </li>
               <!-- Item Project and Filter Name -->
               {{-- <li class="item-thumbs span3 design rounded" data-id="id-0" data-type="web" style="background: url('{{asset('public/profile/upload')}}/{{$pl->p_code.'/'.$pl->p_image}}') center center no-repeat;background-size: cover;"> --}}
@@ -197,6 +230,20 @@
           </div>
       </div>
     </div>
+    <!-- divider -->
+    <div class="row">
+      <div class="span12">
+        <div class="solidline">
+        </div>
+      </div>
+    </div>
+    <!-- end divider -->
+    <div class="row">
+      <div class="span12">
+        <h4>Very satisfied <strong>clients</strong></h4>
+        <div id="maps" style="height: 400px;" class="w-100"></div>
+      </div>
+    </div>
   </div>
 </section>
 <section id="bottom">
@@ -216,6 +263,25 @@
 @endsection
 @section('extra_script')
 <script type="text/javascript">
+  var map, marker;
+  $(document).ready(function() {
+    map = L.map('maps').setView([-0.789275, 113.9213257], 5);
+    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=JrA8XZ6ajy9lV3aT8OeF', {
+      attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>'})
+        .addTo(map);
+    get_allMap();
+  })
+
+  function get_allMap(){    
+    axios.get('{{route('frontend.get_maps')}}')
+    .then(function(resp){
+      $.each(resp.data, function(key, val){
+        marker = new L.marker([val.pm_latitude, val.pm_longitude])
+          .bindPopup(val.p_name)
+          .addTo(map);
+      })
+    })
+  }
   $('.btn-register').on('click', function(){
     var nama = $('#inputName').val();
     var email = $('#inputEmail').val();
@@ -266,8 +332,6 @@
   })
 
   function cuss_register() {
-    // e.preventDefault()
-    console.log('register')
     $.ajax({
       url: "{{route('register')}}",
       data: $('#form-register').serialize(),

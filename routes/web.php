@@ -20,6 +20,15 @@ Route::group(['middleware' => ['guest', 'web']], function () {
 
 Route::prefix('/')->group(function(){
   Route::get('','Frontend\FrontendController@index')->name('frontend.index');
+	Route::get('/get-maps', 'Admin\AdminPondokController@get_maps')->name('frontend.get_maps');
+  Route::get('/pondok-pesantren','Frontend\FrontendController@pondok')->name('frontend.pondok');
+  Route::get('/pondok-pesantren/context-of/{id}', ['uses' => 'Frontend\FrontendController@pondok_context'])->name('frontend.pondok_context');
+
+  // Review Pondok
+  Route::get('/review', 'Frontend\FrontendController@review')->name('frontend.review');
+  Route::get('/review/get-review', 'Frontend\FrontendController@get_review')->name('frontend.get_review');
+  Route::get('/review/grap-review', 'Frontend\FrontendController@grapReview')->name('frontend.grap_review');
+  Route::post('/review/save-review', 'Frontend\FrontendController@save_review')->name('frontend.save_review');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminonly']], function () {
@@ -58,6 +67,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminonly']], funct
 Route::get('/get-city/{id}', 'WilayahController@get_city')->name('get.city');
 Route::get('/get-kecamatan/{id}', 'WilayahController@get_kecamatan')->name('get.kecamatan');
 Route::get('/get-desa/{id}', 'WilayahController@get_desa')->name('get.desa');
+Route::get('/get-pondok/{id}', 'Frontend\FrontendController@get_pondok')->name('get.pondok');
 
 Auth::routes();
 
