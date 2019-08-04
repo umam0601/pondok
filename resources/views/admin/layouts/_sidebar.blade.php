@@ -32,4 +32,7 @@
     <li class="{{Request::is('admin/kitab') ? 'active' : '' || Request::is('admin/kitab/*') ? 'active' : ''}}">
         <a href="{{route('admin.kitab')}}"><i class="fa fa-fw fa-quran"></i>&nbsp <span class="nav-label">Master Kitab</span></a>
     </li>
+    <li class="{{Request::is('admin/review') ? 'active' : '' || Request::is('admin/review/*') ? 'active' : ''}}">
+        <a href="{{route('admin.review')}}"><i class="fa fa-fw fa-paper-plane"></i>&nbsp <span class="nav-label">Master Review</span></a>
+    </li>
 </ul>

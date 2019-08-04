@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
+
+use DataTables;
 use DB;
 
 class AdminController extends Controller
@@ -31,6 +35,32 @@ class AdminController extends Controller
     public function kitab()
     {
         return view('admin.kitab.index');
+    }
+
+    // Review Pondok Peantren
+    public function review()
+    {
+        return view('admin.review.index');
+    }
+
+    public function get_review()
+    {
+        $datas = DB::table('m_review')
+            ->select('m_review.*', 'users.name as username', 'p_name')
+            ->join('m_pondok', 'p_id', 'r_pondok')
+            ->join('users', 'id', 'r_user')->get();
+
+        return DataTables::of($datas)
+            ->addIndexColumn()
+            ->addColumn('action', function ($datas) {
+                return '<div class="btn-group">
+                            <button class="btn btn-sm btn-info hint--top" aria-label="Detail" onclick="detail(\''.Crypt::encrypt($datas->r_id).'\')"><i class="fa fa-fw fa-folder-open"></i></button>
+                            <button class="btn btn-sm btn-warning hint--top" aria-label="Edit" title="Edit" onclick="edit(\''.Crypt::encrypt($datas->r_id).'\')"><i class="fa fa-fw fa-edit"></i></button>
+                            <button class="btn btn-sm btn-danger hint--top" aria-label="Hapus" onclick="hapus(\''.Crypt::encrypt($datas->r_id).'\')"><i class="fa fa-fw fa-trash"></i></button>
+                        </div>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 
     /**

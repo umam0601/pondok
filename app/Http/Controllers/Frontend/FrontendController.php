@@ -182,7 +182,7 @@ class FrontendController extends Controller
         $data = DB::table('m_review')
             ->select('m_review.*', 'users.name as username', 'p_name')
             ->join('m_pondok', 'p_id', 'r_pondok')
-            ->join('users', 'id', 'r_user')->get();
+            ->join('users', 'id', 'r_user')->limit(10)->get();
         return $data;
     }
 

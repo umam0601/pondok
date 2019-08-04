@@ -60,6 +60,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminonly']], funct
 	Route::post('/kitab/update-data', 'Admin\AdminKitabController@update_kitab')->name('admin.kitab.update');
 	Route::post('/kitab/hapus-data', 'Admin\AdminKitabController@hapus_kitab')->name('admin.kitab.hapus');
 
+	// Master Rieview
+	Route::get('/review', 'Admin\AdminController@review')->name('admin.review');
+	Route::get('/review/resource', 'Admin\AdminController@get_review')->name('admin.review.resource');
 
 	Route::post('signout', ['uses' => 'Admin\login_controller@logout'])->name('login.signout');
 });
