@@ -35,29 +35,30 @@
           <h6><b>Filter Review</b></h6>
         </div>
         <div class="">
-          <h6>Pilih Provinsi</h6>
+          {{-- <h6>Pilih Provinsi</h6> --}}
           <select name="f_prov" id="f_prov" class="select2">
             @foreach($provinsi as $prov)
+              <option value="" selected="" disabled="">Pilih Provinsi</option>
               <option value="{{$prov->wp_id}}">{{$prov->wp_name}}</option>
             @endforeach
           </select>
         </div>
         <div class="margintop10">
-          <h6>Pilih Kabupaten / Kota</h6>
+          {{-- <h6>Pilih Kabupaten / Kota</h6> --}}
           <select name="f_kab" id="f_kab" class="select2">
-            
+              <option value="" selected="" disabled="">Pilih Kabupaten / Kota</option>
           </select>
         </div>
         <div class="margintop10">
-          <h6>Pilih Kecamatan</h6>
+          {{-- <h6>Pilih Kecamatan</h6> --}}
           <select name="f_kec" id="f_kec" class="select2">
-            
+              <option value="" selected="" disabled="">Pilih Kecamatan</option>
           </select>
         </div>
         <div class="margintop10">
-          <h6>Pilih Pondok</h6>
+          {{-- <h6>Pilih Pondok</h6> --}}
           <select name="f_pondok" id="f_pondok" class="select2">
-            
+              <option value="" selected="" disabled="">Pilih Pondok</option>
           </select>
         </div>
         <div class="margintop10">
@@ -150,55 +151,55 @@
     grapReview();
   })
 
-  function resetReview() {
-    grapReview();
-  }
-
   function grapReview(){
     $.ajax({
       url: "{{route('frontend.grap_review')}}",
       type: "get",
       success:function(resp) {
-        if (resp.length > 0) {
-          $('#list-review').empty();
-          $.each(resp, function(key, val){
-            $('#list-review').append(
-            '<div class="marginbot20">'+
-              '<div class="w-100">'+
-                '<div class="wrapper">'+
-                  '<div class="testimonial">'+
-                    '<p class="text">'+
-                      '<i class="icon-quote-left icon-48"></i> '+val.r_description+''+
-                    '</p>'+
-                    '<div class="author">'+
-                      '<img src="{{asset('assets/frontend/img/dummies/testimonial-author1.png')}}" class="img-circle bordered" alt="" />'+
-                      '<p class="name">'+
-                        ''+val.username+''+
+        loadingShow()
+        setTimeout(function(){
+          if (resp.length > 0) {
+            $('#list-review').empty();
+            $.each(resp, function(key, val){
+              $('#list-review').append(
+              '<div class="marginbot20">'+
+                '<div class="w-100">'+
+                  '<div class="wrapper">'+
+                    '<div class="testimonial">'+
+                      '<p class="text">'+
+                        '<i class="icon-quote-left icon-48"></i> '+val.r_description+''+
                       '</p>'+
-                      '<span class="info"><a href="#">'+val.p_name+'</a></span>'+
+                      '<div class="author">'+
+                        '<img src="{{asset('assets/frontend/img/dummies/testimonial-author1.png')}}" class="img-circle bordered" alt="" />'+
+                        '<p class="name">'+
+                          ''+val.username+''+
+                        '</p>'+
+                        '<span class="info"><a href="{{url('pondok-pesantren/context-of')}}/'+val.p_id+'">'+val.p_name+'</a></span>'+
+                      '</div>'+
                     '</div>'+
                   '</div>'+
                 '</div>'+
-              '</div>'+
-            '</div>'
-            );
-          })
-        }else{
-          $('#list-review').empty();
-          $('#list-review').append(
-            `<div class="marginbot20">
-              <div class="w-100">
-                <div class="wrapper">
-                  <div class="testimonial">
-                    <p class="text" style="margin-bottom: 0px;">
-                      Belum ada review terkait pondok pesantren tersebut...
-                    </p>
+              '</div>'
+              );
+            })
+          }else{
+            $('#list-review').empty();
+            $('#list-review').append(
+              `<div class="marginbot20">
+                <div class="w-100">
+                  <div class="wrapper">
+                    <div class="testimonial">
+                      <p class="text" style="margin-bottom: 0px;">
+                        Belum ada review terkait pondok pesantren tersebut...
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>`
-          );
-        }
+              </div>`
+            );
+          }
+          loadingHide()
+        }, 500)
       }
     })
   }
@@ -211,7 +212,7 @@
       dataType: "json",
       success:function(resp){
         $('#f_kab').empty();
-        // $("#f_kab").append('<option value="" selected disabled>=== Pilih Kabupaten / Kota ===</option>');
+        $("#f_kab").append('<option value="" selected disabled>Pilih Kabupaten / Kota</option>');
         $.each(resp.kota, function(key, val){
           $("#f_kab").append('<option value="'+val.wc_id+'">'+val.wc_name+'</option>');
         });
@@ -227,7 +228,7 @@
       dataType: "json",
       success:function(resp){
         $('#f_kec').empty();
-        // $("#f_kec").append('<option value="" selected disabled>=== Pilih Kecamatan ===</option>');
+        $("#f_kec").append('<option value="" selected disabled>Pilih Kecamatan</option>');
         $.each(resp.camat, function(key, val){
           $("#f_kec").append('<option value="'+val.wk_id+'">'+val.wk_name+'</option>');
         });
@@ -243,7 +244,7 @@
       dataType: "json",
       success:function(resp){
         $('#f_pondok').empty();
-        // $("#f_pondok").append('<option value="" selected disabled>=== Pilih Kecamatan ===</option>');
+        $("#f_pondok").append('<option value="" selected disabled>Pilih Pondok</option>');
         $.each(resp.pondok, function(key, val){
           $("#f_pondok").append('<option value="'+val.p_id+'">'+val.p_name+'</option>');
         });
@@ -259,47 +260,51 @@
       type: "get",
       data: {id: id},
       success:function(resp){
-        let datas = resp.data;
-        if (datas.length > 0) {
-          $('#list-review').empty();
-          $.each(datas, function(key, val){
-            $('#list-review').append(
-            '<div class="marginbot20">'+
-              '<div class="w-100">'+
-                '<div class="wrapper">'+
-                  '<div class="testimonial">'+
-                    '<p class="text">'+
-                      '<i class="icon-quote-left icon-48"></i> '+val.r_description+''+
-                    '</p>'+
-                    '<div class="author">'+
-                      '<img src="{{asset('assets/frontend/img/dummies/testimonial-author1.png')}}" class="img-circle bordered" alt="" />'+
-                      '<p class="name">'+
-                        ''+val.username+''+
+        loadingShow()
+        setTimeout(function(){
+          let datas = resp.data;
+          if (datas.length > 0) {
+            $('#list-review').empty();
+            $.each(datas, function(key, val){
+              $('#list-review').append(
+              '<div class="marginbot20">'+
+                '<div class="w-100">'+
+                  '<div class="wrapper">'+
+                    '<div class="testimonial">'+
+                      '<p class="text">'+
+                        '<i class="icon-quote-left icon-48"></i> '+val.r_description+''+
                       '</p>'+
-                      '<span class="info"><a href="#">'+val.p_name+'</a></span>'+
+                      '<div class="author">'+
+                        '<img src="{{asset('assets/frontend/img/dummies/testimonial-author1.png')}}" class="img-circle bordered" alt="" />'+
+                        '<p class="name">'+
+                          ''+val.username+''+
+                        '</p>'+
+                        '<span class="info"><a href="{{url('pondok-pesantren/context-of')}}/'+val.p_id+'">'+val.p_name+'</a></span>'+
+                      '</div>'+
                     '</div>'+
                   '</div>'+
                 '</div>'+
-              '</div>'+
-            '</div>'
-            );
-          })
-        }else{
-          $('#list-review').empty();
-          $('#list-review').append(
-            `<div class="marginbot20">
-              <div class="w-100">
-                <div class="wrapper">
-                  <div class="testimonial">
-                    <p class="text" style="margin-bottom: 0px;">
-                      Belum ada review terkait pondok pesantren tersebut...
-                    </p>
+              '</div>'
+              );
+            })
+          }else{
+            $('#list-review').empty();
+            $('#list-review').append(
+              `<div class="marginbot20">
+                <div class="w-100">
+                  <div class="wrapper">
+                    <div class="testimonial">
+                      <p class="text" style="margin-bottom: 0px;">
+                        Belum ada review terkait pondok pesantren tersebut...
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>`
-          );
-        }
+              </div>`
+            );
+          }
+          loadingHide()
+        }, 500)
       }
     })
   }
@@ -372,31 +377,47 @@
     }
 
     if (values == 1) {
-      $.confirm({
-        icon: 'fa fa-question',
-        theme: 'material',
-        closeIcon: true,
-        animation: 'scale',
-        type: 'green',
-        title: 'Peringatan!',
-        content: 'Apakah anda yakin dengan review ini?',
-        buttons: {
-          confirm: {
-              text: 'Ya',
-              btnClass: 'btn-orange',
-              action: function(){
-                cuss_review()
-              }
-          },
-          cancel: {
-              text: 'Tidak',
-              btnClass: 'btn-default',
-              action: function(){
-                
-              }
-          },
-        }
-      });
+      var auth = checkAuth();
+
+      if (auth == true) {
+        $.confirm({
+          icon: 'fa fa-question',
+          theme: 'material',
+          closeIcon: true,
+          animation: 'scale',
+          type: 'green',
+          title: 'Peringatan!',
+          content: 'Apakah anda yakin dengan review ini?',
+          buttons: {
+            confirm: {
+                text: 'Ya',
+                btnClass: 'btn-orange',
+                action: function(){
+                  cuss_review()
+                }
+            },
+            cancel: {
+                text: 'Tidak',
+                btnClass: 'btn-default',
+                action: function(){
+                  
+                }
+            },
+          }
+        });
+      }else{
+        $('#mySignin').modal('show');
+      }
+    }
+  }
+
+  function checkAuth() {
+    var check = "{{Auth::user()}}";
+
+    if (check) {
+      return true
+    }else{
+      return false
     }
   }
 
@@ -409,7 +430,12 @@
       data: formData,
       success:function(resp){
         if (resp.status == 'success'){
-          window.location.href = "{{route('frontend.review')}}"
+          loadingShow()
+          setTimeout(function(){
+            window.location.href = "{{route('frontend.review')}}"
+            loadingHide()
+          }, 500)
+
         }
       }
     })
@@ -418,16 +444,24 @@
   // End Form
 
   function createReview() {
-    $('#content-review').addClass('d-none');
-    $('#create-review').removeClass('d-none');
-    $('#btn-create').addClass('d-none');
-    $('#btn-cancel').removeClass('d-none');
+    loadingShow()
+    setTimeout(function(){
+      $('#content-review').addClass('d-none');
+      $('#create-review').removeClass('d-none');
+      $('#btn-create').addClass('d-none');
+      $('#btn-cancel').removeClass('d-none');
+    }, 500)
+    loadingHide()
   }
   function cancelReview() {
-    $('#content-review').removeClass('d-none');
-    $('#create-review').addClass('d-none');
-    $('#btn-create').removeClass('d-none');
-    $('#btn-cancel').addClass('d-none');
+    loadingShow()
+    setTimeout(function(){
+      $('#content-review').removeClass('d-none');
+      $('#create-review').addClass('d-none');
+      $('#btn-create').removeClass('d-none');
+      $('#btn-cancel').addClass('d-none');
+    }, 500)
+    loadingHide()
   }
 
   // Reg & Log
@@ -507,5 +541,13 @@
       }
     })
   })
+
+  function resetReview() {
+    loadingShow()
+    grapReview();
+    setTimeout(function(){
+      loadingHide()
+    }, 1000)
+  }
 </script>
 @endsection

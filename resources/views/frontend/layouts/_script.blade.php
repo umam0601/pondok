@@ -32,4 +32,11 @@
 	$(document).ready(function(){
 		$('.select2').select2();
 	})
+
+	function loadingShow() {
+		$('.loading').fadeIn();
+	}
+	function loadingHide() {
+		$('.loading').fadeOut();
+	}
 </script>

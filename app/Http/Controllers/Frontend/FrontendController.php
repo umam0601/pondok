@@ -96,7 +96,7 @@ class FrontendController extends Controller
     {
         $id = $request->id;
         $data = DB::table('m_review')
-            ->select('m_review.*', 'users.name as username', 'p_name')
+            ->select('m_review.*', 'users.name as username', 'p_id','p_name')
             ->join('m_pondok', 'p_id', 'r_pondok')
             ->join('users', 'id', 'r_user')
             ->where('r_pondok', $id)->get();
@@ -180,7 +180,7 @@ class FrontendController extends Controller
     public function grapReview()
     {
         $data = DB::table('m_review')
-            ->select('m_review.*', 'users.name as username', 'p_name')
+            ->select('m_review.*', 'users.name as username', 'p_id', 'p_name')
             ->join('m_pondok', 'p_id', 'r_pondok')
             ->join('users', 'id', 'r_user')->limit(10)->get();
         return $data;

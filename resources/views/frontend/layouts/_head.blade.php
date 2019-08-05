@@ -23,19 +23,18 @@
 <link rel="apple-touch-icon-precomposed" href="{{asset('assets/frontend/ico/apple-touch-icon-57-precomposed.png')}}" />
 <link rel="shortcut icon" href="{{asset('assets/images/logo.png')}}" />
 <style type="text/css">
-  ::-webkit-scrollbar{
-    width: 5px;
-  }
-  ::-webkit-scrollbar:hover{
+  ::-webkit-scrollbar {
     width: 10px;
   }
+   
   ::-webkit-scrollbar-track {
-    /*box-shadow: inset 0 0 5px grey;
-    border-radius: 0px;*/
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+      border-radius: 10px;
   }
+   
   ::-webkit-scrollbar-thumb {
-    background: #2acb20;
-    border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
   }
   .header-branded {
   	height: 72px;

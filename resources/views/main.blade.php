@@ -68,6 +68,7 @@
     .btn:hover {
       border: none !important;
     }
+    
   </style>
   <!-- =======================================================
   Theme Name: Flattern
@@ -78,6 +79,7 @@
 </head>
 <body>
   <div id="wrapper">
+    <div class="loading"></div>
     <!-- start header -->
     @include('frontend.layouts._header')
     <!-- end header -->
