@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 
 use DB;
+use App\m_pondok as Pondok;
 
 class FrontendController extends Controller
 {
@@ -26,7 +27,9 @@ class FrontendController extends Controller
     // Pondok Pesantren
     public function pondok()
     {
-        $data = DB::table('m_pondok')->limit(5)->latest()->get();
+        $data = Pondok::with('review')
+            ->join('m_wil_provinsi', 'wp_id', 'p_prov')
+            ->limit(5)->latest()->get();
         $latest_kitab = self::grapKitab();
 
         return view('frontend.pondok.index', compact('data', 'latest_kitab'));
@@ -46,13 +49,17 @@ class FrontendController extends Controller
         }
 
         $pondok = DB::table('m_pondok')
+            ->join('m_wil_provinsi', 'wp_id', 'p_prov')
             ->leftJoin('m_pondok_map', 'pm_pondok', 'p_id')
             ->where('p_id', $id)->first();
+        $review = DB::table('m_review')
+            ->join('users', 'id', 'r_user')
+            ->where('r_pondok', '=', $pondok->p_id)->get();
         $id_crypted = Crypt::encrypt($id);
         $latest_post = self::grapPondok();
         $latest_kitab = self::grapKitab();
 
-        return view('frontend.pondok.context')->with(compact('pondok', 'id_crypted', 'latest_post', 'latest_kitab'));
+        return view('frontend.pondok.context')->with(compact('pondok', 'review','id_crypted', 'latest_post', 'latest_kitab'));
     }
 
     /**

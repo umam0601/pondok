@@ -48,8 +48,8 @@
     <div class="row">
       <div class="span3">
         <div class="logo">
-          <a href=""> <img src="{{asset('assets/images/logo.png')}}" alt="" class="img-logo mb-0" /> </a> &nbsp&nbsp
-          <a class="text-logo" href="index.html"> <b>PONPES</b> <span style="color: #7E7E7E;"><i><b>MAPS</b></i></span></a>
+          {{-- <a href=""> <img src="{{asset('assets/images/logo.png')}}" alt="" class="img-logo mb-0" /> </a> &nbsp&nbsp --}}
+          <a class="text-logo" href="{{url('/')}}"> <b>P<i class="fa fa-globe-americas" style="margin-left: 2px;margin-right: 2px;"></i>NPES</b> <span style="color: #7E7E7E;"><i><b>MAPS</b></i></span></a>
         </div>
       </div>
       <div class="span9">

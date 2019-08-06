@@ -105,27 +105,34 @@
               @endif
               <div class="row">
                 <div class="span4">
-                  <h6>Pilih Provinsi</h6>
+                  {{-- <h6>Pilih Provinsi</h6> --}}
                   <select name="r_prov" id="r_prov" class="select2">
                     @foreach($provinsi as $r_prov)
+                      <option value="" selected="" disabled="">Pilih Provinsi</option>
                       <option value="{{$r_prov->wp_id}}">{{$r_prov->wp_name}}</option>
                     @endforeach
                   </select>
                 </div>
                 <div class="span4">
-                  <h6>Pilih Kabupaten / Kota</h6>
-                  <select name="r_kab" id="r_kab" class="select2"></select>
+                  {{-- <h6>Pilih Kabupaten / Kota</h6> --}}
+                  <select name="r_kab" id="r_kab" class="select2">
+                    <option value="" selected="" disabled="">Pilih Kabupaten / Kota</option>
+                  </select>
                 </div>
                 <div class="span4">
                   <div class="margintop10">
-                    <h6>Pilih Kecamatan</h6>
-                    <select name="r_kec" id="r_kec" class="select2"></select>
+                    {{-- <h6>Pilih Kecamatan</h6> --}}
+                    <select name="r_kec" id="r_kec" class="select2">
+                      <option value="" selected="" disabled="">Pilih Kecamatan</option>
+                    </select>
                   </div>
                 </div>
                 <div class="span4">
                   <div class="margintop10">
-                    <h6>Pilih Pondok</h6>
-                    <select name="r_pondok" id="r_pondok" class="select2"></select>
+                    {{-- <h6>Pilih Pondok</h6> --}}
+                    <select name="r_pondok" id="r_pondok" class="select2">
+                      <option value="" selected="" disabled="">Pilih Pondok</option>
+                    </select>
                     <small id="msgError1" class="text-danger d-none">Harap pilih pondok pesantren!</small>
                   </div>
                 </div>
@@ -319,6 +326,7 @@
       dataType: "json",
       success:function(resp){
         $('#r_kab').empty();
+        $("#f_kab").append('<option value="" selected disabled>Pilih Kabupaten / Kota</option>');
         $.each(resp.kota, function(key, val){
           $("#r_kab").append('<option value="'+val.wc_id+'">'+val.wc_name+'</option>');
         });
@@ -334,6 +342,7 @@
       dataType: "json",
       success:function(resp){
         $('#r_kec').empty();
+        $("#f_kab").append('<option value="" selected disabled>Pilih Kecamatan</option>');
         $.each(resp.camat, function(key, val){
           $("#r_kec").append('<option value="'+val.wk_id+'">'+val.wk_name+'</option>');
         });
@@ -349,6 +358,7 @@
       dataType: "json",
       success:function(resp){
         $('#r_pondok').empty();
+        $("#f_kab").append('<option value="" selected disabled>Pilih Pondok</option>');
         $.each(resp.pondok, function(key, val){
           $("#r_pondok").append('<option value="'+val.p_id+'">'+val.p_name+'</option>');
         });

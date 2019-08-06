@@ -48,6 +48,10 @@
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgb(42, 203, 32);
       border-color: #2acb20;
     }
+    textarea:focus{
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgb(42, 203, 32);
+      border-color: #2acb20;
+    }
     .notif-error{
       height: auto;
       padding-top: 10px;

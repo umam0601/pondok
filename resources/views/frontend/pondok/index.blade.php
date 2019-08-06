@@ -46,14 +46,15 @@
       {{-- Left Sidebar --}}
       <div class="span4">
         <aside class="left-sidebar">
+          @include('frontend.layouts.sidebar._wilayah')
           @include('frontend.layouts.sidebar._kitab')
         </aside>
       </div>
       {{-- End --}}
       <div class="span8">
         @foreach($data as $p)
-        <article>
-          <div class="row">
+        <article class="marginbot10">
+          <div class="row" style="margin-bottom: 10px;">
             <div class="span8">
               <div class="post-image">
                 <div class="post-heading">
@@ -67,11 +68,10 @@
               </div>
               <div class="bottom-article">
                 <ul class="meta-post">
-                  <li><i class="icon-user"></i><a href="#"> Admin</a></li>
-                  <li><i class="icon-folder-open"></i><a href="#"> Blog</a></li>
-                  <li><i class="icon-tags"></i><a href="#">Web design</a></li>
+                  <li><i class="fa fa-map-marked"></i><a href="#">{{$p->wp_name}}</a></li>
+                  <li><i class="fa fa-comment-dots"></i><a href="#">({{count($p->review)}}) Reviews</a></li>
                 </ul>
-                <a href="{{url('pondok-pesantren/context-of')}}/{{Crypt::encrypt($p->p_id)}}" class="pull-right">Continue reading <i class="icon-angle-right"></i></a>
+                <a href="{{url('pondok-pesantren/context-of')}}/{{Crypt::encrypt($p->p_id)}}" class="pull-right">Lanjut membaca <i class="icon-angle-right"></i></a>
               </div>
             </div>
           </div>

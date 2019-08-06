@@ -11,8 +11,9 @@
 <link href="{{asset('assets/frontend/css/cslider.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/frontend/css/style.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/js/leaflet/leaflet.css')}}" rel="stylesheet">
-<link href="{{asset('assets/select2/select2-bootstrap.css')}}" rel="stylesheet">
-<link href="{{asset('assets/select2/select2.min.css')}}" rel="stylesheet">
+<link href="{{asset('assets/select2/select2-bootstrap.css')}}" rel="stylesheet"/>
+<link href="{{asset('assets/select2/select2.min.css')}}" rel="stylesheet"/>
+<link href="{{asset('assets/css/font-awesome/all.min.css')}}" rel="stylesheet"/>
 {{-- Jquery Confirm --}}
 <link rel="stylesheet" href="{{asset('assets/js/jquery-confirm/dist/jquery-confirm.min.css')}}">
 {{-- <link href="{{asset('assets/css/hover-master/css/hover.css')}}" rel="stylesheet" media="all"> --}}
@@ -44,11 +45,13 @@
   	display: flex;
   	align-items: center;
   }
-  .img-logo {
-  	max-height: 52px; 
+  .logo{
+    display: flex;
+    height: 42px;
+    align-items: center;
   }
   .text-logo {
-  	font-size: 20px;
+  	font-size: 28px;
   }
   .mb-0 {
   	margin-bottom: 0px !important;
