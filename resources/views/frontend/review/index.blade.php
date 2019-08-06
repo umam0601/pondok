@@ -305,6 +305,7 @@
           }
           loadingHide()
         }, 500)
+        cancelReview()
       }
     })
   }
