@@ -97,65 +97,47 @@
   <div class="container">
     <div class="row">
       <div class="span12">
-        <h4>Very satisfied <strong>clients</strong></h4>
+        <h4>Wilayah <strong>Pondok</strong></h4>
         <ul id="mycarousel" class="jcarousel-skin-tango recent-jcarousel clients">
-          <li>
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
-              <span style="width: 100%; text-align: center;">Silawesi</span>
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Jawa Timur</span>
               {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
-          <li>
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
-              <span style="width: 100%; text-align: center;">Silawesi</span>
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Jawa Tengah</span>
               {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
-          <li>
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
-              <span style="width: 100%; text-align: center;">Silawesi</span>
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Yogyakarta</span>
               {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
-          <li>
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
-              <span style="width: 100%; text-align: center;">Silawesi</span>
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Solo</span>
               {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
-          <li>
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
-              <span style="width: 100%; text-align: center;">Silawesi</span>
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Jawa Barat</span>
               {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
-          <li>
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
-              <span style="width: 100%; text-align: center;">Silawesi</span>
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Banten</span>
               {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
-          <li>
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
-              <span style="width: 100%; text-align: center;">Silawesi</span>
-              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
-            </a>
-          </li>
-          <li>
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
-              <span style="width: 100%; text-align: center;">Silawesi</span>
-              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
-            </a>
-          </li>
-          <li>
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
-              <span style="width: 100%; text-align: center;">Silawesi</span>
-              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
-            </a>
-          </li>
-          <li>
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center;">
-              <span style="width: 100%; text-align: center;">Silawesi</span>
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Jakarta</span>
               {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
@@ -173,7 +155,7 @@
     <!-- Portfolio Projects -->
     <div class="row">
       <div class="span12">
-        <h4 class="heading">Some of recent <strong>works</strong></h4>
+        <h4 class="heading">Update <strong>Terbaru</strong></h4>
         <div class="row">
           <section id="projects">
             <ul id="thumbs" class="portfolio">
@@ -215,7 +197,7 @@
     <!-- end divider -->
     <div class="row">
       <div class="span12">
-        <h4>Very satisfied <strong>clients</strong></h4>
+        <h4>Kumpulan <strong>Kitabiyah</strong></h4>
         <ul id="mycarousel2" class="jcarousel-skin-tango recent-jcarousel clients">
           <li>
             <a href="#">
@@ -240,7 +222,7 @@
     <!-- end divider -->
     <div class="row">
       <div class="span12">
-        <h4>Very satisfied <strong>clients</strong></h4>
+        <h4>Lokasi pondok dalam <strong>Map</strong></h4>
         <div id="maps" style="height: 400px;" class="w-100"></div>
       </div>
     </div>

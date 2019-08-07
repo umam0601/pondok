@@ -52,31 +52,43 @@
       </div>
       {{-- End --}}
       <div class="span8">
-        @foreach($data as $p)
-        <article class="marginbot10">
-          <div class="row" style="margin-bottom: 10px;">
-            <div class="span8">
-              <div class="post-image">
-                <div class="post-heading">
-                  <h3 style="margin-bottom: 5px;">{{$p->p_name}}</h3>
-                  <p style="margin-bottom: 20px;">Pengasuh : &nbsp <b>{{$p->p_pengasuh}}</b></p>
+        @if(count($data) > 0)
+          @foreach($data as $p)
+          <article class="marginbot10">
+            <div class="row" style="margin-bottom: 10px;">
+              <div class="span8">
+                <div class="post-image">
+                  <div class="post-heading">
+                    <h3 style="margin-bottom: 5px;">{{$p->p_name}}</h3>
+                    <p style="margin-bottom: 20px;">Pengasuh : &nbsp <b>{{$p->p_pengasuh}}</b></p>
+                  </div>
+                  <div class="align-left list-pondok" style="background: url('{{asset('public/profile/upload')}}/{{$p->p_code.'/'.$p->p_image}}') center center no-repeat;background-size: cover;">
+                    <img src="{{asset('assets/frontend/img/img-thumb-context-all.png')}}" class="" alt="" />
+                  </div>
+                  <p>{!! \Illuminate\Support\Str::words($p->p_description, 130,'...')  !!}</p>          
                 </div>
-                <div class="align-left list-pondok" style="background: url('{{asset('public/profile/upload')}}/{{$p->p_code.'/'.$p->p_image}}') center center no-repeat;background-size: cover;">
-                  <img src="{{asset('assets/frontend/img/img-thumb-context-all.png')}}" class="" alt="" />
+                <div class="bottom-article">
+                  <ul class="meta-post">
+                    <li><i class="fa fa-map-marked"></i><a href="#">{{$p->wp_name}}</a></li>
+                    <li><i class="fa fa-comment-dots"></i><a href="#">({{count($p->review)}}) Reviews</a></li>
+                  </ul>
+                  <a href="{{url('pondok-pesantren/context-of')}}/{{Crypt::encrypt($p->p_id)}}" class="pull-right">Lanjut membaca <i class="icon-angle-right"></i></a>
                 </div>
-                <p>{!! \Illuminate\Support\Str::words($p->p_description, 130,'...')  !!}</p>          
-              </div>
-              <div class="bottom-article">
-                <ul class="meta-post">
-                  <li><i class="fa fa-map-marked"></i><a href="#">{{$p->wp_name}}</a></li>
-                  <li><i class="fa fa-comment-dots"></i><a href="#">({{count($p->review)}}) Reviews</a></li>
-                </ul>
-                <a href="{{url('pondok-pesantren/context-of')}}/{{Crypt::encrypt($p->p_id)}}" class="pull-right">Lanjut membaca <i class="icon-angle-right"></i></a>
               </div>
             </div>
-          </div>
-        </article>
-        @endforeach
+          </article>
+          @endforeach
+        @else
+          <article class="marginbot10">
+            <div class="row" style="margin-bottom: 10px;">
+              <div class="span8">
+                <div class="post-image">
+                  <p>Maaf untuk pencarian pondok tersebut belum ada ...</p>          
+                </div>
+              </div>
+            </div>
+          </article>
+        @endif
       </div>
     </div>
   </div>

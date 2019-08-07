@@ -37,8 +37,8 @@
         <div class="">
           {{-- <h6>Pilih Provinsi</h6> --}}
           <select name="f_prov" id="f_prov" class="select2">
+            <option value="" selected="" disabled="">Pilih Provinsi</option>
             @foreach($provinsi as $prov)
-              <option value="" selected="" disabled="">Pilih Provinsi</option>
               <option value="{{$prov->wp_id}}">{{$prov->wp_name}}</option>
             @endforeach
           </select>
@@ -107,8 +107,8 @@
                 <div class="span4">
                   {{-- <h6>Pilih Provinsi</h6> --}}
                   <select name="r_prov" id="r_prov" class="select2">
+                    <option value="" selected="" disabled="">Pilih Provinsi</option>
                     @foreach($provinsi as $r_prov)
-                      <option value="" selected="" disabled="">Pilih Provinsi</option>
                       <option value="{{$r_prov->wp_id}}">{{$r_prov->wp_name}}</option>
                     @endforeach
                   </select>
@@ -326,7 +326,7 @@
       dataType: "json",
       success:function(resp){
         $('#r_kab').empty();
-        $("#f_kab").append('<option value="" selected disabled>Pilih Kabupaten / Kota</option>');
+        $("#r_kab").append('<option value="" selected disabled>Pilih Kabupaten / Kota</option>');
         $.each(resp.kota, function(key, val){
           $("#r_kab").append('<option value="'+val.wc_id+'">'+val.wc_name+'</option>');
         });
@@ -342,7 +342,7 @@
       dataType: "json",
       success:function(resp){
         $('#r_kec').empty();
-        $("#f_kab").append('<option value="" selected disabled>Pilih Kecamatan</option>');
+        $("#r_kec").append('<option value="" selected disabled>Pilih Kecamatan</option>');
         $.each(resp.camat, function(key, val){
           $("#r_kec").append('<option value="'+val.wk_id+'">'+val.wk_name+'</option>');
         });
@@ -358,7 +358,7 @@
       dataType: "json",
       success:function(resp){
         $('#r_pondok').empty();
-        $("#f_kab").append('<option value="" selected disabled>Pilih Pondok</option>');
+        $("#r_pondok").append('<option value="" selected disabled>Pilih Pondok</option>');
         $.each(resp.pondok, function(key, val){
           $("#r_pondok").append('<option value="'+val.p_id+'">'+val.p_name+'</option>');
         });

@@ -31,7 +31,19 @@
 <script type="text/JavaScript">
 	$(document).ready(function(){
 		$('.select2').select2();
-	})
+	});
+
+	$('#keyword').keypress(function(e){
+    if(e.which == 13) {
+      e.preventDefault();
+      searching();
+    }
+  });
+
+	function searching(){
+		var keyword = $('#keyword').val();
+		window.location.href= "{{url('pondok-pesantren/search?')}}keyword="+keyword+"";
+	}
 
 	function loadingShow() {
 		$('.loading').fadeIn();

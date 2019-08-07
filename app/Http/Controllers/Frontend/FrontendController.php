@@ -80,9 +80,15 @@ class FrontendController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function searching(Request $request)
     {
-        //
+        $data = Pondok::when($request->keyword, function ($query) use ($request) {
+            $query->where('p_name', 'like', "%{$request->keyword}%");
+        })
+        ->join('m_wil_provinsi', 'wp_id', 'p_prov')->get();
+        $latest_kitab = self::grapKitab();
+
+        return view('frontend.pondok.index', compact('data', 'latest_kitab'));
     }
 
     /**

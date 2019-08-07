@@ -58,7 +58,9 @@
             <nav>
               <ul class="nav topnav" style="display: flex; align-items: center;">
                 <li>
-                  <input type="text" class="search-query" placeholder="Pencarian pondok ...">
+                  <form id="form-search" style="margin-bottom: 0px;">
+                    <input type="text" class="search-query" id="keyword" name="keyword" placeholder="Pencarian pondok ...">
+                  </form>
                 </li>
                 <li class="{{Request::is('/') ? 'active' : ''}}">
                   <a href="{{route('frontend.index')}}">Home</a>

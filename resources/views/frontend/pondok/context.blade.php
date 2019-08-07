@@ -78,6 +78,7 @@
         </article>
         <!-- author info -->
         <div class="comment-area">
+          <div class="align-right margintop10"><a href="{{route('frontend.review')}}" style="font-size: 14px !important;">Tulis review disini...</a></div>
           <h4>{{count($review)}} Reviews</h4>
           @foreach($review as $rev)
           <div class="media">
@@ -92,28 +93,6 @@
             </div>
           </div>
           @endforeach
-          <h4>Leave your comment</h4>
-          <form id="commentform" action="#" method="post" name="comment-form">
-            <div class="row">
-              <div class="span4">
-                <input type="text" placeholder="* Enter your full name" />
-              </div>
-              <div class="span4">
-                <input type="text" placeholder="* Enter your email address" />
-              </div>
-              <div class="span4 margintop10">
-                <input type="text" placeholder="Enter your website" />
-              </div>
-              <div class="span8 margintop10">
-                <p>
-                  <textarea rows="12" class="input-block-level" placeholder="*Your comment here"></textarea>
-                </p>
-                <p>
-                  <button class="btn btn-theme margintop10" type="submit">Submit comment</button>
-                </p>
-              </div>
-            </div>
-          </form>
         </div>
       </div>
     </div>
