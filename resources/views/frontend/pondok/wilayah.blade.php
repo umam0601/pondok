@@ -83,7 +83,7 @@
             <div class="row" style="margin-bottom: 10px;">
               <div class="span8">
                 <div class="post-image">
-                  <p>Maaf untuk pencarian pondok tersebut belum ada ...</p>          
+                  <p>Maaf belum ada data.untuk wilayah tersebut ..</p>          
                 </div>
               </div>
             </div>
@@ -169,7 +169,7 @@
         } else {
           $('#mySignin').modal('hide');
           setTimeout(function(){
-            window.location.href = "{{route('frontend.pondok')}}";
+            window.location.href = "{{route('frontend.pondok.wilayah')}}";
           }, 1000);
         }
       }

@@ -95,6 +95,17 @@ class FrontendController extends Controller
         return view('frontend.pondok.index', compact('data', 'latest_kitab'));
     }
 
+    public function wilayah(Request $request)
+    {
+        $wil = $request->wilayah;
+        $data = Pondok::where('p_prov', '=', $wil)
+            ->join('m_wil_provinsi', 'wp_id', 'p_prov')->paginate(3);
+        $data->appends($request->only('wilayah'));
+        $latest_kitab = self::grapKitab();
+
+        return view('frontend.pondok.wilayah', compact('data', 'latest_kitab'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -106,6 +117,7 @@ class FrontendController extends Controller
     public function review()
     {
         $provinsi = DB::table('m_wil_provinsi')->get();
+
         return view('frontend.review.index', compact('provinsi'));
     }
 
@@ -116,7 +128,7 @@ class FrontendController extends Controller
             ->select('m_review.*', 'users.name as username', 'p_id','p_name')
             ->join('m_pondok', 'p_id', 'r_pondok')
             ->join('users', 'id', 'r_user')
-            ->where('r_pondok', $id)->get();
+            ->where('r_pondok', $id)->paginate(5);
 
         return response()->json(['data' => $data]);
     }

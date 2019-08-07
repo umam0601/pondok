@@ -130,37 +130,37 @@
         <h4>Wilayah <strong>Pondok</strong></h4>
         <ul id="mycarousel" class="jcarousel-skin-tango recent-jcarousel clients">
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+            <a href="{{url('pondok-pesantren/wilayah?')}}wilayah=35" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Jawa Timur</span>
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+            <a href="{{url('pondok-pesantren/wilayah?')}}wilayah=33" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Jawa Tengah</span>
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+            <a href="{{url('pondok-pesantren/wilayah?')}}wilayah=34" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Yogyakarta</span>
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
-              <span style="width: 100%; text-align: center;">Solo</span>
+            <a href="{{url('pondok-pesantren/wilayah?')}}wilayah=11" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Aceh</span>
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+            <a href="{{url('pondok-pesantren/wilayah?')}}wilayah=32" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Jawa Barat</span>
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+            <a href="{{url('pondok-pesantren/wilayah?')}}wilayah=36" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Banten</span>
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
-            <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+            <a href="{{url('pondok-pesantren/wilayah?')}}wilayah=31" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Jakarta</span>
             </a>
           </li>
