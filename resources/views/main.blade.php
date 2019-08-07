@@ -72,6 +72,31 @@
     .btn:hover {
       border: none !important;
     }
+    .widget-img{
+        width: 55px;
+        height: 55px;
+        background: #fff;
+        position: relative;
+        cursor: pointer;
+        border: 1px solid #D4D4D4;
+        padding: 5px;
+        border-radius: 5px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .widget-img img{
+        background: white;
+        object-fit: scale-down;
+        width: 55px !important;
+        height: 55px !important;
+        /*border: 1px solid #eee;*/
+    }
+
+    .widget-text{
+      position: absolute;
+      left: 70px;
+    }
     
   </style>
   <!-- =======================================================

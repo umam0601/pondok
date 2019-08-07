@@ -20,6 +20,48 @@
     margin-bottom: 5px !important;
     border-radius: 5px;
   }
+  /*.pagination{
+    text-align: center;
+    margin: 0px !important;
+  }*/
+  .pagination{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: inline-block;
+    text-align: center;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+  }
+  ul.pagination li.page-item{
+    display: inline-block;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+  }
+  .page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+  }
+  .page-item:last-child .page-link {
+    margin-right: 0;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+  }
+  .page-link:not(:disabled):not(.disabled) {
+    cursor: pointer;
+  }
+  .page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+  }
 </style>
 @endsection
 @section('content')
@@ -89,6 +131,9 @@
             </div>
           </article>
         @endif
+        <div class="w-100 text-center">
+          {{ $data->links() }}
+        </div>
       </div>
     </div>
   </div>

@@ -79,7 +79,7 @@
                             <div class="row">
                               <div class="col-6 col-md-6 col-sm-6">
                                 @if($pondok_map)
-                                  <button type="button" class="btn btn-sm btn-warning btn-update d-none" onclick="saveMap()">Update</button>
+                                  <button type="button" class="btn btn-sm btn-warning btn-update" onclick="saveMap()">Update</button>
                                 @else
                                   <button type="button" class="btn btn-sm btn-primary btn-save" onclick="saveMap()">Simpan</button>
                                 @endif
@@ -116,13 +116,11 @@
           $('#pm_id').val(resp[0].pm_id)
           map = L.map('PonPesMap').setView([resp[0].pm_latitude, resp[0].pm_longitude], 15);
           L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=JrA8XZ6ajy9lV3aT8OeF', {
-            attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>'})
-            .addTo(map);
+              attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>'})
+              .addTo(map);
           marker = new L.marker([resp[0].pm_latitude, resp[0].pm_longitude])
             .bindPopup(resp[0].p_name)
             .addTo(map);
-
-          check_latlng()
         }else{
           map = L.map('PonPesMap').setView([-0.789275, 113.9213257], 5);
           L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=JrA8XZ6ajy9lV3aT8OeF', {
@@ -131,42 +129,6 @@
         }
       }
     })
-  }
-
-  function check_latlng() {
-    $('#latitude').on('keyup', function(){
-      var lat = $('#latitude').val()
-      var id = $('#pm_pondok').val()
-      $.ajax({
-        url: "{{route('admin.pondok.check_latlng')}}?id=" + id,
-        type: "get",
-        success:function(resp) {
-          console.log(lat, resp[0].pm_latitude)
-          if (lat !== resp[0].pm_latitude) {
-            $('.btn-update').removeClass('d-none')
-          }else{
-            $('.btn-update').addClass('d-none')
-          }
-        }
-      })
-    });
-
-    $('#longitude').on('keyup', function(){
-      var lat = $('#longitude').val()
-      var id = $('#pm_pondok').val()
-      $.ajax({
-        url: "{{route('admin.pondok.check_latlng')}}?id=" + id,
-        type: "get",
-        success:function(resp) {
-          console.log(lat, resp[0].pm_latitude)
-          if (lat !== resp[0].pm_latitude) {
-            $('.btn-update').removeClass('d-none')
-          }else{
-            $('.btn-update').addClass('d-none')
-          }
-        }
-      })
-    });
   }
 
   function saveMap(){

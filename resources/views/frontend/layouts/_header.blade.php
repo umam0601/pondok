@@ -68,9 +68,9 @@
                 <li class="{{Request::is('pondok-pesantren/*') || Request::is('pondok-pesantren') ? 'active' : ''}}">
                   <a href="{{route('frontend.pondok')}}">Pondok</i></a>
                 </li>
-                <li class="">
+                {{-- <li class="">
                   <a href="index.html">Kitab</i></a>
-                </li>
+                </li> --}}
                 <li class="{{Request::is('review/*') || Request::is('review') ? 'active' : ''}}">
                   <a href="{{route('frontend.review')}}">Riview</i></a>
                 </li>

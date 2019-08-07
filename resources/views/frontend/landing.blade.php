@@ -60,10 +60,40 @@
     border: 4px solid #2acb20;
   }
   .show-overlay{
-    border: 4px solid #e9e9e9;
+    border: 0px solid #e9e9e9;
   }
   #maps{
     border: 4px solid #e9e9e9;
+  }
+  ul.clients li{
+     border: 1px solid lightgrey !important;
+  }
+  ul.clients li:hover {
+     border: 1px solid lightgrey !important;
+  }
+  .wraping{
+    padding: 5px !important;
+    border-radius: 5px;
+    text-align: center;
+  }
+  .picture-wrap{
+      width: 155px;
+      height: 155px;
+      background: #fff;
+      position: relative;
+      cursor: pointer;
+      /*display: flex;
+      align-items: center;*/
+      text-align: center;
+      margin-bottom: 10px;
+  }
+
+  .picture-wrap img{
+      background: white;
+      object-fit: scale-down;
+      width: 155px !important;
+      height: 155px !important;
+      /*border: 1px solid #eee;*/
   }
 </style>
 @endsection
@@ -102,43 +132,36 @@
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
             <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Jawa Timur</span>
-              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
             <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Jawa Tengah</span>
-              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
             <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Yogyakarta</span>
-              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
             <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Solo</span>
-              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
             <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Jawa Barat</span>
-              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
             <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Banten</span>
-              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
             <a href="#" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Jakarta</span>
-              {{-- <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" alt="" /> --}}
             </a>
           </li>
         </ul>
@@ -160,8 +183,8 @@
           <section id="projects">
             <ul id="thumbs" class="portfolio">
               @foreach($pondok_latest as $pl)
-              <li class="span3 show-overlay" style="background: url('{{asset('public/profile/upload')}}/{{$pl->p_code.'/'.$pl->p_image}}') center center no-repeat;background-size: cover; border-radius: 10px;">
-                <img src="{{asset('assets/frontend/img/img-thumb.png')}}" alt="" class="img-fluid">
+              <li class="item-thumbs span3 show-overlay"" data-id="id-0" data-type="web"style="background: url('{{asset('public/profile/upload')}}/{{$pl->p_code.'/'.$pl->p_image}}') center center no-repeat;background-size: cover; border-radius: 10px;">
+                <img src="{{asset('assets/frontend/img/img-thumb.png')}}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                 <div class="overlay">
                   <div class="text-center">
                     <p>{{$pl->p_name}}</p>
@@ -169,17 +192,15 @@
                   </div>
                 </div>
               </li>
-              <!-- Item Project and Filter Name -->
-              {{-- <li class="item-thumbs span3 design rounded" data-id="id-0" data-type="web" style="background: url('{{asset('public/profile/upload')}}/{{$pl->p_code.'/'.$pl->p_image}}') center center no-repeat;background-size: cover;"> --}}
-                <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                {{-- <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The City" href="{{asset('public/profile/upload')}}/{{$pl->p_code.'/'.$pl->p_image}}">
-                  <span class="overlay-img"></span>
-                  <span class="overlay-img-thumb font-icon-plus"></span>
-                </a> --}}
-                <!-- Thumb Image and Description -->
-                {{-- <img class="rounded" src="{{asset('assets/frontend/img/img-thumb.png')}}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque <a href='{{url('/')}}'>Link</a>" style="max-width: 750px;">
+              {{-- <li class="span3 show-overlay" style="background: url('{{asset('public/profile/upload')}}/{{$pl->p_code.'/'.$pl->p_image}}') center center no-repeat;background-size: cover; border-radius: 10px;">
+                <img src="{{asset('assets/frontend/img/img-thumb.png')}}" alt="" class="img-fluid">
+                <div class="overlay">
+                  <div class="text-center">
+                    <p>{{$pl->p_name}}</p>
+                    <a href="{{url('/pondok-pesantren/context-of')}}/{{Crypt::encrypt($pl->p_id)}}" class="da-link link-button">Read more</a>
+                  </div>
+                </div>
               </li> --}}
-              <!-- End Item Project -->
               @endforeach
             </ul>
           </section>
@@ -199,11 +220,17 @@
       <div class="span12">
         <h4>Kumpulan <strong>Kitabiyah</strong></h4>
         <ul id="mycarousel2" class="jcarousel-skin-tango recent-jcarousel clients">
-          <li>
+          @foreach($kitab as $k)
+          <li class="wraping">
+            <div class="picture-wrap">
+              <img src="{{asset('public/kitab/upload')}}/{{$k->k_code}}/{{$k->k_image}}" class="" alt="" />
+            </div>            
             <a href="#">
-              <img src="{{asset('assets/frontend/img/dummies/clients/client1.png')}}" class="client-logo" style="height: 250px;" alt="" />
+              {{$k->k_name}}
             </a>
+            <p>{{$k->k_penulis}}</p>
           </li>
+          @endforeach
         </ul>
       </div>
       <div class="span12">

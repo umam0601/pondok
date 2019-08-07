@@ -21,7 +21,8 @@ class FrontendController extends Controller
     {
         $pondok_slide = DB::table('m_pondok')->where('p_slide', '=', '1')->get();
         $pondok_latest = DB::table('m_pondok')->latest()->get();
-        return view('frontend.landing', compact('pondok_slide', 'pondok_latest'));
+        $kitab = DB::table('m_kitab')->get();
+        return view('frontend.landing', compact('pondok_slide', 'pondok_latest', 'kitab'));
     }
 
     // Pondok Pesantren
@@ -29,7 +30,8 @@ class FrontendController extends Controller
     {
         $data = Pondok::with('review')
             ->join('m_wil_provinsi', 'wp_id', 'p_prov')
-            ->limit(5)->latest()->get();
+            ->latest()->paginate(3);
+        // $data->appends()
         $latest_kitab = self::grapKitab();
 
         return view('frontend.pondok.index', compact('data', 'latest_kitab'));
@@ -82,11 +84,13 @@ class FrontendController extends Controller
      */
     public function searching(Request $request)
     {
+        $latest_kitab = self::grapKitab();
         $data = Pondok::when($request->keyword, function ($query) use ($request) {
             $query->where('p_name', 'like', "%{$request->keyword}%");
         })
-        ->join('m_wil_provinsi', 'wp_id', 'p_prov')->get();
-        $latest_kitab = self::grapKitab();
+        ->join('m_wil_provinsi', 'wp_id', 'p_prov')->paginate(5);
+
+        $data->appends($request->only('keyword'));
 
         return view('frontend.pondok.index', compact('data', 'latest_kitab'));
     }

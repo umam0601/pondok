@@ -3,11 +3,16 @@
   <ul class="recent">
     @foreach($latest_kitab as $no => $lk)
     <li>
-      <img src="{{asset('assets/frontend/img/dummies/blog/65x65/thumb1.jpg')}}" class="pull-left" alt="" />
-      <h6 style="margin-bottom: 5px; line-height: 1.3rem;"><a href="">{{$lk->k_name}}</a></h6>
-      <p>
-        Penulis : &nbsp <b>{{$lk->k_penulis}}</b>
-      </p>
+      <div class="align-right widget-text">
+        <h6 style="margin-bottom: 5px; line-height: 1.3rem;"><a href="">{{$lk->k_name}}</a></h6>
+        <p>
+          Penulis: 
+          <b>{{$lk->k_penulis}}</b>
+        </p>
+      </div>
+      <div class="widget-img">
+        <img src="{{asset('public/kitab/upload')}}/{{$lk->k_code}}/{{$lk->k_image}}" class="pull-left" alt="" />
+      </div>      
     </li>
     @endforeach
   </ul>
