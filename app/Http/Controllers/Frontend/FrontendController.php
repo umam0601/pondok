@@ -120,7 +120,7 @@ class FrontendController extends Controller
         $data = DB::table('m_review')
             ->select('m_review.*', 'users.name as username', 'p_id','p_name')
             ->join('m_pondok', 'p_id', 'r_pondok')
-            ->join('users', 'id', 'r_user')->paginate(5);
+            ->join('users', 'id', 'r_user')->paginate(3);
 
         return view('frontend.review.index', compact('data', 'provinsi'));
     }

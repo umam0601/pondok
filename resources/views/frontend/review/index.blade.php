@@ -175,7 +175,7 @@
 @section('extra_script')
 <script type="text/javascript">
   $(document).ready(function(){
-    grapReview();
+    // grapReview();
   })
 
   $('#f_prov').on('change', function(){
@@ -229,11 +229,7 @@
 
   function filtering() {
     let id = $('#f_pondok').val();
-    $.ajax({
-      url: "{{route('frontend.get_review')}}",
-      type: "get",
-      data: {id: id}
-    });
+    window.location.href = "{{url('review/get-review?')}}id="+id;
   }
 
   // Form Review
