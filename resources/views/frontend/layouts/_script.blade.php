@@ -33,6 +33,13 @@
 		$('.select2').select2();
 	});
 
+	function loadingShow() {
+		$('.loading').fadeIn();
+	}
+	function loadingHide() {
+		$('.loading').fadeOut();
+	}
+
 	$('#keyword').keypress(function(e){
     if(e.which == 13) {
       e.preventDefault();
@@ -42,13 +49,9 @@
 
 	function searching(){
 		var keyword = $('#keyword').val();
-		window.location.href= "{{url('pondok-pesantren/search?')}}keyword="+keyword+"";
-	}
-
-	function loadingShow() {
-		$('.loading').fadeIn();
-	}
-	function loadingHide() {
-		$('.loading').fadeOut();
+		loadingShow()
+		setTimeout(function(){
+			window.location.href= "{{url('pondok-pesantren/search?')}}keyword="+keyword+"";
+		}, 1500);
 	}
 </script>

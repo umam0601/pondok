@@ -99,6 +99,10 @@
 @endsection
 @section('extra_script')
 <script type="text/javascript">
+  $(function(){
+    loadingHide()
+  });
+  
   $('.btn-register').on('click', function(){
     var nama = $('#inputName').val();
     var email = $('#inputEmail').val();

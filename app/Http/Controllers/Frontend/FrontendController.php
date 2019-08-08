@@ -117,8 +117,12 @@ class FrontendController extends Controller
     public function review()
     {
         $provinsi = DB::table('m_wil_provinsi')->get();
+        $data = DB::table('m_review')
+            ->select('m_review.*', 'users.name as username', 'p_id','p_name')
+            ->join('m_pondok', 'p_id', 'r_pondok')
+            ->join('users', 'id', 'r_user')->paginate(5);
 
-        return view('frontend.review.index', compact('provinsi'));
+        return view('frontend.review.index', compact('data', 'provinsi'));
     }
 
     public function get_review(Request $request)
@@ -129,8 +133,9 @@ class FrontendController extends Controller
             ->join('m_pondok', 'p_id', 'r_pondok')
             ->join('users', 'id', 'r_user')
             ->where('r_pondok', $id)->paginate(5);
+        $provinsi = DB::table('m_wil_provinsi')->get();
 
-        return response()->json(['data' => $data]);
+        return view('frontend.review.index', compact('data', 'provinsi'));
     }
 
     public function save_review(Request $request)

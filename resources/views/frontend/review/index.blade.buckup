@@ -108,7 +108,6 @@
                 </div>
               </div>
               @endforeach
-              {{ $data->links() }}
             </div>
             <hr>
           </div>
@@ -178,6 +177,59 @@
     grapReview();
   })
 
+  function grapReview(){
+    $.ajax({
+      url: "{{route('frontend.grap_review')}}",
+      type: "get",
+      success:function(resp) {
+        loadingShow()
+        setTimeout(function(){
+          if (resp.length > 0) {
+            $('#list-review').empty();
+            $.each(resp, function(key, val){
+              $('#list-review').append(
+              '<div class="marginbot20">'+
+                '<div class="w-100">'+
+                  '<div class="wrapper">'+
+                    '<div class="testimonial">'+
+                      '<p class="text">'+
+                        '<i class="icon-quote-left icon-48"></i> '+val.r_description+''+
+                      '</p>'+
+                      '<div class="author">'+
+                        '<img src="{{asset('assets/frontend/img/dummies/testimonial-author1.png')}}" class="img-circle bordered" alt="" />'+
+                        '<p class="name">'+
+                          ''+val.username+''+
+                        '</p>'+
+                        '<span class="info"><a href="{{url('pondok-pesantren/context-of')}}/'+val.p_id+'">'+val.p_name+'</a></span>'+
+                      '</div>'+
+                    '</div>'+
+                  '</div>'+
+                '</div>'+
+              '</div>'
+              );
+            })
+          }else{
+            $('#list-review').empty();
+            $('#list-review').append(
+              `<div class="marginbot20">
+                <div class="w-100">
+                  <div class="wrapper">
+                    <div class="testimonial">
+                      <p class="text" style="margin-bottom: 0px;">
+                        Belum ada review terkait pondok pesantren tersebut...
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>`
+            );
+          }
+          loadingHide()
+        }, 500)
+      }
+    })
+  }
+
   $('#f_prov').on('change', function(){
     let id = $('#f_prov').val();
     $.ajax({
@@ -232,8 +284,56 @@
     $.ajax({
       url: "{{route('frontend.get_review')}}",
       type: "get",
-      data: {id: id}
-    });
+      data: {id: id},
+      success:function(resp){
+        loadingShow()
+        setTimeout(function(){
+          let datas = resp.data;
+          if (datas.length > 0) {
+            $('#list-review').empty();
+            $.each(datas, function(key, val){
+              $('#list-review').append(
+              '<div class="marginbot20">'+
+                '<div class="w-100">'+
+                  '<div class="wrapper">'+
+                    '<div class="testimonial">'+
+                      '<p class="text">'+
+                        '<i class="icon-quote-left icon-48"></i> '+val.r_description+''+
+                      '</p>'+
+                      '<div class="author">'+
+                        '<img src="{{asset('assets/frontend/img/dummies/testimonial-author1.png')}}" class="img-circle bordered" alt="" />'+
+                        '<p class="name">'+
+                          ''+val.username+''+
+                        '</p>'+
+                        '<span class="info"><a href="{{url('pondok-pesantren/context-of')}}/'+val.p_id+'">'+val.p_name+'</a></span>'+
+                      '</div>'+
+                    '</div>'+
+                  '</div>'+
+                '</div>'+
+              '</div>'
+              );
+            })
+          }else{
+            $('#list-review').empty();
+            $('#list-review').append(
+              `<div class="marginbot20">
+                <div class="w-100">
+                  <div class="wrapper">
+                    <div class="testimonial">
+                      <p class="text" style="margin-bottom: 0px;">
+                        Belum ada review terkait pondok pesantren tersebut...
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>`
+            );
+          }
+          loadingHide()
+        }, 500)
+        cancelReview()
+      }
+    })
   }
 
   // Form Review
