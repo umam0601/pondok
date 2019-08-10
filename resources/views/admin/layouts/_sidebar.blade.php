@@ -12,9 +12,9 @@
                 <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
                 <li class="dropdown-divider"></li> --}}
                 <li>
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <a class="dropdown-item" href="{{ route('login.signout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                 </li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                <form id="logout-form" action="{{ route('login.signout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
             </ul>
@@ -23,16 +23,6 @@
             <img src="{{asset('assets/images/logo.png')}}" alt="" class="img-fluid">
         </div>
     </li>
-    {{-- <li class="active">
-        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level">
-            <li class="active"><a href="index.html">Dashboard v.1</a></li>
-            <li><a href="dashboard_2.html">Dashboard v.2</a></li>
-            <li><a href="dashboard_3.html">Dashboard v.3</a></li>
-            <li><a href="dashboard_4_1.html">Dashboard v.4</a></li>
-            <li><a href="dashboard_5.html">Dashboard v.5 </a></li>
-        </ul>
-    </li> --}}
     <li class="{{Request::is('admin') ? 'active' : ''}}">
         <a href="{{route('admin')}}"><i class="fa fa-fw fa-th-large"></i>&nbsp <span class="nav-label">Dashboard</span></a>
     </li>
@@ -41,5 +31,8 @@
     </li>
     <li class="{{Request::is('admin/kitab') ? 'active' : '' || Request::is('admin/kitab/*') ? 'active' : ''}}">
         <a href="{{route('admin.kitab')}}"><i class="fa fa-fw fa-quran"></i>&nbsp <span class="nav-label">Master Kitab</span></a>
+    </li>
+    <li class="{{Request::is('admin/review') ? 'active' : '' || Request::is('admin/review/*') ? 'active' : ''}}">
+        <a href="{{route('admin.review')}}"><i class="fa fa-fw fa-paper-plane"></i>&nbsp <span class="nav-label">Master Review</span></a>
     </li>
 </ul>

@@ -113,10 +113,10 @@
 		<div class="col-12">
 			<div class="ibox">
 				<div class="ibox-title">
-					<h5>My Map</h5>
+					<h5>Map Marker Pondok Pesantren</h5>
 				</div>
 				<div class="ibox-content">
-					<div id="myMap" style="height: 500px;"></div>
+					<div id="PonPes" style="height: 500px;"></div>
 				</div>
 			</div>
 		</div>
@@ -125,8 +125,24 @@
 @endsection
 @section('extra_script')
 <script type="text/javascript">
+  var map, marker;
 	$(document).ready(function() {
-		var map = L.map('myMap').setView([51.505, -0.09], 13);
+		map = L.map('PonPes').setView([-0.789275, 113.9213257], 5);
+    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=JrA8XZ6ajy9lV3aT8OeF', {
+      attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>'})
+        .addTo(map);
+    get_allMap();
 	})
+
+	function get_allMap(){		
+    axios.get('{{route('admin.pondok.get_maps')}}')
+    .then(function(resp){
+    	$.each(resp.data, function(key, val){
+				marker = new L.marker([val.pm_latitude, val.pm_longitude])
+					.bindPopup(val.p_name)
+					.addTo(map);
+    	})
+    })
+	}
 </script>
 @endsection

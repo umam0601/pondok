@@ -9,7 +9,7 @@
                 <a href="{{route('admin')}}">Home</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="{{route('admin.pondok')}}">Mster Pondok</a>
+                <a href="{{route('admin.pondok')}}">Master Pondok</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>Galeri Pondok {{$pondok->p_name}}</strong>

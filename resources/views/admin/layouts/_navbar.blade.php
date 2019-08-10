@@ -19,7 +19,7 @@
                 <li>
                     <div class="dropdown-messages-box">
                         <a class="dropdown-item float-left" href="profile.html">
-                            <img alt="image" class="rounded-circle" src="img/a7.jpg">
+                            <img alt="image" class="rounded-circle" src="{{asset('assets/backend/img/a7.jpg')}}">
                         </a>
                         <div class="media-body">
                             <small class="float-right">46h ago</small>
@@ -32,7 +32,7 @@
                 <li>
                     <div class="dropdown-messages-box">
                         <a class="dropdown-item float-left" href="profile.html">
-                            <img alt="image" class="rounded-circle" src="img/a4.jpg">
+                            <img alt="image" class="rounded-circle" src="{{asset('assets/backend/img/a4.jpg')}}">
                         </a>
                         <div class="media-body ">
                             <small class="float-right text-navy">5h ago</small>
@@ -45,7 +45,7 @@
                 <li>
                     <div class="dropdown-messages-box">
                         <a class="dropdown-item float-left" href="profile.html">
-                            <img alt="image" class="rounded-circle" src="img/profile.jpg">
+                            <img alt="image" class="rounded-circle" src="{{asset('assets/backend/img/profile.jpg')}}">
                         </a>
                         <div class="media-body ">
                             <small class="float-right">23h ago</small>
@@ -107,10 +107,10 @@
             </ul>
         </li>
         <li>
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <a href="{{ route('login.signout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa fa-sign-out-alt"></i> Log out
             </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            <form id="logout-form" action="{{ route('login.signout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
         </li>
