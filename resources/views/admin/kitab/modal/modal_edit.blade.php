@@ -40,7 +40,11 @@
                 </div>
               </div>
               <div class="col-12 text-center">
-                <img src="" class="img-fluid img-thumbnail" alt="" id="edit-img-priview">
+                <div class="wraping">
+                  <div class="picture-wrap">
+                    <img src="" class="" alt="" id="edit-img-priview">
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -2753,7 +2753,7 @@ article img.pull-right, article .align-right {
 /* Loading Overlay*/
 /* Absolute Center Spinner */
 .loading {
-  display: none;
+  display: block;
   position: fixed;
   z-index: 999;
   height: 30em;

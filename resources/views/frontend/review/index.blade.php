@@ -5,6 +5,16 @@
     font-size: 18px;
     margin-bottom: 0rem;
   }
+  .dropdown-menu > li > .list-pondok{
+    color: #828282 !important;
+  }
+  .dropdown-menu > li > .list-pondok:hover{
+    color: white !important;
+    cursor: pointer;
+  }
+  #list-pondok > li > a{
+    border-radius: 5px;
+  }
 </style>
 @endsection
 @section('content')
@@ -98,10 +108,12 @@
                       </p>
                       <div class="author">
                         <img src="{{asset('assets/frontend/img/dummies/testimonial-author1.png')}}" class="img-circle bordered" alt="" />
-                        <p class="name">
+                        <p class="name"> 
                           {{$review->username}}
                         </p>
-                        <span class="info"><a href="{{url('pondok-pesantren/context-of')}}/{{$review->p_id}}">{{$review->p_name}}</a></span>
+                        <span class="info"><a href="{{url('/pondok-pesantren/context-of')}}/{{Crypt::encrypt($review->p_id)}}">{{$review->p_name}}</a></span>
+                        <hr> 
+                        <span>{{$review->r_date}}</span>
                       </div>
                     </div>
                   </div>
@@ -124,37 +136,22 @@
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
               @endif
               <div class="row">
-                <div class="span4">
-                  {{-- <h6>Pilih Provinsi</h6> --}}
-                  <select name="r_prov" id="r_prov" class="select2">
-                    <option value="" selected="" disabled="">Pilih Provinsi</option>
-                    @foreach($provinsi as $r_prov)
-                      <option value="{{$r_prov->wp_id}}">{{$r_prov->wp_name}}</option>
-                    @endforeach
-                  </select>
+                <div class="span7">
+                  
+                  <ul style="margin: 0px;">
+                    <li class="dropdown">
+                      <input type="text" class="input-block-level pondok" style="padding: 0px 0px 0px 10px; margin-bottom: 5px;" placeholder="Tulis nama pondok untuk mencari...">
+                      <input type="hidden" name="r_pondok" id="r_pondok">
+                      <ul class="dropdown-menu w-100 header-list" id="list-pondok" style="background-color: white;">
+                        
+                      </ul>
+                    </li>
+                  </ul>
+
+                  <small id="msgError1" class="text-danger d-none">Harap pilih pondok pesantren!</small>
                 </div>
-                <div class="span4">
-                  {{-- <h6>Pilih Kabupaten / Kota</h6> --}}
-                  <select name="r_kab" id="r_kab" class="select2">
-                    <option value="" selected="" disabled="">Pilih Kabupaten / Kota</option>
-                  </select>
-                </div>
-                <div class="span4">
-                  <div class="margintop10">
-                    {{-- <h6>Pilih Kecamatan</h6> --}}
-                    <select name="r_kec" id="r_kec" class="select2">
-                      <option value="" selected="" disabled="">Pilih Kecamatan</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="span4">
-                  <div class="margintop10">
-                    {{-- <h6>Pilih Pondok</h6> --}}
-                    <select name="r_pondok" id="r_pondok" class="select2">
-                      <option value="" selected="" disabled="">Pilih Pondok</option>
-                    </select>
-                    <small id="msgError1" class="text-danger d-none">Harap pilih pondok pesantren!</small>
-                  </div>
+                <div class="span1">
+                  {{-- <button type="button" class="btn btn-theme" onclick="search_filter()"><i class="fa fa-filter"></i></button> --}}
                 </div>
                 <div class="span8 margintop10">
                   <textarea id="r_description" name="r_description" rows="12" class="input-block-level" placeholder="Tuliskan review disini ..."></textarea>
@@ -171,12 +168,106 @@
     </div>
   </div>
 </section>
+
+{{-- Modal filter create review --}}
+<div id="modal-search" class="modal styled hide fade" tabindex="-1" role="dialog" aria-labelledby="modalSearchPondok" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 id="modalSearchPondok">Cari Pondok</h4>
+  </div>
+  <div class="modal-body">
+    <div class="span2">
+      <select name="r_prov" id="r_prov" class="select2">
+        <option value="" selected="" disabled="">Pilih Provinsi</option>
+        @foreach($provinsi as $r_prov)
+          <option value="{{$r_prov->wp_id}}">{{$r_prov->wp_name}}</option>
+        @endforeach
+      </select>
+    </div>
+    <div class="span2">
+      <select name="r_kab" id="r_kab" class="select2">
+        <option value="" selected="" disabled="">Pilih Kabupaten / Kota</option>
+      </select>
+    </div>
+    <div class="span2">
+      <div class="margintop10">
+        <select name="r_kec" id="r_kec" class="select2">
+          <option value="" selected="" disabled="">Pilih Kecamatan</option>
+        </select>
+      </div>
+    </div>
+    <div class="span2">
+      <div class="margintop10">
+        <select name="r_pondok" id="r_pondok" class="select2">
+          <option value="" selected="" disabled="">Pilih Pondok</option>
+        </select>
+        <small id="msgError1" class="text-danger d-none">Harap pilih pondok pesantren!</small>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('extra_script')
 <script type="text/javascript">
   $(document).ready(function(){
     // grapReview();
-  })
+    $('.loading').fadeOut();
+    $('.pondok').on('keyup', function(){
+      var term = $('.pondok').val();
+      if (term != '') {        
+        $.ajax({
+          url: "{{url('/review/cari-pondok')}}",
+          type: "get",
+          data: {term: term.toString()},
+          success:function(resp) {
+            listPondok(resp.data);
+          }
+        })
+      }else{
+        $('#list-pondok').removeClass('d-block');
+        $('#list-pondok').addClass('d-none');
+      }
+    })
+  });
+
+  function listPondok(pondok) {
+    $('.header-list').empty();
+    if (pondok.length > 0) {
+      
+      $('#list-pondok').removeClass('d-none');
+      $('#list-pondok').addClass('d-block');
+      $.each(pondok, function(key, val){
+        $('.header-list').append(
+          `<li><a class="list-pondok" onclick="setPondok(`+val.p_id+`)" style="border: 1px solid lightgrey;">`+val.p_name+`</a></li>`
+        )
+      })
+    }else{
+      $('.header-list').append(
+        `<li><a class="list-pondok" style="border: 1px solid lightgrey;">Tidak ada pondok terkait ...</a></li>`
+      )
+    }
+  }
+
+  function setPondok(id) {
+
+    $('#list-pondok').removeClass('d-block');
+    $('#list-pondok').addClass('d-none');
+
+    $.ajax({
+      url: "{{url('/review/set-pondok')}}?p_id="+id,
+      type: "get",
+      success:function(resp){
+        $('.pondok').val(resp.data.name);
+        $('#r_pondok').val(resp.data.id);
+
+        $('#r_description').focus();
+      }
+    })
+  }
+
+  function search_filter() {
+    $('#modal-search').modal('show');
+  }
 
   $('#f_prov').on('change', function(){
     let id = $('#f_prov').val();
@@ -466,14 +557,10 @@
         }
       }
     })
-  })
+  });
 
   function resetReview() {
-    loadingShow()
-    grapReview();
-    setTimeout(function(){
-      loadingHide()
-    }, 1000)
+    window.location.href = "{{route('frontend.review')}}";
   }
 </script>
 @endsection

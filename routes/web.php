@@ -30,6 +30,8 @@ Route::prefix('/')->group(function(){
   Route::get('/review', 'Frontend\FrontendController@review')->name('frontend.review');
   Route::get('/review/get-review', 'Frontend\FrontendController@get_review')->name('frontend.get_review');
   Route::get('/review/grap-review', 'Frontend\FrontendController@grapReview')->name('frontend.grap_review');
+  Route::get('/review/cari-pondok', 'Frontend\FrontendController@cari_pondok')->name('frontend.cari_pondok');
+  Route::get('/review/set-pondok', 'Frontend\FrontendController@set_pondok')->name('frontend.set_pondok');
   Route::post('/review/save-review', 'Frontend\FrontendController@save_review')->name('frontend.save_review');
 });
 

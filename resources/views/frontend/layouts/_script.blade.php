@@ -31,6 +31,7 @@
 <script type="text/JavaScript">
 	$(document).ready(function(){
 		$('.select2').select2();
+		$('.loading').fadeOut();
 	});
 
 	function loadingShow() {

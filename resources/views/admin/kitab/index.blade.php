@@ -1,5 +1,53 @@
 @extends('main-admin')
 
+@section('extra_style')
+<style type="text/css">
+  .wraping{
+    padding: 5px !important;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid lightgrey;
+  }
+  .picture-wrap{
+      width: 216px;
+      height: 144px;
+      background: #fff;
+      position: relative;
+      cursor: pointer;
+      text-align: center;
+      /*margin-bottom: 10px;*/
+  }
+
+  .picture-wrap img{
+      background: white;
+      object-fit: scale-down;
+      width: 216px !important;
+      height: 144px !important;
+  }
+  .wraping-detail{
+    padding: 5px !important;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid lightgrey;
+  }
+  .picture-wrap-detail{
+      width: 165px;
+      height: 165px;
+      background: #fff;
+      position: relative;
+      cursor: pointer;
+      text-align: center;
+      /*margin-bottom: 10px;*/
+  }
+
+  .picture-wrap-detail img{
+      background: white;
+      object-fit: scale-down;
+      width: 165px !important;
+      height: 165px !important;
+  }
+</style>
+@endsection
 @section('main-content')
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">

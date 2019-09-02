@@ -85,7 +85,7 @@
             <a href="#" class="thumbnail pull-left"><img src="{{asset('assets/frontend/img/avatar.png')}}" alt="" /></a>
             <div class="media-body">
               <div class="media-content">
-                <h6><span>March 12, 2013</span> &nbsp{{$rev->name}}</h6>
+                <h6><span>{{$rev->r_date}}</span> &nbsp{{$rev->name}}</h6>
                 <p>
                   {{$rev->r_description}}
                 </p>

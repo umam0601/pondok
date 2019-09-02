@@ -9,7 +9,11 @@
       <div class="modal-body">
         <div class="row mb-3">
 					<div class="col-5 col-md-5">
-						<img src="" alt="" class="w-100 shadow" id="k_image">
+						<div class="wraping-deail">
+							<div class="picture-wrap-detail">
+								<img src="" alt="" class="" id="k_image">
+							</div>
+						</div>
 					</div>
 					<div class="col-7 col-md-7">
 						<div class="row">
