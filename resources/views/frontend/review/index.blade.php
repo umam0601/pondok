@@ -68,7 +68,7 @@
             </div>
             <div class="span2">
               <div class="align-right">
-                <button class="btn btn-theme" id="btn-reset" onclick="resetReview()" type="button">Reset</button>
+                <!-- <button class="btn btn-theme" id="btn-reset" onclick="resetReview()" type="button">Reset</button> -->
               </div>
             </div>  
             <div class="span3 margintop10">
@@ -468,12 +468,12 @@
     })
   })
 
-  function resetReview() {
-    loadingShow()
-    grapReview();
-    setTimeout(function(){
-      loadingHide()
-    }, 1000)
-  }
+  // function resetReview() {
+  //   loadingShow()
+  //   grapReview();
+  //   setTimeout(function(){
+  //     loadingHide()
+  //   }, 1000)
+  // }
 </script>
 @endsection
