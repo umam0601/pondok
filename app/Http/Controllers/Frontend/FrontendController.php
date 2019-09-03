@@ -55,12 +55,14 @@ class FrontendController extends Controller
             ->leftJoin('m_pondok_map', 'pm_pondok', 'p_id')
             ->where('p_id', $id)->first();
         $review = DB::table('m_review')
+            ->select('r_id', 'r_description', 'users.name', DB::raw('date_format(m_review.created_at, "%d %M %Y") as r_date'))
             ->join('users', 'id', 'r_user')
-            ->where('r_pondok', '=', $pondok->p_id)->get();
+            ->where('r_pondok', '=', $pondok->p_id)
+            ->get();
         $id_crypted = Crypt::encrypt($id);
         $latest_post = self::grapPondok();
         $latest_kitab = self::grapKitab();
-
+        // return json_encode($review);
         return view('frontend.pondok.context')->with(compact('pondok', 'review','id_crypted', 'latest_post', 'latest_kitab'));
     }
 
@@ -118,18 +120,43 @@ class FrontendController extends Controller
     {
         $provinsi = DB::table('m_wil_provinsi')->get();
         $data = DB::table('m_review')
-            ->select('m_review.*', 'users.name as username', 'p_id','p_name')
+            ->select('m_review.*', 'users.name as username', 'p_id','p_name', DB::raw('date_format(m_review.created_at, "%d %M %Y") as r_date'))
             ->join('m_pondok', 'p_id', 'r_pondok')
             ->join('users', 'id', 'r_user')->paginate(3);
 
         return view('frontend.review.index', compact('data', 'provinsi'));
     }
 
+    public function cari_pondok(Request $request)
+    {
+        $cari = $request->term;
+        $data = DB::table('m_pondok')
+            ->select('m_pondok.*')
+            ->where(function ($q) use ($cari) {
+                $q->whereRaw("p_name like '%" . $cari . "%'");
+                $q->orWhereRaw("p_code like '%" . $cari . "%'");
+            })
+            ->get();
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+
+    public function set_pondok(Request $request)
+    {
+        $p_id = $request->p_id;
+        $data = DB::table('m_pondok')->where('p_id', '=', $p_id)->select('p_id as id', 'p_name as name')->first();
+
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+
     public function get_review(Request $request)
     {
         $id = $request->id;
         $data = DB::table('m_review')
-            ->select('m_review.*', 'users.name as username', 'p_id','p_name')
+            ->select('m_review.*', 'users.name as username', 'p_id','p_name', DB::raw('date_format(m_review.created_at, "%d %M %Y") as r_date'))
             ->join('m_pondok', 'p_id', 'r_pondok')
             ->join('users', 'id', 'r_user')
             ->where('r_pondok', $id)->paginate(5);

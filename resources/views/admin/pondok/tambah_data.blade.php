@@ -1,4 +1,30 @@
 @extends('main-admin')
+@section('extra_style')
+<style type="text/css">  
+  .wraping{
+    padding: 5px !important;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid lightgrey;
+  }
+  .picture-wrap{
+      width: 500px;
+      height: 330px;
+      background: #fff;
+      position: relative;
+      cursor: pointer;
+      text-align: center;
+      /*margin-bottom: 10px;*/
+  }
+
+  .picture-wrap img{
+      background: white;
+      object-fit: scale-down;
+      width: 500px !important;
+      height: 330px !important;
+  }
+</style>
+@endsection
 @section('main-content')
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -103,7 +129,12 @@
                           <div class="col-12 col-md-12">
                             <div class="form-group">
                               <label for="p_image">Upload Foto</label>
-                              <img src="{{asset('public/images/thumbnail.png')}}" alt="" id="img-priview" class="img-fluid img-thumbnail">
+                              <div class="wraping">
+                                <div class="picture-wrap">
+                                  <img src="{{asset('public/images/thumbnail.png')}}" alt="" id="img-priview" class="">
+                                </div>
+                              </div>
+                              
                               <span id="imgError" class="text-danger d-none" style="font-size: 12px;">Gambar harus berupa file 'gif', 'jpg', 'png', 'jpeg'</span>
                             </div>
                           </div>

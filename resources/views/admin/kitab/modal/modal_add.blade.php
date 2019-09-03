@@ -39,7 +39,11 @@
                 </div>
               </div>
               <div class="col-12 text-center">
-                <img src="{{asset('public/images/thumbnail.png')}}" class="img-fluid img-thumbnail" alt="" id="img-priview">
+                <div class="wraping">
+                  <div class="picture-wrap">
+                    <img src="{{asset('public/images/thumbnail.png')}}" class="" alt="" id="img-priview">
+                  </div>
+                </div>
               </div>
             </div>
           </div>

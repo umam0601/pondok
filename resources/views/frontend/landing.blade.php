@@ -82,8 +82,6 @@
       background: #fff;
       position: relative;
       cursor: pointer;
-      /*display: flex;
-      align-items: center;*/
       text-align: center;
       margin-bottom: 10px;
   }
@@ -93,7 +91,6 @@
       object-fit: scale-down;
       width: 155px !important;
       height: 155px !important;
-      /*border: 1px solid #eee;*/
   }
 </style>
 @endsection
@@ -109,7 +106,7 @@
         <p>
           {!! \Illuminate\Support\Str::words($ps->p_description, 30,'...')  !!}
         </p>
-        <a href="#" class="da-link link-button">Read more</a>
+        <a href="{{url('/pondok-pesantren/context-of')}}/{{Crypt::encrypt($ps->p_id)}}" class="da-link link-button">Read more</a>
         <div class="da-img">
           <img src="{{asset('public/profile/upload')}}/{{$ps->p_code.'/'.$ps->p_image}}" alt=""/>
         </div>
@@ -178,7 +175,7 @@
     <!-- Portfolio Projects -->
     <div class="row">
       <div class="span12">
-        <h4 class="heading">Update <strong>Terbaru</strong></h4>
+        <h4 class="heading">Data pesantren <strong>Terbaru</strong></h4>
         <div class="row">
           <section id="projects">
             <ul id="thumbs" class="portfolio">
@@ -218,10 +215,10 @@
     <!-- end divider -->
     <div class="row">
       <div class="span12">
-        <h4>Kumpulan <strong>Kitabiyah</strong></h4>
+        <h4 style="height: auto; display: flex; align-items: start;">Kumpulan <strong>Kitabiyah</strong> &nbsp &nbsp &nbsp <a href="" style="font-size: 12px;"><i class="fa fa-angle-double-right"></i> Tampilkan Semua</a></h4>
         <ul id="mycarousel2" class="jcarousel-skin-tango recent-jcarousel clients">
           @foreach($kitab as $k)
-          <li class="wraping">
+          <li class="wraping" style="background-color: #efefef">
             <div class="picture-wrap">
               <img src="{{asset('public/kitab/upload')}}/{{$k->k_code}}/{{$k->k_image}}" class="" alt="" />
             </div>            
@@ -232,11 +229,6 @@
           </li>
           @endforeach
         </ul>
-      </div>
-      <div class="span12">
-          <div class="aligncenter">
-            <button class="btn btn-theme">Lihat lebih banyak</button>
-          </div>
       </div>
     </div>
     <!-- divider -->

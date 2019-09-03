@@ -28,6 +28,9 @@
     .d-none {
       display: none !important;
     }
+    .d-block {
+      display: block !important;
+    }
 
     .btn-danger {
       background: #D54848 !important;
@@ -90,14 +93,15 @@
         object-fit: scale-down;
         width: 55px !important;
         height: 55px !important;
-        /*border: 1px solid #eee;*/
     }
 
     .widget-text{
       position: absolute;
       left: 70px;
     }
-    
+    .select2-container--default .select2-selection--single {
+      border-radius: 0px; 
+    }
   </style>
   <!-- =======================================================
   Theme Name: Flattern
