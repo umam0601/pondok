@@ -22,6 +22,7 @@ class FrontendController extends Controller
         $pondok_slide = DB::table('m_pondok')->where('p_slide', '=', '1')->get();
         $pondok_latest = DB::table('m_pondok')->latest()->get();
         $kitab = DB::table('m_kitab')->get();
+        // return $pondok_slide;
         return view('frontend.landing', compact('pondok_slide', 'pondok_latest', 'kitab'));
     }
 

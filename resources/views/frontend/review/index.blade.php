@@ -78,7 +78,7 @@
             </div>
             <div class="span2">
               <div class="align-right">
-                <!-- <button class="btn btn-theme" id="btn-reset" onclick="resetReview()" type="button">Reset</button> -->
+                <button class="btn btn-theme" id="btn-reset" onclick="resetReview()" type="button">Reset</button>
               </div>
             </div>  
             <div class="span3 margintop10">
@@ -558,19 +558,8 @@
       }
     })
   });
-
-<<<<<<< HEAD
-  // function resetReview() {
-  //   loadingShow()
-  //   grapReview();
-  //   setTimeout(function(){
-  //     loadingHide()
-  //   }, 1000)
-  // }
-=======
   function resetReview() {
     window.location.href = "{{route('frontend.review')}}";
   }
->>>>>>> 1876c9d5ca401503e31a0027e3838976f31fb034
 </script>
 @endsection
