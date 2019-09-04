@@ -20,7 +20,7 @@ Route::group(['middleware' => ['guest', 'web']], function () {
 
 Route::prefix('/')->group(function(){
   Route::get('','Frontend\FrontendController@index')->name('frontend.index');
-	Route::get('/get-maps', 'Admin\AdminPondokController@get_maps')->name('frontend.get_maps');
+	Route::get('/get-maps', 'Frontend\FrontendController@get_maps')->name('frontend.get_maps');
   Route::get('/pondok-pesantren','Frontend\FrontendController@pondok')->name('frontend.pondok');
   Route::get('/pondok-pesantren/context-of/{id}', ['uses' => 'Frontend\FrontendController@pondok_context'])->name('frontend.pondok_context');
 	Route::get('/pondok-pesantren/search', 'Frontend\FrontendController@searching')->name('frontend.pondok.search');
