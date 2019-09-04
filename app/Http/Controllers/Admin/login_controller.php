@@ -20,9 +20,10 @@ class Login_controller extends Controller
         $user = user::where('name', $request->name)->first();
 
         if ($user->role_admin == '1') {
+
             if($user && Hash::check($request->password, $user->password)){
                 Auth::login($user);
-
+                
                 // Session([
                 //     'holding'   => $user->perusahaan->holding,
                 //     'comp'      => $user->perusahaan

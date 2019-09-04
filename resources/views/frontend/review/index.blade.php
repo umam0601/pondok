@@ -558,7 +558,6 @@
       }
     })
   });
-
   function resetReview() {
     window.location.href = "{{route('frontend.review')}}";
   }
