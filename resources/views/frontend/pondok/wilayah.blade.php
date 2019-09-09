@@ -24,6 +24,7 @@
 @endsection
 @section('content')
 <section id="inner-headline">
+  <input type="hidden" class="wilId" value="{{$provName->wp_id}}">
   <div class="container">
     <div class="row">
       <div class="span4">
@@ -51,7 +52,7 @@
         </aside>
       </div>
       {{-- End --}}
-      <div class="span8">
+      <div class="span8" id="dataPondok1">
         @if(count($data) > 0)
           @foreach($data as $p)
           <article class="marginbot10">
@@ -83,7 +84,7 @@
             <div class="row" style="margin-bottom: 10px;">
               <div class="span8">
                 <div class="post-image">
-                  <p>Maaf belum ada data.untuk wilayah tersebut ..</p>          
+                  <p>Maaf data pondok untuk wilayah "{{$provName->wp_name}}" belum tersedia ...</p>          
                 </div>
               </div>
             </div>
@@ -93,12 +94,34 @@
           {{ $data->links() }}
         </div>
       </div>
+      <div class="span8 d-none" id="dataPondok2">
+        
+      </div>
     </div>
   </div>
 </section>
 @endsection
 @section('extra_script')
 <script type="text/javascript">
+  $(function(){
+    loadingHide()
+  });
+
+  $(document).ready(function(){
+    var wilayah = document.getElementsByClassName('list-wilayah');
+    var wilId = $('.wilId').val(); 
+    
+    for (var i = 0; i < wilayah.length; i++) {
+      var val = $('.val-wilayah').eq(i).val();
+      if (val == wilId) {
+        $('.list-wilayah').eq(i).addClass('active');
+        $('.list-wilayah').eq(i).focus();
+      }else{
+        $('.list-wilayah').eq(i).removeClass('active');
+      }
+    }
+  })
+  
   $('.btn-register').on('click', function(){
     var nama = $('#inputName').val();
     var email = $('#inputEmail').val();
@@ -169,7 +192,7 @@
         } else {
           $('#mySignin').modal('hide');
           setTimeout(function(){
-            window.location.href = "{{route('frontend.pondok.wilayah')}}";
+            window.location.href = "{{route('frontend.pondok')}}";
           }, 1000);
         }
       }

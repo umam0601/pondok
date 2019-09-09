@@ -16,6 +16,7 @@
                 </li>
                 <form id="logout-form" action="{{ route('login.signout') }}" method="POST" style="display: none;">
                     @csrf
+                    <input type="hidden" name="username" value="{{Auth::user()->name}}">
                 </form>
             </ul>
         </div>
@@ -25,6 +26,9 @@
     </li>
     <li class="{{Request::is('admin') ? 'active' : ''}}">
         <a href="{{route('admin')}}"><i class="fa fa-fw fa-th-large"></i>&nbsp <span class="nav-label">Dashboard</span></a>
+    </li>
+    <li class="{{Request::is('admin/user') ? 'active' : '' || Request::is('admin/user/*') ? 'active' : ''}}">
+        <a href="{{route('admin.user')}}"><i class="fa fa-fw fa-user"></i>&nbsp <span class="nav-label">Master User</span>  </a>
     </li>
     <li class="{{Request::is('admin/pondok') ? 'active' : '' || Request::is('admin/pondok/*') ? 'active' : ''}}">
         <a href="{{route('admin.pondok')}}"><i class="fa fa-fw fa-mosque"></i>&nbsp <span class="nav-label">Master Pondok</span>  </a>

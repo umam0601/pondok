@@ -19,12 +19,16 @@ Route::group(['middleware' => ['guest', 'web']], function () {
 });
 
 Route::prefix('/')->group(function(){
+	Route::get('/frontend2', function(){
+		return view('main2');
+	});
   Route::get('','Frontend\FrontendController@index')->name('frontend.index');
 	Route::get('/get-maps', 'Frontend\FrontendController@get_maps')->name('frontend.get_maps');
   Route::get('/pondok-pesantren','Frontend\FrontendController@pondok')->name('frontend.pondok');
   Route::get('/pondok-pesantren/context-of/{id}', ['uses' => 'Frontend\FrontendController@pondok_context'])->name('frontend.pondok_context');
 	Route::get('/pondok-pesantren/search', 'Frontend\FrontendController@searching')->name('frontend.pondok.search');
-	Route::get('/pondok-pesantren/wilayah', 'Frontend\FrontendController@wilayah')->name('frontend.pondok.wilayah');
+	Route::get('/pondok-pesantren/filter', 'Frontend\FrontendController@filter')->name('frontend.pondok.filter');
+	Route::get('/pondok-pesantren/wilayah/{id}', ['uses' => 'Frontend\FrontendController@wilayah'])->name('frontend.pondok.wilayah');
 
   // Review Pondok
   Route::get('/review', 'Frontend\FrontendController@review')->name('frontend.review');
@@ -63,6 +67,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminonly']], funct
 	Route::get('/kitab/edit-data', 'Admin\AdminKitabController@edit_kitab')->name('admin.kitab.edit');
 	Route::post('/kitab/update-data', 'Admin\AdminKitabController@update_kitab')->name('admin.kitab.update');
 	Route::post('/kitab/hapus-data', 'Admin\AdminKitabController@hapus_kitab')->name('admin.kitab.hapus');
+
+	// Master Rieview
+	Route::get('/user', 'Admin\AdminController@user')->name('admin.user');
+	Route::get('/user/resource', 'Admin\AdminController@get_user')->name('admin.user.resource');
 
 	// Master Rieview
 	Route::get('/review', 'Admin\AdminController@review')->name('admin.review');

@@ -6,10 +6,12 @@
     border-radius: 5px;
     text-align: center;
     border: 1px solid lightgrey;
+    width: 320px;
+    height: 320px;
   }
   .picture-wrap{
-      width: 500px;
-      height: 330px;
+      width: 100%;
+      height: 100%;
       background: #fff;
       position: relative;
       cursor: pointer;
@@ -20,8 +22,8 @@
   .picture-wrap img{
       background: white;
       object-fit: scale-down;
-      width: 500px !important;
-      height: 330px !important;
+      width: 100% !important;
+      height: 100% !important;
   }
 </style>
 @endsection

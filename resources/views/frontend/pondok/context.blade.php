@@ -70,7 +70,10 @@
               </div>
               <div class="bottom-article">
                 <ul class="meta-post">
-                  <li><i class="fa fa-map-marked"></i><a href="">{{$pondok->p_address}}</a></li>
+                  <li><i class="fa fa-map-marked"></i>&nbsp<a>{{$pondok->p_address}}</a></li>
+                  <li><i class="fa fa-fw fa-phone"></i>&nbsp<a>{{$pondok->p_phone}}</a></li>
+                  <li><i class="fa fa-fw fa-globe"></i>&nbsp<a>{{($pondok->p_web) ? $pondok->p_web : '-'}}</a></li>
+                  <li><i class="fa fa-fw fa-envelope"></i>&nbsp<a>{{($pondok->p_email) ? $pondok->p_email : '-'}}</a></li>
                 </ul>
               </div>
             </div>

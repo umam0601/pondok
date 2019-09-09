@@ -51,7 +51,7 @@
         </aside>
       </div>
       {{-- End --}}
-      <div class="span8">
+      <div class="span8" id="dataPondok1">
         @if(count($data) > 0)
           @foreach($data as $p)
           <article class="marginbot10">
@@ -92,6 +92,9 @@
         <div class="w-100 text-center">
           {{ $data->links() }}
         </div>
+      </div>
+      <div class="span8 d-none" id="dataPondok2">
+        
       </div>
     </div>
   </div>

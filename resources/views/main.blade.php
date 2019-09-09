@@ -102,6 +102,46 @@
     .select2-container--default .select2-selection--single {
       border-radius: 0px; 
     }
+    .select2-container--default .select2-search--dropdown .select2-search__field {
+      border: 1px solid #2acb20;
+    }
+    .select2-container--default .select2-results__option--highlighted[aria-selected] {
+      background-color: #2acb20;
+    }
+    input[type="search"]:focus{
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgb(42, 203, 32);
+    }
+    .filter-wilayah{
+      width: 100%;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e9e9e9;
+    }
+    ul.list-box{
+      list-style: square;
+      max-height: 400px;
+      overflow-y: scroll;
+      margin-left: 0 !important;
+    }
+    .list-wilayah{
+      padding-left: 5px;
+      border-bottom: 1px solid #e9e9e9;
+    }
+    .list-wilayah:hover > a{
+      background-color: #2acb20;
+      color: white !important;
+      cursor: pointer;
+    }
+    .list-wilayah:hover{
+      background-color: #2acb20;
+      color: white !important;
+      cursor: pointer;
+    }
+    .list-wilayah.active{
+      background-color: #2acb20;
+      color: white;
+      cursor: pointer;
+    }
   </style>
   <!-- =======================================================
   Theme Name: Flattern

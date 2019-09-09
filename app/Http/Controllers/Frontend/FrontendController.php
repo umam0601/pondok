@@ -29,13 +29,14 @@ class FrontendController extends Controller
     // Pondok Pesantren
     public function pondok()
     {
+        $provinsi = DB::table('m_wil_provinsi')->get();
         $data = Pondok::with('review')
             ->join('m_wil_provinsi', 'wp_id', 'p_prov')
             ->latest()->paginate(3);
         // $data->appends()
         $latest_kitab = self::grapKitab();
 
-        return view('frontend.pondok.index', compact('data', 'latest_kitab'));
+        return view('frontend.pondok.index', compact('data', 'latest_kitab', 'provinsi'));
     }
 
     /**
@@ -50,7 +51,7 @@ class FrontendController extends Controller
         } catch (\Exception $e) {
             return view('frontend.errors.404');
         }
-
+        
         $pondok = DB::table('m_pondok')
             ->join('m_wil_provinsi', 'wp_id', 'p_prov')
             ->leftJoin('m_pondok_map', 'pm_pondok', 'p_id')
@@ -63,7 +64,7 @@ class FrontendController extends Controller
         $id_crypted = Crypt::encrypt($id);
         $latest_post = self::grapPondok();
         $latest_kitab = self::grapKitab();
-        // return json_encode($review);
+        
         return view('frontend.pondok.context')->with(compact('pondok', 'review','id_crypted', 'latest_post', 'latest_kitab'));
     }
 
@@ -79,6 +80,18 @@ class FrontendController extends Controller
         //
     }
 
+    public function filter(Request $request)
+    {
+        $wp_id = $request->wp_id;
+        $data = Pondok::with('review')->where('p_prov', '=', $wp_id)
+            ->join('m_wil_provinsi', 'wp_id', 'p_prov')->paginate(2);
+        $data->appends($request->only('wilayah'));
+
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -87,6 +100,7 @@ class FrontendController extends Controller
      */
     public function searching(Request $request)
     {
+        $provinsi = DB::table('m_wil_provinsi')->get();
         $latest_kitab = self::grapKitab();
         $data = Pondok::when($request->keyword, function ($query) use ($request) {
             $query->where('p_name', 'like', "%{$request->keyword}%");
@@ -95,18 +109,23 @@ class FrontendController extends Controller
 
         $data->appends($request->only('keyword'));
 
-        return view('frontend.pondok.index', compact('data', 'latest_kitab'));
+        return view('frontend.pondok.index', compact('data', 'latest_kitab', 'provinsi'));
     }
 
-    public function wilayah(Request $request)
+    public function wilayah($id)
     {
-        $wil = $request->wilayah;
-        $data = Pondok::where('p_prov', '=', $wil)
+        try {
+            $id = Crypt::decrypt($id);            
+        } catch (\Exception $e) {
+            return view('frontend.errors.404');
+        }
+        $provinsi = DB::table('m_wil_provinsi')->get();
+        $provName = DB::table('m_wil_provinsi')->where('wp_id', $id)->first();
+        $data = Pondok::where('p_prov', '=', $id)
             ->join('m_wil_provinsi', 'wp_id', 'p_prov')->paginate(3);
-        $data->appends($request->only('wilayah'));
         $latest_kitab = self::grapKitab();
-
-        return view('frontend.pondok.wilayah', compact('data', 'latest_kitab'));
+        
+        return view('frontend.pondok.wilayah', compact('data', 'latest_kitab', 'provinsi', 'provName'));
     }
 
     /**
@@ -116,7 +135,7 @@ class FrontendController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // Review Pondok
+    // Review Pondok 
     public function review()
     {
         $provinsi = DB::table('m_wil_provinsi')->get();

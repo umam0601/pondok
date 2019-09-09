@@ -38,6 +38,43 @@ class AdminController extends Controller
     }
 
     // Review Pondok Peantren
+    public function user()
+    {
+        return view('admin.user.index');
+    }
+
+    public function get_user()
+    {
+        $datas = DB::table('users')->get();
+
+        return DataTables::of($datas)
+            ->addIndexColumn()
+            ->addColumn('role', function($datas){
+                if ($datas->role_admin == '1') {
+                    return 'Admin';
+                }else{
+                    return 'User';
+                }
+            })
+            ->addColumn('status', function($datas){
+                if ($datas->status == '1') {
+                    return 'Online';
+                }else{
+                    return 'Offline';
+                }
+            })
+            ->addColumn('action', function ($datas) {
+                return '<div class="btn-group">
+                            <button class="btn btn-sm btn-info hint--top" aria-label="Detail" onclick="detail(\''.Crypt::encrypt($datas->id).'\')"><i class="fa fa-fw fa-folder-open"></i></button>
+                            <button class="btn btn-sm btn-warning hint--top" aria-label="Edit" title="Edit" onclick="edit(\''.Crypt::encrypt($datas->id).'\')"><i class="fa fa-fw fa-edit"></i></button>
+                            <button class="btn btn-sm btn-danger hint--top" aria-label="Hapus" onclick="hapus(\''.Crypt::encrypt($datas->id).'\')"><i class="fa fa-fw fa-trash"></i></button>
+                        </div>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    // Review Pondok Peantren
     public function review()
     {
         return view('admin.review.index');

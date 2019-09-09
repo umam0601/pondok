@@ -5,12 +5,20 @@
     font-size: 18px;
     margin-bottom: 0rem;
   }
+  ul.searching{
+    list-style: none;
+  }
   .dropdown-menu > li > .list-pondok{
     color: #828282 !important;
+  }
+  .dropdown-menu > li:hover{
+    background-color: unset !important;
   }
   .dropdown-menu > li > .list-pondok:hover{
     color: white !important;
     cursor: pointer;
+    background-color: #2acb20;
+    box-shadow: 3px 3px 10px grey;
   }
   #list-pondok > li > a{
     border-radius: 5px;
@@ -136,9 +144,9 @@
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
               @endif
               <div class="row">
-                <div class="span7">
+                <div class="span8">
                   
-                  <ul style="margin: 0px;">
+                  <ul class="searching" style="margin: 0px;">
                     <li class="dropdown">
                       <input type="text" class="input-block-level pondok" style="padding: 0px 0px 0px 10px; margin-bottom: 5px;" placeholder="Tulis nama pondok untuk mencari...">
                       <input type="hidden" name="r_pondok" id="r_pondok">
@@ -154,7 +162,7 @@
                   {{-- <button type="button" class="btn btn-theme" onclick="search_filter()"><i class="fa fa-filter"></i></button> --}}
                 </div>
                 <div class="span8 margintop10">
-                  <textarea id="r_description" name="r_description" rows="12" class="input-block-level" placeholder="Tuliskan review disini ..."></textarea>
+                  <textarea id="r_description" name="r_description" rows="7" class="input-block-level" placeholder="Tuliskan review disini ..."></textarea>
                   <small id="msgError2" class="text-danger d-none">Harap tuliskan review anda!</small>
                   <p>
                     <button class="btn btn-theme margintop10" onclick="saveReview()" type="button">Simpan Review</button>
@@ -477,6 +485,10 @@
       $('#create-review').addClass('d-none');
       $('#btn-create').removeClass('d-none');
       $('#btn-cancel').addClass('d-none');
+      $('#msgError1').addClass('d-none');
+      $('#msgError2').addClass('d-none');
+      $('.pondok').val('');
+      $('#r_pondok').val('');
     }, 500)
     loadingHide()
   }

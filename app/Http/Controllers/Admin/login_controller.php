@@ -23,19 +23,14 @@ class Login_controller extends Controller
 
             if($user && Hash::check($request->password, $user->password)){
                 Auth::login($user);
-                
-                // Session([
-                //     'holding'   => $user->perusahaan->holding,
-                //     'comp'      => $user->perusahaan
-                // ]);
-                // if ($user->role_admin == '1') {
-                    return redirect()->route('admin');
-                // } else {
-                //     return redirect()->route('frontend.index');
-                // }
-                
+
+                user::where('name', $request->name)->update([
+                    'status' => '1'
+                ]);
+
+                return redirect()->route('admin');
             }
-        }        
+        }
 
         Session::flash('info', 'Kombinasi Password dan Username Tidak Ditemukan');
 
@@ -47,32 +42,33 @@ class Login_controller extends Controller
 
         if($user && Hash::check($request->password, $user->password)){
             Auth::login($user);
-            return response()->json('berhasil');
-            // Session([
-            //     'holding'   => $user->perusahaan->holding,
-            //     'comp'      => $user->perusahaan
-            // ]);
-            // if ($user->role_admin == '1') {
-            //     return redirect()->route('admin');
-            // } else {
-                // return redirect()->route('frontend.index');
-            // }
-            
+
+            user::where('name', $request->name)->update([
+                'status' => '1'
+            ]);
         }
 
         return response()->json('gagal');
-
-        // Session::flash('info', 'Kombinasi Password dan Username Tidak Ditemukan');
-
-        // return redirect()->back()->withInput($request->all());
     }
 
-    public function logout(){
+    public function logout(Request $request){
+        $user = user::where('name', $request->username)->first();
+        // return json_encode($request->all());
         Auth::logout();
         Session::flush();
 
-        // Session::flash('no-loading', 'true');
+        if ($user->role_admin == '1') {
+            // return 'Admin';
+            user::where('name', $request->username)->update([
+                'status' => '0'
+            ]);
+            return redirect()->route('admin.login');
+        }else{
 
-        return redirect()->route('admin.login');
+            user::where('name', $request->username)->update([
+                'status' => '0'
+            ]);
+            // return redirect()->route('frontend.index');
+        }
     }
 }
