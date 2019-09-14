@@ -104,6 +104,8 @@ class FrontendController extends Controller
         $latest_kitab = self::grapKitab();
         $data = Pondok::when($request->keyword, function ($query) use ($request) {
             $query->where('p_name', 'like', "%{$request->keyword}%");
+                // ->orWhere('m_wil_provinsi.wp_name', 'like', "%{$request->keyword}%");
+                // ->orWhere('m_wil_kota.wc_name', 'like', "%{$request->keyword}%");
         })
         ->join('m_wil_provinsi', 'wp_id', 'p_prov')->paginate(5);
 
@@ -112,20 +114,41 @@ class FrontendController extends Controller
         return view('frontend.pondok.index', compact('data', 'latest_kitab', 'provinsi'));
     }
 
-    public function wilayah($id)
+    public function wilayah(Request $request)
     {
-        try {
-            $id = Crypt::decrypt($id);            
-        } catch (\Exception $e) {
-            return view('frontend.errors.404');
+        // return json_encode($request->all());
+        $prov  = $request->prov;
+        $kota  = $request->kota;
+        $camat = $request->camat;
+
+        if ($kota == null || $kota == 'all') {
+            $data = Pondok::with('review')->where('p_prov', '=', $prov)
+                ->join('m_wil_provinsi', 'wp_id', 'p_prov')
+                ->select('m_pondok.*', 'wp_id', 'wp_name as wilayah')->paginate(3);
+            $wilName = DB::table('m_wil_provinsi')
+                ->where('wp_id', $prov)
+                ->select('wp_id as id_wil', 'wp_name as nama_wil')->first();
+        }elseif ($camat == null || $camat == 'all') {
+            $data = Pondok::with('review')->where('p_kab', '=', $kota)
+                ->join('m_wil_kota', 'wc_id', 'p_kab')
+                ->select('m_pondok.*', 'wc_id', 'wc_name as wilayah')->paginate(3);
+            $wilName = DB::table('m_wil_kota')
+                ->where('wc_id', $kota)
+                ->select('wc_id as id_wil', 'wc_name as nama_wil')->first();
+        }else{
+            $data = Pondok::with('review')->where('p_kec', '=', $camat)
+                ->join('m_wil_kecamatan', 'wk_id', 'p_kec')
+                ->select('m_pondok.*', 'wk_id', 'wk_name as wilayah')->paginate(3);
+            $wilName = DB::table('m_wil_kecamatan')
+                ->where('wk_id', $camat)
+                ->select('wk_id as id_wil', 'wk_name as nama_wil')->first();
         }
+
+        $data->appends($request->only('wilayah'));
         $provinsi = DB::table('m_wil_provinsi')->get();
-        $provName = DB::table('m_wil_provinsi')->where('wp_id', $id)->first();
-        $data = Pondok::where('p_prov', '=', $id)
-            ->join('m_wil_provinsi', 'wp_id', 'p_prov')->paginate(3);
         $latest_kitab = self::grapKitab();
         
-        return view('frontend.pondok.wilayah', compact('data', 'latest_kitab', 'provinsi', 'provName'));
+        return view('frontend.pondok.wilayah', compact('data', 'latest_kitab', 'provinsi', 'wilName'));
     }
 
     /**

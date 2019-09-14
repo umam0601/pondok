@@ -24,7 +24,7 @@
 @endsection
 @section('content')
 <section id="inner-headline">
-  <input type="hidden" class="wilId" value="{{$provName->wp_id}}">
+  <input type="hidden" class="wilId" value="{{$wilName->id_wil}}">
   <div class="container">
     <div class="row">
       <div class="span4">
@@ -70,7 +70,7 @@
                 </div>
                 <div class="bottom-article">
                   <ul class="meta-post">
-                    <li><i class="fa fa-map-marked"></i><a href="#">{{$p->wp_name}}</a></li>
+                    <li><i class="fa fa-map-marked"></i><a href="#">{{$p->wilayah}}</a></li>
                     <li><i class="fa fa-comment-dots"></i><a href="#">({{count($p->review)}}) Reviews</a></li>
                   </ul>
                   <a href="{{url('pondok-pesantren/context-of')}}/{{Crypt::encrypt($p->p_id)}}" class="pull-right">Lanjut membaca <i class="icon-angle-right"></i></a>
@@ -84,14 +84,14 @@
             <div class="row" style="margin-bottom: 10px;">
               <div class="span8">
                 <div class="post-image">
-                  <p>Maaf data pondok untuk wilayah "{{$provName->wp_name}}" belum tersedia ...</p>          
+                  <p>Maaf data pondok untuk wilayah "{{$wilName->nama_wil}}" belum tersedia ...</p>          
                 </div>
               </div>
             </div>
           </article>
         @endif
         <div class="w-100 text-center">
-          {{ $data->links() }}
+          {{ $data->appends(request()->query())->links() }}
         </div>
       </div>
       <div class="span8 d-none" id="dataPondok2">
@@ -107,20 +107,40 @@
     loadingHide()
   });
 
-  $(document).ready(function(){
-    var wilayah = document.getElementsByClassName('list-wilayah');
-    var wilId = $('.wilId').val(); 
-    
-    for (var i = 0; i < wilayah.length; i++) {
-      var val = $('.val-wilayah').eq(i).val();
-      if (val == wilId) {
-        $('.list-wilayah').eq(i).addClass('active');
-        $('.list-wilayah').eq(i).focus();
-      }else{
-        $('.list-wilayah').eq(i).removeClass('active');
+  $('#f_provinsi').on('change', function(e){
+    var id = e.target.value
+    $.ajax({
+      url: "{{url('/get-city')}}" + "/" + id,
+      type: "get",
+      dataType: "json",
+      success:function(resp){
+        $('#f_kota').empty();
+        $("#f_kota").append('<option value="all" selected>Seluruh '+resp.kota[0].wp_name+'</option>');
+        $.each(resp.kota, function(key, val){
+          $("#f_kota").append('<option value="'+val.wc_id+'">'+val.wc_name+'</option>');
+        });
+        $('#city_content').removeClass('d-none');
+        $('#btn-filter').removeAttr('disabled');
       }
-    }
-  })
+    });
+  });
+
+  $('#f_kota').on('change', function(e){
+    var id = e.target.value
+    $.ajax({
+      url: "{{url('/get-kecamatan')}}" + "/" + id,
+      type: "get",
+      dataType: "json",
+      success:function(resp){
+        $('#f_kecamatan').empty();
+        $("#f_kecamatan").append('<option value="all" selected>Seluruh  '+resp.camat[0].wc_name+'</option>');
+        $.each(resp.camat, function(key, val){
+          $("#f_kecamatan").append('<option value="'+val.wk_id+'">'+val.wk_name+'</option>');
+        });
+        $('#distric_content').removeClass('d-none');
+      }
+    });
+  });
   
   $('.btn-register').on('click', function(){
     var nama = $('#inputName').val();
