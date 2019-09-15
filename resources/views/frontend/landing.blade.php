@@ -127,27 +127,27 @@
         <h4>Wilayah <strong>Pondok</strong></h4>
         <ul id="mycarousel" class="jcarousel-skin-tango recent-jcarousel clients">
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
-            <a href="{{url('pondok-pesantren/wilayah')}}/{{Crypt::encrypt('35')}}" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+            <a href="{{url('pondok-pesantren/wilayah')}}?prov=35" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Jawa Timur</span>
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
-            <a href="{{url('pondok-pesantren/wilayah')}}/{{Crypt::encrypt('33')}}" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+            <a href="{{url('pondok-pesantren/wilayah')}}?prov=33" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Jawa Tengah</span>
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
-            <a href="{{url('pondok-pesantren/wilayah')}}/{{Crypt::encrypt('34')}}" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+            <a href="{{url('pondok-pesantren/wilayah')}}?prov=34" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Yogyakarta</span>
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
-            <a href="{{url('pondok-pesantren/wilayah')}}/{{Crypt::encrypt('11')}}" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+            <a href="{{url('pondok-pesantren/wilayah')}}?prov=11" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Aceh</span>
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
-            <a href="{{url('pondok-pesantren/wilayah')}}/{{Crypt::encrypt('32')}}" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+            <a href="{{url('pondok-pesantren/wilayah')}}?prov=32" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Jawa Barat</span>
             </a>
           </li>
@@ -157,7 +157,7 @@
             </a>
           </li>
           <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
-            <a href="{{url('pondok-pesantren/wilayah')}}/{{Crypt::encrypt('31')}}" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+            <a href="{{url('pondok-pesantren/wilayah')}}?prov=31" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
               <span style="width: 100%; text-align: center;">Jakarta</span>
             </a>
           </li>

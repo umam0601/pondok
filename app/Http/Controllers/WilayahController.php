@@ -13,7 +13,7 @@ class WilayahController extends Controller
 {
     public function get_city($id)
     {
-        $city = m_kota::where('wc_provinsi', '=', $id)->get();
+        $city = m_kota::join('m_wil_provinsi', 'wp_id', 'wc_provinsi')->where('wc_provinsi', '=', $id)->get();
 
         return response()->json([
             'kota' => $city
@@ -22,7 +22,7 @@ class WilayahController extends Controller
 
     public function get_kecamatan($id)
     {
-        $camat = m_camat::where('wk_kota', '=', $id)->get();
+        $camat = m_camat::join('m_wil_kota', 'wc_id', 'wk_kota')->where('wk_kota', '=', $id)->get();
 
         return response()->json([
             'camat' => $camat

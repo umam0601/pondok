@@ -93,9 +93,6 @@
           {{ $data->links() }}
         </div>
       </div>
-      <div class="span8 d-none" id="dataPondok2">
-        
-      </div>
     </div>
   </div>
 </section>
@@ -104,6 +101,41 @@
 <script type="text/javascript">
   $(function(){
     loadingHide()
+  });
+
+  $('#f_provinsi').on('change', function(e){
+    var id = e.target.value
+    $.ajax({
+      url: "{{url('/get-city')}}" + "/" + id,
+      type: "get",
+      dataType: "json",
+      success:function(resp){
+        $('#f_kota').empty();
+        $("#f_kota").append('<option value="all" selected>Seluruh '+resp.kota[0].wp_name+'</option>');
+        $.each(resp.kota, function(key, val){
+          $("#f_kota").append('<option value="'+val.wc_id+'">'+val.wc_name+'</option>');
+        });
+        $('#city_content').removeClass('d-none');
+        $('#btn-filter').removeAttr('disabled');
+      }
+    });
+  });
+
+  $('#f_kota').on('change', function(e){
+    var id = e.target.value
+    $.ajax({
+      url: "{{url('/get-kecamatan')}}" + "/" + id,
+      type: "get",
+      dataType: "json",
+      success:function(resp){
+        $('#f_kecamatan').empty();
+        $("#f_kecamatan").append('<option value="all" selected>Seluruh  '+resp.camat[0].wc_name+'</option>');
+        $.each(resp.camat, function(key, val){
+          $("#f_kecamatan").append('<option value="'+val.wk_id+'">'+val.wk_name+'</option>');
+        });
+        $('#distric_content').removeClass('d-none');
+      }
+    });
   });
   
   $('.btn-register').on('click', function(){

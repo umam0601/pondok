@@ -28,7 +28,7 @@ Route::prefix('/')->group(function(){
   Route::get('/pondok-pesantren/context-of/{id}', ['uses' => 'Frontend\FrontendController@pondok_context'])->name('frontend.pondok_context');
 	Route::get('/pondok-pesantren/search', 'Frontend\FrontendController@searching')->name('frontend.pondok.search');
 	Route::get('/pondok-pesantren/filter', 'Frontend\FrontendController@filter')->name('frontend.pondok.filter');
-	Route::get('/pondok-pesantren/wilayah/{id}', ['uses' => 'Frontend\FrontendController@wilayah'])->name('frontend.pondok.wilayah');
+	Route::get('/pondok-pesantren/wilayah', ['uses' => 'Frontend\FrontendController@wilayah'])->name('frontend.pondok.wilayah');
 
   // Review Pondok
   Route::get('/review', 'Frontend\FrontendController@review')->name('frontend.review');
