@@ -1,7 +1,7 @@
 @extends('main-admin')
 
 @section('main-content')
-<div class="wrapper wrapper-content">
+<!-- <div class="wrapper wrapper-content">
 	<div class="row">
 		<div class="col-lg-3">
 			<div class="ibox ">
@@ -109,7 +109,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+ -->	<div class="row">
 		<div class="col-12">
 			<div class="ibox">
 				<div class="ibox-title">

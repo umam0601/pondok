@@ -47,7 +47,7 @@
       <div class="span4">
         <aside class="left-sidebar">
           @include('frontend.layouts.sidebar._wilayah')
-          @include('frontend.layouts.sidebar._kitab')
+          <!-- @include('frontend.layouts.sidebar._kitab') -->
         </aside>
       </div>
       {{-- End --}}
