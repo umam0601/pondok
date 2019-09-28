@@ -91,8 +91,8 @@
             </div>  
             <div class="span3 margintop10">
               <div class="text-center">
-                <button class="btn btn-theme w-100" id="btn-create" onclick="createReview()" type="button">Tulis Review</button>
-                <button class="btn btn-danger w-100 d-none" id="btn-cancel" onclick="cancelReview()" type="button">Batal</button>
+                <button class="btn btn-theme w-100 @if($user != null && $pondok != null) d-none @endif" id="btn-create" onclick="createReview()" type="button">Tulis Review</button>
+                <button class="btn btn-danger w-100 @if($user == null && $pondok == null) d-none @endif" id="btn-cancel" onclick="cancelReview()" type="button">Batal</button>
               </div>
             </div>          
           </div>
@@ -101,7 +101,8 @@
       {{-- End --}}
       <div class="span8" style="border: 1px solid lightgrey; padding: 10px 20px 10px 20px;">
         <div class="marginbot20">
-          <div id="content-review">
+          
+          <div id="content-review" class="@if($user != null && $pondok != null) d-none @endif">
             <div class="marginbot20">
               <h6><b>Review Pondok Pesantren</b></h6>
             </div>
@@ -134,7 +135,8 @@
           </div>
 
           {{-- Create Riview --}}
-          <div id="create-review" class="d-none">
+
+          <div id="create-review" class="@if($user == null && $pondok == null) d-none @endif">
             <div class="marginbot20">
               <h6><b>Tulis Review Anda</b></h6>
             </div>
@@ -148,8 +150,8 @@
                   
                   <ul class="searching" style="margin: 0px;">
                     <li class="dropdown">
-                      <input type="text" class="input-block-level pondok" style="padding: 0px 0px 0px 10px; margin-bottom: 5px;" placeholder="Tulis nama pondok untuk mencari...">
-                      <input type="hidden" name="r_pondok" id="r_pondok">
+                      <input type="text" class="input-block-level pondok" style="padding: 0px 0px 0px 10px; margin-bottom: 5px;" placeholder="Tulis nama pondok untuk mencari..." @if($user != null && $pondok != null) value="{{$pondok->p_name}}" @endif>
+                      <input type="hidden" name="r_pondok" id="r_pondok" @if($user != null && $pondok != null) value="{{$pondok->p_id}}" @endif>
                       <ul class="dropdown-menu w-100 header-list" id="list-pondok" style="background-color: white;">
                         
                       </ul>
