@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 
 use DB;
+use Auth;
 use App\m_pondok as Pondok;
 
 class FrontendController extends Controller
@@ -19,8 +20,8 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        $pondok_slide = DB::table('m_pondok')->where('p_slide', '=', '1')->limit(5)->get();
-        $pondok_latest = DB::table('m_pondok')->latest()->limit(8)->get();
+        $pondok_slide = DB::table('m_pondok')->where('p_slide', '=', '1')->get();
+        $pondok_latest = DB::table('m_pondok')->latest()->limit(12)->get();
         $kitab = DB::table('m_kitab')->get();
         // return $pondok_slide;
         return view('frontend.landing', compact('pondok_slide', 'pondok_latest', 'kitab'));
@@ -159,15 +160,29 @@ class FrontendController extends Controller
      */
 
     // Review Pondok 
-    public function review()
+    public function review(Request $request)
     {
+        // return json_encode($request->user);
+        $user = null;
+        $pondok = null;
+
         $provinsi = DB::table('m_wil_provinsi')->get();
         $data = DB::table('m_review')
             ->select('m_review.*', 'users.name as username', 'p_id','p_name', DB::raw('date_format(m_review.created_at, "%d %M %Y") as r_date'))
             ->join('m_pondok', 'p_id', 'r_pondok')
             ->join('users', 'id', 'r_user')->paginate(3);
+        
+        if ($request->user != null) {
+            $user = Crypt::decrypt($request->user);
+        }
+        if ($request->pondok != null) {
+            $p_id = Crypt::decrypt($request->pondok);
+            $pondok = DB::table('m_pondok')->where('p_id', '=', $p_id)->first();
+        }
 
-        return view('frontend.review.index', compact('data', 'provinsi'));
+        // return json_encode($request->user);
+
+        return view('frontend.review.index', compact('data', 'provinsi', 'user', 'pondok'));
     }
 
     public function cari_pondok(Request $request)

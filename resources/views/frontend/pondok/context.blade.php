@@ -81,7 +81,7 @@
         </article>
         <!-- author info -->
         <div class="comment-area">
-          <div class="align-right margintop10"><a href="{{route('frontend.review')}}" style="font-size: 14px !important;">Tulis review disini...</a></div>
+          <div class="align-right margintop10"><a href="{{route('frontend.review')}}?user={{Crypt::encrypt(Auth::user()->id)}}&&pondok={{Crypt::encrypt($pondok->p_id)}}" style="font-size: 14px !important;">Tulis review disini...</a></div>
           <h4>{{count($review)}} Reviews</h4>
           @foreach($review as $rev)
           <div class="media">
