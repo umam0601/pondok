@@ -20,7 +20,7 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        $pondok_slide = DB::table('m_pondok')->where('p_slide', '=', '1')->get();
+        $pondok_slide = DB::table('m_pondok')->where('p_slide', '=', '1')->limit(5)->get();
         $pondok_latest = DB::table('m_pondok')->latest()->limit(12)->get();
         $kitab = DB::table('m_kitab')->get();
         // return $pondok_slide;
