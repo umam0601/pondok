@@ -15,7 +15,7 @@
 <link href="{{asset('assets/js/leaflet/leaflet.css')}}" rel="stylesheet">
 {{-- Jquery Confirm --}}
 <link rel="stylesheet" href="{{asset('assets/js/jquery-confirm/dist/jquery-confirm.min.css')}}">
-<!-- Gritter -->
+<!-- Gritter --> 
 <link href="{{asset('assets/backend/js/plugins/gritter/jquery.gritter.css')}}" rel="stylesheet">
 <link href="{{asset('assets/backend/css/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
 <link href="{{asset('assets/backend/css/animate.css')}}" rel="stylesheet">
