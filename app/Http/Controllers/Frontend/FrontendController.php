@@ -221,8 +221,9 @@ class FrontendController extends Controller
             ->join('users', 'id', 'r_user')
             ->where('r_pondok', $id)->paginate(5);
         $provinsi = DB::table('m_wil_provinsi')->get();
+        $pondok   = null;
 
-        return view('frontend.review.index', compact('data', 'provinsi'));
+        return view('frontend.review.index', compact('data', 'provinsi', 'pondok'));
     }
 
     public function save_review(Request $request)

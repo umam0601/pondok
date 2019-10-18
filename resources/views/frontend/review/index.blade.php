@@ -150,7 +150,7 @@
                   
                   <ul class="searching" style="margin: 0px;">
                     <li class="dropdown">
-                      <input type="text" class="input-block-level pondok" style="padding: 0px 0px 0px 10px; margin-bottom: 5px;" placeholder="Tulis nama pondok untuk mencari..." @if($pondok != null) value="{{$pondok->p_name}}" @endif>
+                      <input type="text" class="input-block-level" id="nama_pondok" style="padding: 0px 0px 0px 10px; margin-bottom: 5px;" placeholder="Tulis nama pondok untuk mencari..." @if($pondok != null) value="{{$pondok->p_name}}" @endif>
                       <input type="hidden" name="r_pondok" id="r_pondok" @if($pondok != null) value="{{$pondok->p_id}}" @endif>
                       <input type="hidden" id="pondokCrypt" @if($pondok != null) value="{{$pondokCrypt}}" @endif>
                       <ul class="dropdown-menu w-100 header-list" id="list-pondok" style="background-color: white;">
@@ -223,9 +223,15 @@
   $(document).ready(function(){
     // grapReview();
     $('.loading').fadeOut();
-    $('.pondok').on('keyup', function(){
-      var term = $('.pondok').val();
-      if (term != '') {        
+    // $('#nama_pondok').on('blur', function(){
+    //   $('#list-pondok').removeClass('d-block');
+    //   $('#list-pondok').addClass('d-none');
+    // });
+
+    $('#nama_pondok').on('keyup', function(){
+      var term = $('#nama_pondok').val();
+      // console.log(term);
+      if (term != '' || term == null) {        
         $.ajax({
           url: "{{url('/review/cari-pondok')}}",
           type: "get",
@@ -242,6 +248,7 @@
   });
 
   function listPondok(pondok) {
+    console.log(pondok)
     $('.header-list').empty();
     if (pondok.length > 0) {
       
@@ -260,7 +267,7 @@
   }
 
   function setPondok(id) {
-
+    console.log(id);
     $('#list-pondok').removeClass('d-block');
     $('#list-pondok').addClass('d-none');
 
@@ -268,13 +275,14 @@
       url: "{{url('/review/set-pondok')}}?p_id="+id,
       type: "get",
       success:function(resp){
-        $('.pondok').val(resp.data.name);
+        $('#nama_pondok').val(resp.data.name);
         $('#r_pondok').val(resp.data.id);
 
         $('#r_description').focus();
       }
     })
   }
+  
 
   function search_filter() {
     $('#modal-search').modal('show');
@@ -490,7 +498,7 @@
       $('#btn-cancel').addClass('d-none');
       $('#msgError1').addClass('d-none');
       $('#msgError2').addClass('d-none');
-      $('.pondok').val('');
+      $('#nama_pondok').val('');
       $('#r_pondok').val('');
     }, 500)
     loadingHide()
