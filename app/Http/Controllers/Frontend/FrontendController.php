@@ -166,7 +166,8 @@ class FrontendController extends Controller
         // return json_encode($request->user);
         // $user = null;
         $pondok = null;
-
+        $pondokCrypt = null;
+        
         $provinsi = DB::table('m_wil_provinsi')->get();
         $data = DB::table('m_review')
             ->select('m_review.*', 'users.name as username', 'p_id','p_name', DB::raw('date_format(m_review.created_at, "%d %M %Y") as r_date'))
