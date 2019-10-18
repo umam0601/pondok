@@ -17,6 +17,7 @@ class Login_controller extends Controller
     }
 
     public function authenticate(Request $request){
+        // return json_encode($request->all());
         $user = user::where('name', $request->name)->first();
 
         if ($user->role_admin == '1') {
@@ -24,9 +25,9 @@ class Login_controller extends Controller
             if($user && Hash::check($request->password, $user->password)){
                 Auth::login($user);
 
-                user::where('name', $request->name)->update([
-                    'status' => '1'
-                ]);
+                // user::where('name', $request->name)->update([
+                //     'status' => '1'
+                // ]);
 
                 return redirect()->route('admin');
             }
@@ -38,17 +39,19 @@ class Login_controller extends Controller
     }
 
     public function authenticate_user(Request $request){
+        // return json_encode($request->all());
         $user = user::where('name', $request->name)->first();
 
         if($user && Hash::check($request->password, $user->password)){
             Auth::login($user);
 
-            user::where('name', $request->name)->update([
-                'status' => '1'
-            ]);
+            // user::where('name', $request->name)->update([
+            //     'status' => '1'
+            // ]);
+            return response()->json('success');
+        }else{
+            return response()->json('gagal');
         }
-
-        return response()->json('gagal');
     }
 
     public function logout(Request $request){
@@ -59,15 +62,15 @@ class Login_controller extends Controller
 
         if ($user->role_admin == '1') {
             // return 'Admin';
-            user::where('name', $request->username)->update([
-                'status' => '0'
-            ]);
+            // user::where('name', $request->username)->update([
+            //     'status' => '0'
+            // ]);
             return redirect()->route('admin.login');
         }else{
 
-            user::where('name', $request->username)->update([
-                'status' => '0'
-            ]);
+            // user::where('name', $request->username)->update([
+            //     'status' => '0'
+            // ]);
             // return redirect()->route('frontend.index');
         }
     }

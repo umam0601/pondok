@@ -18,7 +18,7 @@ class FrontendController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $pondok_slide = DB::table('m_pondok')->where('p_slide', '=', '1')->limit(5)->get();
         $pondok_latest = DB::table('m_pondok')->latest()->limit(12)->get();
@@ -164,7 +164,7 @@ class FrontendController extends Controller
     public function review(Request $request)
     {
         // return json_encode($request->user);
-        $user = null;
+        // $user = null;
         $pondok = null;
 
         $provinsi = DB::table('m_wil_provinsi')->get();
@@ -173,17 +173,18 @@ class FrontendController extends Controller
             ->join('m_pondok', 'p_id', 'r_pondok')
             ->join('users', 'id', 'r_user')->paginate(3);
         
-        if ($request->user != null) {
-            $user = Crypt::decrypt($request->user);
-        }
+        // if ($request->user != null) {
+        //     $user = Crypt::decrypt($request->user);
+        // }
         if ($request->pondok != null) {
+            $pondokCrypt = $request->pondok;
             $p_id = Crypt::decrypt($request->pondok);
             $pondok = DB::table('m_pondok')->where('p_id', '=', $p_id)->first();
         }
 
         // return json_encode($request->user);
 
-        return view('frontend.review.index', compact('data', 'provinsi', 'user', 'pondok'));
+        return view('frontend.review.index')->with(compact('data', 'provinsi', 'pondok', 'pondokCrypt'));
     }
 
     public function cari_pondok(Request $request)
