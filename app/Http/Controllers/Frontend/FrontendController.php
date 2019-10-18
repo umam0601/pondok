@@ -175,16 +175,16 @@ class FrontendController extends Controller
         
         // if ($request->user != null) {
         //     $user = Crypt::decrypt($request->user);
-        // }
+        // } 
         if ($request->pondok != null) {
             $pondokCrypt = $request->pondok;
             $p_id = Crypt::decrypt($request->pondok);
             $pondok = DB::table('m_pondok')->where('p_id', '=', $p_id)->first();
         }
-
+        
         // return json_encode($request->user);
 
-        return view('frontend.review.index')->with(compact('data', 'provinsi', 'pondok', 'pondokCrypt'));
+        return view('frontend.review.index', compact('data', 'provinsi', 'pondok','pondokCrypt'));
     }
 
     public function cari_pondok(Request $request)
@@ -316,3 +316,5 @@ class FrontendController extends Controller
         return $data;
     }
 }
+
+// u can use  'pondokCrypt'
