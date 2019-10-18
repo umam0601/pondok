@@ -92,32 +92,6 @@
       width: 155px !important;
       height: 155px !important;
   }
-  h4 {
-    text-transform: capitalize;
-    color: darkgreen;
-    font-family: sans-serif;
-    text-decoration:underline; 
-  }
-  h6{
-    font-family: sans-serif;
-    background-size: cover;
-    padding: 10px;
-
-  }
-  .displaysatu{
-    display: inline-block;
-    margin-right: 20px;
-    float: left;
-  }
-  .lisatu li{
-    font-size: 15px;
-    font-weight: bold;
-  }
-  label{
-    font-size: 15px;
-    text-decoration-line: underline;
-    font-weight: bold;
-  }
 </style>
 @endsection
 @section('content')
@@ -146,99 +120,50 @@
   </div>
   <!-- end slider -->
 </section>
-<!-- Wilayah Pondok Berdasarkan Geografis -->
 <section id="content">
   <div class="container">
     <div class="row">
       <div class="span12">
-        <h4>Wilayah Geografis <strong>Pondok Pesantren</strong></h4>
-        <!-- <ul id="mycarousel" class="jcarousel-skin-tango recent-jcarousel clients"> -->
-          <!-- Pulau Jawa -->
-          <div class="displaysatu">
-            <ul>
-            <li class="lisatu" style="list-style-type: square;"><label>Wilayah Pulau Jawa :</label>
-              <ul>
-                <li style="list-style-type: disc;" ><a href="{{url('pondok-pesantren/wilayah')}}?prov=35"><span style="width: 100%; text-align: center;">Jawa Timur</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=33"><span style="width: 100%; text-align: center;">Jawa Tengah</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=32"><span style="width: 100%; text-align: center;">Jawa Barat</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=31"><span style="width: 100%; text-align: center;">DKI Jakarta</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=34"><span style="width: 100%; text-align: center;">DI Yogyakarta</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=36"><span style="width: 100%; text-align: center;">Banten</span></a>
-              </ul>
-            </li>
-            </ul>
-          </div>
-          <div class="displaysatu">
-            <ul>
-            <li class="lisatu" style="list-style-type: square;"><label>Wilayah Pulau Sumatra :</label> 
-              <ul>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=11"><span style="width: 100%; text-align: center;">Aceh</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=12"><span style="width: 100%; text-align: center;">Sumatra Utara</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=13"><span style="width: 100%; text-align: center;">Sumatra Barat</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=16"><span style="width: 100%; text-align: center;">Sumatra Selatan</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=14"><span style="width: 100%; text-align: center;">Riau</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=21"><span style="width: 100%; text-align: center;">Kepulauan Riau</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=15"><span style="width: 100%; text-align: center;">Jambi</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=17"><span style="width: 100%; text-align: center;">Bengkulu</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=19"><span style="width: 100%; text-align: center;">Bangka Belitung</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=18"><span style="width: 100%; text-align: center;">Lampung</span></a>
-              </ul>
-            </li>
-            </ul>
-          </div>
-          <div class="displaysatu">
-            <ul>
-            <li class="lisatu" style="list-style-type: square;"><label>Wilayah Pulau Kalimantan :</label>
-              <ul>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=61"><span style="width: 100%; text-align: center;">Kalimantan Barat</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=64"><span style="width: 100%; text-align: center;">Kalimantan Timur</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=62"><span style="width: 100%; text-align: center;">Kalimantan Tengah</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=63"><span style="width: 100%; text-align: center;">Kalimantan Selatan</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=65"><span style="width: 100%; text-align: center;">Kalimantan Utara</span></a>
-              </ul>
-            </li>
-            </ul>
-          </div>
-          <div class="displaysatu">
-            <ul>
-            <li class="lisatu" style="list-style-type: square;"><label>Wilayah Pulau Sulawesi :</label>
-              <ul>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=74"><span style="width: 100%; text-align: center;">Sulawesi Tenggara</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=76"><span style="width: 100%; text-align: center;">Sulawesi Barat</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=72"><span style="width: 100%; text-align: center;">Sulawesi Tengah</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=71"><span style="width: 100%; text-align: center;">Sulawesi Utara</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=73"><span style="width: 100%; text-align: center;">Sulawesi Selatan</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=75"><span style="width: 100%; text-align: center;">Gorontalo</span></a>
-              </ul>
-            </li>
-            </ul>
-          </div>
-          <div class="displaysatu">
-            <ul>
-            <li class="lisatu" style="list-style-type: square;"><label>Wilayah Pulau Bali dan Nusa Tenggara :</label>
-              <ul>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=51"><span style="width: 100%; text-align: center;">Bali</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=53"><span style="width: 100%; text-align: center;">Nusa Tenggara Timur</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=52"><span style="width: 100%; text-align: center;">Nusa Tenggara Barat</span></a>
-              </ul>
-            </li>
-            </ul>
-          </div>
-          <div class="displaysatu">
-            <ul>
-            <li class="lisatu" style="list-style-type: square;"><label>Wilayah Kepulauan Maluku dan Papua :</label>
-              <ul>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=81"><span style="width: 100%; text-align: center;">Maluku</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=82"><span style="width: 100%; text-align: center;">Maluku Utara</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=91"><span style="width: 100%; text-align: center;">Papua</span></a>
-                <li style="list-style-type: disc;"><a href="{{url('pondok-pesantren/wilayah')}}?prov=92"><span style="width: 100%; text-align: center;">Papua Barat</span></a>
-              </ul>
-            </li>
-            </ul>
-          </div>          
+        <h4>Wilayah <strong>Pondok</strong></h4>
+        <ul id="mycarousel" class="jcarousel-skin-tango recent-jcarousel clients">
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="{{url('pondok-pesantren/wilayah')}}?prov=35" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Jawa Timur</span>
+            </a>
+          </li>
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="{{url('pondok-pesantren/wilayah')}}?prov=33" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Jawa Tengah</span>
+            </a>
+          </li>
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="{{url('pondok-pesantren/wilayah')}}?prov=34" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Yogyakarta</span>
+            </a>
+          </li>
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="{{url('pondok-pesantren/wilayah')}}?prov=11" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Aceh</span>
+            </a>
+          </li>
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="{{url('pondok-pesantren/wilayah')}}?prov=32" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Jawa Barat</span>
+            </a>
+          </li>
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="{{url('pondok-pesantren/wilayah')}}/36" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Banten</span>
+            </a>
+          </li>
+          <li style="background: url('{{asset('assets/images/green-button.png')}}') no-repeat center center; background-size: cover; border-radius: 10px;">
+            <a href="{{url('pondok-pesantren/wilayah')}}?prov=31" style="padding: 10px; height: 35px; display: flex; align-items: center; color: #737373 !important; font-weight: bold; font-size: 16px;">
+              <span style="width: 100%; text-align: center;">Jakarta</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
-
     <!-- divider -->
     <div class="row">
       <div class="span12">
@@ -247,12 +172,10 @@
       </div>
     </div>
     <!-- end divider -->
-
     <!-- Portfolio Projects -->
-    <!-- DATA TERBARU PONDOK PESANTREN -->
     <div class="row">
       <div class="span12">
-        <h4 class="heading">Data Terbaru <strong>Pondok Pesantren</strong></h4>
+        <h4 class="heading">Data pesantren <strong>Terbaru</strong></h4>
         <div class="row">
           <section id="projects">
             <ul id="thumbs" class="portfolio">
@@ -283,14 +206,14 @@
     </div>
     <!-- End Portfolio Projects -->
     <!-- divider -->
-   <!--  <div class="row">
+    <div class="row">
       <div class="span12">
         <div class="solidline">
         </div>
       </div>
     </div>
-    --> <!-- end divider -->
-    <!-- <div class="row">
+    <!-- end divider -->
+    <div class="row">
       <div class="span12">
         <h4 style="height: auto; display: flex; align-items: start;">Kumpulan <strong>Kitabiyah</strong> &nbsp &nbsp &nbsp <a href="" style="font-size: 12px;"><i class="fa fa-angle-double-right"></i> Tampilkan Semua</a></h4>
         <ul id="mycarousel2" class="jcarousel-skin-tango recent-jcarousel clients">
@@ -308,7 +231,7 @@
         </ul>
       </div>
     </div>
-     --><!-- divider -->
+    <!-- divider -->
     <div class="row">
       <div class="span12">
         <div class="solidline">

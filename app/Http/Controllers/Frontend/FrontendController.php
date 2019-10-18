@@ -47,6 +47,7 @@ class FrontendController extends Controller
      */
     public function pondok_context($id)
     {
+        // return json_encode([ 'id' => $id, 'en' => Crypt::decrypt($id)]);
         try {
             $id = Crypt::decrypt($id);            
         } catch (\Exception $e) {
@@ -308,7 +309,8 @@ class FrontendController extends Controller
     public function get_maps()
     {
         $data = DB::table('m_pondok_map')
-            ->leftJoin('m_pondok', 'p_id', 'pm_pondok')->get();
+            ->leftJoin('m_pondok', 'p_id', 'pm_pondok')
+            ->select('p_id', 'p_name', 'pm_latitude', 'pm_longitude')->get();
 
         return $data;
     }
